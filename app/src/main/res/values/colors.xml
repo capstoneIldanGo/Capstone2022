@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="logoColor">#FF4EADE3</color>
-    <color name="gray">#4DC4C4C4</color>
+    <color name="gray">#FFC4C4C4</color>
+    <color name="opaqueGray">#4DC4C4C4</color>
 </resources>
