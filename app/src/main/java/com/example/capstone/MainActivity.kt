@@ -5,11 +5,12 @@ import android.os.Bundle
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.core.view.MotionEventCompat
 import com.example.capstone.databinding.ActivityMainBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), BottomSheetClickListener {
 
     private var _binding: ActivityMainBinding ?= null
     private val binding get() = _binding!!
@@ -30,6 +31,10 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+    }
+
+    override fun onButtonClicked(text: String) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 
 }
