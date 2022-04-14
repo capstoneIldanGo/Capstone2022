@@ -1,14 +1,9 @@
 package com.example.capstone
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.GestureDetector
-import android.view.MotionEvent
-import android.widget.LinearLayout
-import android.widget.Toast
-import androidx.core.view.MotionEventCompat
 import com.example.capstone.databinding.ActivityMainBinding
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class MainActivity : AppCompatActivity(), BottomSheetClickListener {
 
@@ -33,8 +28,19 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
 
     }
 
-    override fun onButtonClicked(text: String) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+    override fun onButtonClicked(id: Int) {
+        when(id) {
+            R.id.btn_favorite -> {
+                val intent = Intent(this, MyWishList::class.java)
+                startActivity(intent)
+            }
+            R.id.btn_alarm -> {
+
+            }
+            R.id.btn_logstate -> {
+
+            }
+        }
     }
 
 }
