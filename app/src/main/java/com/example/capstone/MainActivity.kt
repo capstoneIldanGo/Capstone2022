@@ -43,4 +43,9 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
         }
     }
 
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
+    }
+
 }

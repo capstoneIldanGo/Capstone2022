@@ -48,4 +48,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation 'com.google.android.material:material:1.6.0-alpha03'
+
+    //livedata
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+
+    //recyclerview, cardview
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.cardview:cardview:1.0.0'
 }
