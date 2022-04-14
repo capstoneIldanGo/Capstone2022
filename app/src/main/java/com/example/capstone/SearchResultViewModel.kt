@@ -1,0 +1,14 @@
+package com.example.capstone
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+
+
+class SearchResultViewModel : ViewModel() {
+    private val _text = MutableLiveData<String>().apply {
+        value = "This is  SearchResultFragment"
+    }
+    val text: LiveData<String> = _text
+
+}
