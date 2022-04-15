@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ildango.capstone.databinding.BottomSheetBinding
+import com.ildango.capstone.databinding.FragmentMainBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.lang.Exception
 
@@ -15,7 +15,7 @@ interface BottomSheetClickListener {
 
 class BottomSheetFragment() : BottomSheetDialogFragment() {
 
-    private var _binding: BottomSheetBinding? = null
+    private var _binding: FragmentMainBottomSheetBinding? = null
     private val binding get() = _binding!!
     private lateinit var bottomSheetClickListener: BottomSheetClickListener
 
@@ -29,7 +29,7 @@ class BottomSheetFragment() : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = BottomSheetBinding.inflate(inflater, container, false)
+        _binding = FragmentMainBottomSheetBinding.inflate(inflater, container, false)
         return binding.root
     }
 
