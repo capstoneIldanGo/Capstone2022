@@ -5,16 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.fragment.app.DialogFragment
-import com.example.capstone.databinding.ActivityMainBinding
-import com.example.capstone.databinding.FragmentSearchResultBinding
-import com.example.capstone.databinding.FragmentMainBottomSheetBinding
+import com.ildango.capstone.databinding.FragmentMainBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.lang.Exception
 
+
 interface BottomSheetClickListener {
-    fun onButtonClicked(text: String)
+    fun onButtonClicked(id: Int)
 }
 
 class BottomSheetFragment() : BottomSheetDialogFragment() {
@@ -54,15 +51,15 @@ class BottomSheetFragment() : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnFavorite.setOnClickListener {
-            bottomSheetClickListener.onButtonClicked(binding.btnFavorite.text.toString())
+            bottomSheetClickListener.onButtonClicked(R.id.btn_favorite)
             dismiss()
         }
         binding.btnAlarm.setOnClickListener {
-            bottomSheetClickListener.onButtonClicked(binding.btnAlarm.text.toString())
+            bottomSheetClickListener.onButtonClicked(R.id.btn_alarm)
             dismiss()
         }
         binding.btnLogstate.setOnClickListener {
-            bottomSheetClickListener.onButtonClicked(binding.btnLogstate.text.toString())
+            bottomSheetClickListener.onButtonClicked(R.id.btn_logstate)
             dismiss()
         }
 
@@ -74,4 +71,3 @@ class BottomSheetFragment() : BottomSheetDialogFragment() {
     }
 
 }
-

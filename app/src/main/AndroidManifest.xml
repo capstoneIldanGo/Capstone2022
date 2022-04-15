@@ -19,8 +19,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.ildango.capstone.MyWishList" />
         <activity android:name="com.ildango.capstone.ResultActivity"/>
-        <activity android:name="com.ildango.capstone.ResultDetailActivity"/>
+        <activity android:name=".ResultDetailActivity"/>
+
     </application>
 
 </manifest>
