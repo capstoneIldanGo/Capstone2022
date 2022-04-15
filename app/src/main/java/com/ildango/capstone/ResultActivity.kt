@@ -2,16 +2,16 @@ package com.ildango.capstone
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.ildango.capstone.databinding.SearchResultBinding
+import com.ildango.capstone.databinding.ActivitySearchResultBinding
 
 class ResultActivity : AppCompatActivity() {
 
-    private var _binding: SearchResultBinding?= null
+    private var _binding: ActivitySearchResultBinding?= null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = SearchResultBinding.inflate(layoutInflater)
+        _binding = ActivitySearchResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 }
