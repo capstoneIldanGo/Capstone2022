@@ -1,9 +1,9 @@
-package com.example.capstone
+package com.ildango.capstone
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.capstone.databinding.ActivityWishListBinding
+import com.ildango.capstone.databinding.ActivityWishListBinding
 
 
 class MyWishList : AppCompatActivity() {

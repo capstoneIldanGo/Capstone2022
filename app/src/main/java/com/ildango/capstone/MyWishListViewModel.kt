@@ -1,4 +1,4 @@
-package com.example.capstone
+package com.ildango.capstone
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
