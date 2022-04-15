@@ -9,7 +9,6 @@ import com.ildango.capstone.databinding.FragmentMainBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.lang.Exception
 
-
 interface BottomSheetClickListener {
     fun onButtonClicked(id: Int)
 }
