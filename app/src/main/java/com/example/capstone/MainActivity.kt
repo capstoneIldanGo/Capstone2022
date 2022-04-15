@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
     private var _binding: ActivityMainBinding ?= null
     private val binding get() = _binding!!
     private val bottomSheet = BottomSheetFragment()
-    private val searchResult = SearchResultFragment()
 
 
 
