@@ -1,4 +1,4 @@
-package com.example.capstone
+package com.ildango.capstone
 
 import android.content.Context
 import android.os.Bundle
@@ -8,7 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.capstone.databinding.ActivityMainBinding
-import com.example.capstone.databinding.BottomSheetBinding
+import com.example.capstone.databinding.FragmentSearchResultBinding
+import com.example.capstone.databinding.FragmentMainBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.lang.Exception
 
@@ -18,7 +19,7 @@ interface BottomSheetClickListener {
 
 class BottomSheetFragment() : BottomSheetDialogFragment() {
 
-    private var _binding: BottomSheetBinding? = null
+    private var _binding: FragmentMainBottomSheetBinding? = null
     private val binding get() = _binding!!
     private lateinit var bottomSheetClickListener: BottomSheetClickListener
 
@@ -32,7 +33,7 @@ class BottomSheetFragment() : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = BottomSheetBinding.inflate(inflater, container, false)
+        _binding = FragmentMainBottomSheetBinding.inflate(inflater, container, false)
         return binding.root
     }
 

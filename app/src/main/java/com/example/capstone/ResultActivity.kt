@@ -3,17 +3,18 @@ package com.example.capstone
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.capstone.databinding.SearchResultBinding
+import com.example.capstone.databinding.ActivitySearchResultBinding
+
 
 class ResultActivity : AppCompatActivity() {
 
-    private var _binding: SearchResultBinding?= null
+    private var _binding: ActivitySearchResultBinding?= null
     private val binding get() = _binding!!
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = SearchResultBinding.inflate(layoutInflater)
+        _binding = ActivitySearchResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.btnAroundLowest.setOnClickListener{
