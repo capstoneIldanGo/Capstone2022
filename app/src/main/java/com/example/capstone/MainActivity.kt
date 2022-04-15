@@ -8,6 +8,8 @@ import android.widget.Toast
 import com.example.capstone.databinding.ActivityMainBinding
 import com.ildango.capstone.BottomSheetClickListener
 import com.ildango.capstone.BottomSheetFragment
+import com.ildango.capstone.OnSwipeTouchListener
+import com.ildango.capstone.R
 
 
 class MainActivity : AppCompatActivity(), BottomSheetClickListener {
@@ -16,6 +18,7 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
     private var _binding: ActivityMainBinding?= null
     private val binding get() = _binding!!
     private val bottomSheet = BottomSheetFragment()
+    private val searchResult = SearchResultFragment()
 
 
 
@@ -41,8 +44,23 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
 
     }
 
-    override fun onButtonClicked(text: String) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+    override fun onButtonClicked(id: Int) {
+        when(id) {
+            R.id.btn_favorite -> {
+                val intent = Intent(this, MyWishList::class.java)
+                startActivity(intent)
+            }
+            R.id.btn_alarm -> {
+
+            }
+            R.id.btn_logstate -> {
+
+            }
+        }
     }
 
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
+    }
 }
