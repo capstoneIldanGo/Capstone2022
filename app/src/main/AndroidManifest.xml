@@ -21,7 +21,7 @@
 
         <activity android:name="com.ildango.capstone.MyWishList" />
         <activity android:name="com.ildango.capstone.ResultActivity"/>
-        <activity android:name=".ResultDetailActivity"/>
+        <activity android:name="com.ildango.capstone.ResultDetailActivity"/>
 
     </application>
 
