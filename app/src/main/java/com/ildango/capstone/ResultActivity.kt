@@ -1,8 +1,8 @@
-package com.example.capstone
+package com.ildango.capstone
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.capstone.databinding.SearchResultBinding
+import com.ildango.capstone.databinding.SearchResultBinding
 
 class ResultActivity : AppCompatActivity() {
 

@@ -1,16 +1,10 @@
-package com.example.capstone
+package com.ildango.capstone
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
-import android.widget.LinearLayout
-import android.widget.Toast
-import androidx.core.view.MotionEventCompat
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment.findNavController
-import com.example.capstone.databinding.ActivityMainBinding
+import com.ildango.capstone.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity(), BottomSheetClickListener {

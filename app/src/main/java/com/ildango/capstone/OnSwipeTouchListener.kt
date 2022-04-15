@@ -1,4 +1,4 @@
-package com.example.capstone
+package com.ildango.capstone
 
 import android.content.Context
 import android.view.GestureDetector
