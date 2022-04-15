@@ -1,15 +1,10 @@
-package com.example.capstone
+package com.ildango.capstone
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
-import com.example.capstone.databinding.ActivityMainBinding
-import com.ildango.capstone.BottomSheetClickListener
-import com.ildango.capstone.BottomSheetFragment
-import com.ildango.capstone.OnSwipeTouchListener
-import com.ildango.capstone.R
+import com.ildango.capstone.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity(), BottomSheetClickListener {

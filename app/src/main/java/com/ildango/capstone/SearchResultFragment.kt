@@ -1,4 +1,4 @@
-package com.example.capstone
+package com.ildango.capstone
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.capstone.databinding.FragmentSearchResultBinding
+import com.ildango.capstone.databinding.FragmentSearchResultBinding
 // import androidx.navigation.fragment.findNavController
 
 class SearchResultFragment : Fragment(){

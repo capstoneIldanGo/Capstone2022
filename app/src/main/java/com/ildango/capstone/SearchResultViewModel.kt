@@ -1,4 +1,4 @@
-package com.example.capstone
+package com.ildango.capstone
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
