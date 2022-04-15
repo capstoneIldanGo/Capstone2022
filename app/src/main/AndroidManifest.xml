@@ -18,7 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+      
         <activity android:name=".MyWishList" />
+        <activity android:name=".ResultActivity"/>
+        <activity android:name=".ResultDetailActivity"/>
+
     </application>
 
 </manifest>
