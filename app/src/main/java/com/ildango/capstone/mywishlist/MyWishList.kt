@@ -23,6 +23,16 @@ class MyWishList : AppCompatActivity() {
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(MyWishListViewModel::class.java)
 
+        // list view
+        binding.recyclerviewWishList.layoutManager = LinearLayoutManager(this)
+
+        val dataObserver:Observer<ArrayList<MyWishItem>> =
+            Observer { livedata ->
+                mItems.value = livedata
+                val mAdapter = MyWishListAdapter(mItems)
+                binding.recyclerviewWishList.adapter = mAdapter
+            }
+        viewModel.liveData.observe(this, dataObserver)
 
     }
 

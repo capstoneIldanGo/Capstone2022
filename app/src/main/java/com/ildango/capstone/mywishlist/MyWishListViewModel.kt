@@ -10,7 +10,13 @@ class MyWishListViewModel(application:Application) : AndroidViewModel(applicatio
     var liveData : MutableLiveData<ArrayList<MyWishItem>> = MutableLiveData<ArrayList<MyWishItem>>()
 
     init {
+        var WishItem = ArrayList<MyWishItem>()
+        // dummy data
+        WishItem.add(MyWishItem("imgUrl", "test1", "100000원"))
+        WishItem.add(MyWishItem("imgUrl", "test2", "40000000원"))
+        WishItem.add(MyWishItem("imgUrl", "test3", "25000원"))
 
+        liveData.postValue(WishItem)
     }
 
     // 찜 목록에서 아이템 선택해서 삭제
