@@ -6,7 +6,7 @@
     <data>
         <variable
             name="model"
-            type="com.ildango.capstone.MyWishListViewModel" />
+            type="com.ildango.capstone.mywishlist.MyWishListViewModel" />
     </data>
 
     <LinearLayout
@@ -55,7 +55,7 @@
             android:onClick="@{()->model.deleteItems()}"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listview_wishList"
+            android:id="@+id/recyclerview_wishList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
