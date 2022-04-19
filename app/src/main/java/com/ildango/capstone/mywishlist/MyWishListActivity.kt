@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ildango.capstone.databinding.ActivityWishListBinding
 
 
-class MyWishList : AppCompatActivity() {
+class MyWishListActivity : AppCompatActivity() {
 
     private var _binding: ActivityWishListBinding?= null
     private val binding get() = _binding!!

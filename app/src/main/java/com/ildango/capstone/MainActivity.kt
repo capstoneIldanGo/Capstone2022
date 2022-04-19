@@ -3,7 +3,7 @@ package com.ildango.capstone
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.ildango.capstone.mywishlist.MyWishList
+import com.ildango.capstone.mywishlist.MyWishListActivity
 import com.ildango.capstone.databinding.ActivityMainBinding
 
 
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
     override fun onButtonClicked(id: Int) {
         when(id) {
             R.id.btn_favorite -> {
-                val intent = Intent(this, MyWishList::class.java)
+                val intent = Intent(this, MyWishListActivity::class.java)
                 startActivity(intent)
             }
             R.id.btn_alarm -> {

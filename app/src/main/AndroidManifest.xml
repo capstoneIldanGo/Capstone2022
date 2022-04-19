@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.ildango.capstone.mywishlist.MyWishList" />
+        <activity android:name="com.ildango.capstone.mywishlist.MyWishListActivity" />
         <activity android:name="com.ildango.capstone.ResultActivity"/>
         <activity android:name="com.ildango.capstone.ResultDetailActivity"/>
 
