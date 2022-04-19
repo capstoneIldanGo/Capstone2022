@@ -8,6 +8,8 @@
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/drawable/ic_launcher_background.xml" value="0.287962962962963" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/drawable/style_bottomsheet.xml" value="0.1935" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/drawable/style_btn.xml" value="0.18" />
+        <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/font/font_notosans.xml" value="0.22564102564102564" />
+        <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/font/notosans.xml" value="0.22564102564102564" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/activity_main.xml" value="0.30572916666666666" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/activity_price_alarm.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/activity_search_result.xml" value="0.276268115942029" />
@@ -17,7 +19,7 @@
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/fragment_search_result.xml" value="0.1" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/item_alarm_listview.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/item_list.xml" value="0.3134057971014493" />
-        <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/item_wish_listview.xml" value="0.5" />
+        <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/item_wish_listview.xml" value="0.48258706467661694" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/listview_on_bottom_sheet.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/main_bottom_navigation_drawer.xml" value="0.3328125" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/main_bottom_sheet.xml" value="0.33" />
