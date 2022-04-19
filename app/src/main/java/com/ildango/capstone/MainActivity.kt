@@ -5,18 +5,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.ildango.capstone.mywishlist.MyWishListActivity
 import com.ildango.capstone.databinding.ActivityMainBinding
+import com.ildango.capstone.myalarmlist.MyAlarmListActivity
 
 
 class MainActivity : AppCompatActivity(), BottomSheetClickListener {
-
-
 
     private var _binding: ActivityMainBinding?= null
     private val binding get() = _binding!!
     private val bottomSheet = BottomSheetFragment()
     private val searchResult = SearchResultFragment()
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +44,8 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
                 startActivity(intent)
             }
             R.id.btn_alarm -> {
-
+                val intent = Intent(this, MyAlarmListActivity::class.java)
+                startActivity(intent)
             }
             R.id.btn_logstate -> {
 

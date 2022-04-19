@@ -6,7 +6,7 @@
     <data>
         <variable
             name="model"
-            type="com.ildango.capstone.mywishlist.MyWishListViewModel" />
+            type="com.ildango.capstone.MyViewModel" />
     </data>
 
     <LinearLayout
@@ -17,7 +17,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="10dp">
@@ -31,15 +31,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
                 android:text="찜한 상품들을 보여줍니다"
                 android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:textSize="17sp" />
 
             <View
                 android:layout_width="300dp"
                 android:layout_height="1dp"
-                android:layout_marginTop="10dp"
                 android:background="@color/black" />
 
         </LinearLayout>
