@@ -6,26 +6,28 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ildango.capstone.databinding.ActivityPriceAlarmBinding
-import com.ildango.capstone.mywishlist.MyWishItem
-import com.ildango.capstone.mywishlist.MyWishListAdapter
+import com.ildango.capstone.MyViewModel
+import com.ildango.capstone.databinding.ActivityPriceAlarmListBinding
 
 class MyAlarmListActivity : AppCompatActivity() {
 
-    private var _binding: ActivityPriceAlarmBinding?= null
+    private var _binding: ActivityPriceAlarmListBinding?= null
     private val binding get() = _binding!!
-    private lateinit var viewModel: MyAlarmListViewModel
+    private lateinit var viewModel: MyViewModel
 
     private val mItems = MutableLiveData<ArrayList<MyAlarmItem>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityPriceAlarmBinding.inflate(this.layoutInflater)
+        _binding = ActivityPriceAlarmListBinding.inflate(this.layoutInflater)
         setContentView(binding.root)
-        viewModel = ViewModelProvider(this).get(MyAlarmListViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MyViewModel::class.java)
 
         // list view
         binding.recyclerviewAlarmList.layoutManager = LinearLayoutManager(this)
+
+        // dummy data
+        viewModel.addAlarmItems()
 
         val dataObserver: Observer<ArrayList<MyAlarmItem>> =
             Observer { livedata ->
@@ -33,7 +35,7 @@ class MyAlarmListActivity : AppCompatActivity() {
                 val mAdapter = MyAlarmListAdapter(mItems)
                 binding.recyclerviewAlarmList.adapter = mAdapter
             }
-        viewModel.liveData.observe(this, dataObserver)
+        viewModel.alarmLiveData.observe(this, dataObserver)
 
     }
 

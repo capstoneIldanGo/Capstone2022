@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="model"
+            type="com.ildango.capstone.MyViewModel" />
     </data>
 
     <LinearLayout
@@ -48,7 +50,8 @@
             android:layout_gravity="end"
             android:layout_marginEnd="25dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/icon_delete" />
+            android:src="@drawable/icon_delete"
+            android:onClick="@{()->model.deleteItems()}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_alarmList"
