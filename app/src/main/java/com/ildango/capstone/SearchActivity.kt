@@ -17,6 +17,8 @@ class SearchActivity : AppCompatActivity() {
         _binding = ActivitySearchBinding.inflate(this.layoutInflater)
         setContentView(binding.root)
 
+        binding.searchView.isIconified = false
+
         binding.searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 var intent = Intent(this@SearchActivity, ResultActivity::class.java)
