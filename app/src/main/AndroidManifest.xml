@@ -22,7 +22,8 @@
         <activity android:name="com.ildango.capstone.mywishlist.MyWishListActivity" />
         <activity android:name=".myalarmlist.MyAlarmListActivity"/>
         <activity android:name="com.ildango.capstone.ResultActivity"/>
-        <activity android:name="com.ildango.capstone.ResultDetailActivity"/>
+        <activity android:name="com.ildango.capstone.ResultDetailActivity" />
+        <activity android:name=".SearchActivity" />
 
     </application>
 
