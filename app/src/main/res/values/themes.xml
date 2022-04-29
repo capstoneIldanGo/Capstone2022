@@ -20,7 +20,7 @@
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
     </style>
     <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/style_bottomsheet</item>
+        <item name="android:background">@drawable/style_gray_radius30</item>
         <item name="android:layout_margin">20dp</item>
     </style>
 </resources>

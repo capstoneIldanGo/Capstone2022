@@ -31,7 +31,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="3dp"
             android:layout_weight="1"
-            android:background="@drawable/style_btn"
+            android:background="@drawable/style_gray_radius10"
             android:gravity="center"
             android:text="검색"
             android:textSize="15sp"
