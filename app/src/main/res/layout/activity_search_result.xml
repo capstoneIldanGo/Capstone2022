@@ -93,8 +93,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="411dp"
+        android:layout_height="265dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,6 +106,7 @@
             android:layout_width="wrap_content"
             android:layout_height="70dp"
             android:layout_marginLeft="15dp"
+            android:layout_marginTop="0dp"
             android:layout_weight="1"
             android:text="@string/latestPrice"
             android:textSize="30sp" />
@@ -164,31 +165,41 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+        >
 
         <Button
 
             android:id="@+id/btnAroundLowest"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="@string/aroundLowestPrice"
+            android:textAlignment="textEnd"
+            android:textColor="#2B2929"
+            android:textSize="30sp" />
 
         <Button
 
             android:id="@+id/btnWholeLowest"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="@string/entireLowestPrice"
+            android:textAlignment="textEnd"
+            android:textColor="#2B2929"
+            android:textSize="30sp"/>
 
         <Button
 
             android:id="@+id/btnUnopenedLowest"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="@string/sclassLowestPrice"
+            android:textAlignment="textEnd"
+            android:textColor="#2B2929"
+            android:textSize="30sp"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

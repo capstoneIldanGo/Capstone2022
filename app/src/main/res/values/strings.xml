@@ -2,5 +2,10 @@
     <string name="app_name">Capstone</string>
     <string name="productTextSearch">검색어를 입력해주세요</string>
     <string name="latestPrice">18,000원</string>
+    <string name="aroundLowestPrice">18,000원</string>
+    <string name="entireLowestPrice">18,000원</string>
+    <string name="sclassLowestPrice">18,000원</string>
+    <string name="kindOfSort">내 주변 최저가</string>
+
 
 </resources>
