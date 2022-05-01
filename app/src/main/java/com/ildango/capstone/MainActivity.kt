@@ -20,13 +20,11 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-      //  val navController = Navigation.findNavController(binding.navHostActivityMain)
 
 
         binding.btnSearch.setOnClickListener {
             val nextIntent = Intent(this, ResultActivity::class.java)
             startActivity(nextIntent)
-            //   navController.navigate(R.id.action_mainActivity_to_searchResultFragment)
         }
 
         binding.viewUnderSearchBar.setOnTouchListener(object:OnSwipeTouchListener(this@MainActivity) {
