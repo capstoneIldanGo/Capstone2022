@@ -27,12 +27,14 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/btnSortingLatest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:text="최신순"/>
 
         <Button
+            android:id="@+id/btnSortingLowest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
@@ -49,6 +51,7 @@
 
 
     <Button
+        android:id="@+id/btnAllPlatform"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
@@ -59,24 +62,28 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/btnCarrotMarket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:text="당근마켓"/>
 
         <Button
+            android:id="@+id/btnJunggoMarket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:text="중고나라"/>
 
         <Button
+            android:id="@+id/btnThunderMarket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:text="번개장터"/>
 
         <Button
+            android:id="@+id/btnHelloMarcket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
@@ -96,12 +103,14 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/btnTagFavoriteArea"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:text="관심지역"/>
 
         <Button
+            android:id="@+id/btnTagSclass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
