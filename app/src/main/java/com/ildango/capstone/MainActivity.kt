@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
         setContentView(binding.root)
     }
 
+
     override fun onStart() {
         super.onStart()
         binding.searchView.setQuery("", false)
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
                 startActivity(intent)
                 return true
             }
+
 
             override fun onQueryTextChange(p0: String?): Boolean {
                 // 텍스트 값 바뀔 때
