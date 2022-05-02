@@ -41,7 +41,6 @@ class ResultActivity : AppCompatActivity() {
         })
 
         binding.btnAroundLowest.setOnClickListener{
-            finish()
             val nextIntent = Intent(this, ResultDetailActivity::class.java)
             nextIntent.putExtra("keyword", searchKeyword)
             nextIntent.putExtra("type", type1)
@@ -49,15 +48,15 @@ class ResultActivity : AppCompatActivity() {
         }
 
         binding.btnWholeLowest.setOnClickListener{
-            finish()
             val nextIntent = Intent(this, ResultDetailActivity::class.java)
+            nextIntent.putExtra("keyword", searchKeyword)
             nextIntent.putExtra("type", type2)
             startActivity(nextIntent)
         }
 
         binding.btnUnopenedLowest.setOnClickListener{
-            finish()
             val nextIntent = Intent(this, ResultDetailActivity::class.java)
+            nextIntent.putExtra("keyword", searchKeyword)
             nextIntent.putExtra("type", type3)
             startActivity(nextIntent)
         }
