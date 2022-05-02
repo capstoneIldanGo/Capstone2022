@@ -3,6 +3,7 @@ package com.ildango.capstone
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.widget.SearchView
 import com.ildango.capstone.mywishlist.MyWishListActivity
 import com.ildango.capstone.databinding.ActivityMainBinding
 import com.ildango.capstone.myalarmlist.MyAlarmListActivity
@@ -19,10 +20,19 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.tvSearchbar.setOnClickListener {
-            val intent = Intent(this, SearchActivity::class.java)
-            startActivity(intent)
-        }
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                var intent = Intent(this@MainActivity, ResultActivity::class.java)
+                intent.putExtra("keyword", binding.searchView.query.toString())
+                startActivity(intent)
+                return true
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                // 텍스트 값 바뀔 때
+                return false
+            }
+        })
 
         binding.viewUnderSearchBar.setOnTouchListener(object:OnSwipeTouchListener(this@MainActivity) {
             override fun onSwipeTop() {
