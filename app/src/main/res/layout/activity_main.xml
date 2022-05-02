@@ -6,8 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-
-
 <LinearLayout
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -15,49 +13,23 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageView
+        android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginBottom="30dp"
-        android:gravity="center_horizontal">
+        android:layout_marginTop="180dp"
+        android:src="@drawable/logo"
+        android:layout_gravity="center_horizontal"/>
 
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:src="@drawable/logo" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="10dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextSearch"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:background="@color/opaqueGray"
-            android:padding="10dp"
-            android:layout_margin="10dp"
-            android:ellipsize="start"
-            android:layout_gravity="center_vertical"
-            android:hint="검색어를 입력하세요"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnSearch"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:background="@drawable/style_btn"
-            android:text="검색"
-            android:textSize="20sp"/>
-
-    </LinearLayout>
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_vertical"
+        android:includeFontPadding="false"
+        android:background="@drawable/style_gray_radius10"
+        app:iconifiedByDefault="false" />
 
     <View
         android:id="@+id/viewUnderSearchBar"
