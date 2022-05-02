@@ -23,8 +23,9 @@
     <TextView
         android:id="@+id/tv_searchbar"
         android:layout_width="350dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="20dp"
+        android:paddingLeft="20dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/style_gray_radius10"
         android:drawableLeft="@drawable/ic_baseline_search_24"/>
