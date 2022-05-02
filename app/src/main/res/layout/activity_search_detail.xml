@@ -5,39 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="419dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/productTextSearch"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="4"
-            android:padding="2dp"
-            android:text="@string/productTextSearch" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnSearchAgain"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="3dp"
-            android:layout_weight="1"
-            android:background="@drawable/style_btn"
-            android:gravity="center"
-            android:text="검색"
-            android:textSize="15sp"
-            tools:ignore="TouchTargetSizeCheck" />
-
-    </LinearLayout>
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:includeFontPadding="false"
+        style="@style/SearchbarStyle"
+        app:iconifiedByDefault="false"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -45,7 +21,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        app:layout_constraintTop_toBottomOf="@id/searchView">
 
         <TextView
             android:id="@+id/recentTransaction"
@@ -55,7 +31,6 @@
             android:layout_weight="14"
             android:padding="0dp"
             android:text="@string/kindOfSort" />
-
 
         <ImageButton
             android:id="@+id/btnSorting"
