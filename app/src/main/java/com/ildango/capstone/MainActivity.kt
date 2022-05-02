@@ -19,6 +19,12 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        binding.searchView.setQuery("", false)
+        binding.searchView.clearFocus()
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
