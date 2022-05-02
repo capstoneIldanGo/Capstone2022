@@ -35,6 +35,8 @@ android {
     dataBinding {
         enabled true
     }
+
+
 }
 
 dependencies {
@@ -57,4 +59,7 @@ dependencies {
     //recyclerview, cardview
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.cardview:cardview:1.0.0'
+
+    // graph
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.2'
 }
