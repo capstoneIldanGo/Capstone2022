@@ -1,6 +1,5 @@
-package com.ildango.capstone
-
-import android.content.Context
+import com.ildango.capstone.BottomSheetClickListener
+import com.ildango.capstone.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
