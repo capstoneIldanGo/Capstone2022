@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">Capstone</string>
     <string name="productTextSearch">검색어를 입력해주세요</string>
-    <string name="latestPrice">18,000원</string>
-    <string name="aroundLowestPrice">18,000원</string>
-    <string name="entireLowestPrice">18,000원</string>
-    <string name="sclassLowestPrice">18,000원</string>
     <string name="kindOfSort">내 주변 최저가</string>
+    <string name="text_of_alarmpage">원하는 가격을 알림으로 받을 수 있습니다</string>
+    <string name="what_is_recent_transaction">제일 최근 거래가는?</string>
+    <string name="btn_price_alarm">원하는 가격 알림받기</string>
+    <string name="price_info_list">가격정보</string>
+    <string name="text_of_wishpage">찜한 상품들을 보여줍니다</string>
+    <string name="chart_title">시세확인</string>
 </resources>

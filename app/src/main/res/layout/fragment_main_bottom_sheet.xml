@@ -35,11 +35,12 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:drawableLeft="@drawable/icon_heart_filled_small"
+        android:drawablePadding="15dp"
         android:textAlignment="textStart"
         android:layout_marginBottom="10dp"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:text="  찜한 목록" />
+        android:text="찜한 목록" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_alarm"
@@ -47,11 +48,12 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:drawableLeft="@drawable/icon_notifications_small"
+        android:drawablePadding="15dp"
         android:textAlignment="textStart"
         android:layout_marginBottom="10dp"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:text="  알림 설정" />
+        android:text="알림 설정" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_logstate"
@@ -59,10 +61,11 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:drawableLeft="@drawable/icon_logout_small"
+        android:drawablePadding="15dp"
         android:textAlignment="textStart"
         android:layout_marginBottom="10dp"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:text="  로그아웃" />
+        android:text="로그아웃" />
 
 </LinearLayout>

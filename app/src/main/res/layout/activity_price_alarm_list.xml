@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="원하는 가격을 알림으로 받을 수 있습니다"
+                android:text="@string/text_of_alarmpage"
                 android:textColor="@color/black"
                 android:textSize="17sp" />
 
