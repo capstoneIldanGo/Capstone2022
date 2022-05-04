@@ -1,10 +1,11 @@
-package com.ildango.capstone
+package com.ildango.capstone.result
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import com.ildango.capstone.databinding.ActivitySearchResultBinding
+import com.ildango.capstone.resultdetail.ResultDetailActivity
 
 const val type1 = "내 주변"
 const val type2 = "전국"

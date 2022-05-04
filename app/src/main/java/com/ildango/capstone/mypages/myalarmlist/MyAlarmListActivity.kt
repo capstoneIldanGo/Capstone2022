@@ -1,4 +1,4 @@
-package com.ildango.capstone.mywishlist
+package com.ildango.capstone.mypages.myalarmlist
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -6,37 +6,36 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ildango.capstone.MyViewModel
-import com.ildango.capstone.databinding.ActivityWishListBinding
+import com.ildango.capstone.mypages.MyViewModel
+import com.ildango.capstone.databinding.ActivityPriceAlarmListBinding
 
+class MyAlarmListActivity : AppCompatActivity() {
 
-class MyWishListActivity : AppCompatActivity() {
-
-    private var _binding: ActivityWishListBinding?= null
+    private var _binding: ActivityPriceAlarmListBinding?= null
     private val binding get() = _binding!!
     private lateinit var viewModel: MyViewModel
 
-    private val mItems = MutableLiveData<ArrayList<MyWishItem>>()
+    private val mItems = MutableLiveData<ArrayList<MyAlarmItem>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityWishListBinding.inflate(this.layoutInflater)
+        _binding = ActivityPriceAlarmListBinding.inflate(this.layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(MyViewModel::class.java)
 
         // list view
-        binding.recyclerviewWishList.layoutManager = LinearLayoutManager(this)
+        binding.recyclerviewAlarmList.layoutManager = LinearLayoutManager(this)
 
         // dummy data
-        viewModel.addWishItems()
+        viewModel.addAlarmItems()
 
-        val dataObserver:Observer<ArrayList<MyWishItem>> =
+        val dataObserver: Observer<ArrayList<MyAlarmItem>> =
             Observer { livedata ->
                 mItems.value = livedata
-                val mAdapter = MyWishListAdapter(mItems)
-                binding.recyclerviewWishList.adapter = mAdapter
+                val mAdapter = MyAlarmListAdapter(mItems)
+                binding.recyclerviewAlarmList.adapter = mAdapter
             }
-        viewModel.wishLiveData.observe(this, dataObserver)
+        viewModel.alarmLiveData.observe(this, dataObserver)
 
     }
 

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.ildango.capstone.databinding.ActivitySearchBinding
+import com.ildango.capstone.result.ResultActivity
 
 class SearchActivity : AppCompatActivity() {
 
@@ -31,7 +32,6 @@ class SearchActivity : AppCompatActivity() {
                 // 추천검색어
                 return false
             }
-
         })
 
     }

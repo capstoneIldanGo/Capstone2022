@@ -1,4 +1,4 @@
-package com.ildango.capstone.mywishlist
+package com.ildango.capstone.mypages.mywishlist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package com.ildango.capstone
+package com.ildango.capstone.resultdetail
 
 import SortingSheetFragment
 import android.content.Intent
@@ -6,6 +6,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import com.ildango.capstone.databinding.ActivitySearchDetailBinding
+import com.ildango.capstone.result.ResultActivity
+import com.ildango.capstone.result.type1
+import com.ildango.capstone.result.type2
+import com.ildango.capstone.result.type3
 
 class ResultDetailActivity : AppCompatActivity(){
 
@@ -48,11 +52,11 @@ class ResultDetailActivity : AppCompatActivity(){
 
     private fun setTextByType(type:String) {
         when(type){
-            type1->
+            type1 ->
                 binding.recentTransaction.text = "$type1 최저가"
-            type2->
+            type2 ->
                 binding.recentTransaction.text = "$type2 최저가"
-            type3->
+            type3 ->
                 binding.recentTransaction.text = "$type3 최저가"
         }
     }
