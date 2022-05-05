@@ -23,6 +23,7 @@
         android:padding="0dp"
         android:text="@string/kindOfSort"
         android:textSize="20sp"
+        android:textColor="@color/darkGray"
         app:layout_constraintTop_toBottomOf="@id/searchView"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -33,7 +34,7 @@
         android:layout_marginEnd="20dp"
         android:background="@android:color/transparent"
         app:srcCompat="@drawable/ic_baseline_tune_24"
-        app:tint="#000000"
+        app:tint="@color/darkGray"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/tvRecentTransaction"
         app:layout_constraintBottom_toTopOf="@id/recycler_course_item"/>
