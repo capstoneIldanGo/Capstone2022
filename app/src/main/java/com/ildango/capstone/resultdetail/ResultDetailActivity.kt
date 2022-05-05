@@ -1,6 +1,5 @@
 package com.ildango.capstone.resultdetail
 
-import SortingSheetFragment
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
