@@ -1,10 +1,10 @@
-package com.ildango.capstone
+package com.ildango.capstone.mypages
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.ildango.capstone.myalarmlist.MyAlarmItem
-import com.ildango.capstone.mywishlist.MyWishItem
+import com.ildango.capstone.mypages.myalarmlist.MyAlarmItem
+import com.ildango.capstone.mypages.mywishlist.MyWishItem
 
 class MyViewModel(application: Application) : AndroidViewModel(application) {
 

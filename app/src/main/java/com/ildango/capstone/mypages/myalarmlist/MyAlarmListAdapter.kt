@@ -1,4 +1,4 @@
-package com.ildango.capstone.myalarmlist
+package com.ildango.capstone.mypages.myalarmlist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.ildango.capstone.R
-import com.ildango.capstone.mywishlist.MyWishItem
+import com.ildango.capstone.mypages.mywishlist.MyWishItem
 
 class MyAlarmListAdapter(private var items: LiveData<ArrayList<MyAlarmItem>>)
     : RecyclerView.Adapter<MyAlarmListAdapter.MyAlarmListViewHolder>() {
