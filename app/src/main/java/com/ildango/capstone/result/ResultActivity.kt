@@ -2,8 +2,10 @@ package com.ildango.capstone.result
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.ViewModelProvider
 import com.ildango.capstone.databinding.ActivitySearchResultBinding
 import com.ildango.capstone.resultdetail.ResultDetailActivity
 
@@ -15,21 +17,40 @@ class ResultActivity : AppCompatActivity() {
 
     private var _binding: ActivitySearchResultBinding?= null
     private val binding get() = _binding!!
+    private lateinit var viewModel : ResultViewModel
 
+    private val priceListTags = arrayListOf(type1, type2, type3)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivitySearchResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        viewModel = ViewModelProvider(this).get(ResultViewModel::class.java)
 
         val intent = intent
-        var searchKeyword = intent.getStringExtra("keyword").toString()
+        val searchKeyword = intent.getStringExtra("keyword").toString()
         binding.searchView.setQuery(searchKeyword, false)
+
+        // listview
+        var priceListPrice = viewModel.getPricesByTag()
+        val adapter = PriceListAdapter(priceListTags, priceListPrice)
+        binding.listviewPriceList.adapter = adapter
+
+        binding.listviewPriceList.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+            val nextIntent = Intent(this, ResultDetailActivity::class.java)
+            nextIntent.putExtra("keyword", searchKeyword)
+            when(position) {
+                0->nextIntent.putExtra("type", type1)
+                1->nextIntent.putExtra("type", type2)
+                2->nextIntent.putExtra("type", type3)
+            }
+            startActivity(nextIntent)
+        }
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 finish()
-                var intent = Intent(this@ResultActivity, ResultActivity::class.java)
+                val intent = Intent(this@ResultActivity, ResultActivity::class.java)
                 intent.putExtra("keyword", binding.searchView.query.toString())
                 startActivity(intent)
                 return true
@@ -40,27 +61,6 @@ class ResultActivity : AppCompatActivity() {
                 return false
             }
         })
-
-        binding.btnAroundLowest.setOnClickListener{
-            val nextIntent = Intent(this, ResultDetailActivity::class.java)
-            nextIntent.putExtra("keyword", searchKeyword)
-            nextIntent.putExtra("type", type1)
-            startActivity(nextIntent)
-        }
-
-        binding.btnWholeLowest.setOnClickListener{
-            val nextIntent = Intent(this, ResultDetailActivity::class.java)
-            nextIntent.putExtra("keyword", searchKeyword)
-            nextIntent.putExtra("type", type2)
-            startActivity(nextIntent)
-        }
-
-        binding.btnUnopenedLowest.setOnClickListener{
-            val nextIntent = Intent(this, ResultDetailActivity::class.java)
-            nextIntent.putExtra("keyword", searchKeyword)
-            nextIntent.putExtra("type", type3)
-            startActivity(nextIntent)
-        }
     }
 
     override fun onDestroy() {

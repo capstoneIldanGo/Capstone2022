@@ -20,11 +20,10 @@
         android:id="@+id/tv_recentTransaction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:text="@string/what_is_recent_transaction"
         android:textColor="@color/gray"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/listview_price_list"
         app:layout_constraintTop_toBottomOf="@id/searchView" />
 
     <Button
@@ -36,7 +35,7 @@
         android:padding="0dp"
         android:text="@string/btn_price_alarm"
         android:textColor="@color/gray"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintRight_toRightOf="@id/listview_price_list"
         app:layout_constraintTop_toTopOf="@id/tv_recentTransaction" />
 
     <TextView
@@ -75,31 +74,13 @@
         app:layout_constraintLeft_toLeftOf="@id/tv_recentTransaction"
         app:layout_constraintTop_toBottomOf="@id/lineChart" />
 
-    <Button
-        android:id="@+id/btnAroundLowest"
+    <ListView
+        android:id="@+id/listview_price_list"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:text="18000원"
-        android:textAlignment="textEnd"
-        style="@style/PriceButtonStyle"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        tools:listitem="@layout/item_price_list_listview"
         app:layout_constraintTop_toBottomOf="@id/tv_priceInfoTitle" />
-
-    <Button
-        android:id="@+id/btnWholeLowest"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:text="18000원"
-        android:textAlignment="textEnd"
-        style="@style/PriceButtonStyle"
-        app:layout_constraintTop_toBottomOf="@id/btnAroundLowest"/>
-
-    <Button
-        android:id="@+id/btnUnopenedLowest"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:text="18000원"
-        android:textAlignment="textEnd"
-        style="@style/PriceButtonStyle"
-        app:layout_constraintTop_toBottomOf="@id/btnWholeLowest"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
