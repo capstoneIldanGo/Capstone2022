@@ -7,57 +7,50 @@
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
+        style="@style/SearchbarStyle"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical"
         android:includeFontPadding="false"
-        style="@style/SearchbarStyle"
         app:iconifiedByDefault="false"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tvRecentTransaction"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchView">
+        android:layout_marginStart="25dp"
+        android:padding="0dp"
+        android:text="@string/kindOfSort"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
+        app:layout_constraintLeft_toLeftOf="parent"/>
 
-        <TextView
-            android:id="@+id/recentTransaction"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_weight="14"
-            android:padding="0dp"
-            android:text="@string/kindOfSort" />
-
-        <ImageButton
-            android:id="@+id/btnSorting"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#FFFFFF"
-            android:layout_marginEnd="20dp"
-            android:layout_gravity="end"
-            app:srcCompat="@drawable/ic_baseline_tune_24"
-            app:tint="#000000" />
-
-    </LinearLayout>
+    <ImageButton
+        android:id="@+id/btn_sorting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/ic_baseline_tune_24"
+        app:tint="#000000"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvRecentTransaction"
+        app:layout_constraintBottom_toTopOf="@id/recycler_course_item"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_course_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="?attr/actionBarSize"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:paddingBottom="?attr/actionBarSize"
         android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        tools:listitem="@layout/item_result_listview" />
+        tools:listitem="@layout/item_result_listview"
+        app:layout_constraintTop_toBottomOf="@id/tvRecentTransaction"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

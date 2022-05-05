@@ -53,11 +53,11 @@ class ResultDetailActivity : AppCompatActivity(){
     private fun setTextByType(type:String) {
         when(type){
             type1 ->
-                binding.recentTransaction.text = "$type1 최저가"
+                binding.tvRecentTransaction.text = "$type1 최저가"
             type2 ->
-                binding.recentTransaction.text = "$type2 최저가"
+                binding.tvRecentTransaction.text = "$type2 최저가"
             type3 ->
-                binding.recentTransaction.text = "$type3 최저가"
+                binding.tvRecentTransaction.text = "$type3 최저가"
         }
     }
 
