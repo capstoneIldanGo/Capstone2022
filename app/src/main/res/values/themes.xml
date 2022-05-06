@@ -51,6 +51,7 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textAlignment">textStart</item>
         <item name="android:background">@android:color/transparent</item>
+        <item name="android:button">@null</item>
     </style>
 
 </resources>
