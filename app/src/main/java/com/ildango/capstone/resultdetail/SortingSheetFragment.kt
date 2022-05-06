@@ -13,6 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.ildango.capstone.databinding.FragmentSortingBottomSheetBinding
+import kotlinx.android.synthetic.main.fragment_sorting_bottom_sheet.*
 
 
 interface SortingSheetClickListener {
@@ -72,13 +73,44 @@ class SortingSheetFragment() : BottomSheetDialogFragment() {
     companion object {
         const val TAG = "SortingSheet"
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        binding.btnAllPlatform.setOnClickListener {
+            if(btnAllPlatform?.isChecked == true) {
+                btnJunggoMarket?.isChecked = true;
+                btnCarrotMarket?.isChecked = true;
+                btnThunderMarket?.isChecked = true;
+            }
+            else {
+                btnJunggoMarket?.isChecked = false;
+                btnCarrotMarket?.isChecked = false;
+                btnThunderMarket?.isChecked = false;
+            }
+        }
+        binding.btnCarrotMarket.setOnClickListener{
+            checkButtons()
+        }
+        binding.btnJunggoMarket.setOnClickListener{
+            checkButtons()
+        }
+        binding.btnThunderMarket.setOnClickListener{
+            checkButtons()
+        }
+    }
 
     // 글자 클릭시 변화주기 추가
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun checkButtons() {
+        if(btnCarrotMarket.isChecked==true && btnJunggoMarket.isChecked==true && btnThunderMarket.isChecked==true)
+            btnAllPlatform.isChecked = true
+        else
+            btnAllPlatform.isChecked = false
     }
 
 }
