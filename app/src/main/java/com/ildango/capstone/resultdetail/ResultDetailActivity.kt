@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ildango.capstone.databinding.ActivitySearchDetailBinding
 import com.ildango.capstone.result.ResultActivity
 import com.ildango.capstone.result.type1
@@ -25,6 +26,9 @@ class ResultDetailActivity : AppCompatActivity(){
         binding.btnSorting.setOnClickListener{
             sortingSheet.show(supportFragmentManager, SortingSheetFragment.TAG)
         }
+
+        binding.recyclerCourseItem.layoutManager = LinearLayoutManager(this)
+
         
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
