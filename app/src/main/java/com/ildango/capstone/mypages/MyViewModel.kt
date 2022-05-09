@@ -12,10 +12,10 @@ class MyViewModel(application: Application) : AndroidViewModel(application) {
     var alarmLiveData : MutableLiveData<ArrayList<MyAlarmItem>> = MutableLiveData<ArrayList<MyAlarmItem>>()
 
     init {
-        addWishItems()
+       // addWishItems()
         addAlarmItems()
     }
-
+/*
     fun addWishItems() {
         var wishItem = ArrayList<MyWishItem>()
         // dummy data
@@ -24,7 +24,7 @@ class MyViewModel(application: Application) : AndroidViewModel(application) {
         wishItem.add(MyWishItem("imgUrl", "test3", "25000원"))
 
         wishLiveData.postValue(wishItem)
-    }
+    }*/
 
     fun addAlarmItems() {
         var alarmItem = ArrayList<MyAlarmItem>()

@@ -19,8 +19,8 @@ class MyWishListAdapter(private var items: LiveData<ArrayList<MyWishItem>>)
         items.value!!.get(position).let { item ->
             with(holder) {
                 iv_thumbnail.setImageResource(R.drawable.logo)
-                tv_title.text = item.title
-                tv_price.text = item.price
+                //tv_title.text = item.title
+                //tv_price.text = item.price
             }
         }
     }
