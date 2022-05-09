@@ -3,7 +3,7 @@ package com.ildango.capstone.mypages.mywishlist
 class MyWishItemModel:ArrayList<MyWishItem>()
 
 data class MyWishItem (
-    var thumbnailImg : String,
-    var title : String,
-    var price : String
+    val thumbnailImg : String,
+    val title : String,
+    val price : String
 )

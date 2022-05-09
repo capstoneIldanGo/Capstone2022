@@ -2,8 +2,11 @@ package com.ildango.capstone.resultdetail
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ildango.capstone.databinding.ActivitySearchDetailBinding
 import com.ildango.capstone.result.ResultActivity
@@ -15,21 +18,41 @@ class ResultDetailActivity : AppCompatActivity(){
 
     private var _binding: ActivitySearchDetailBinding?= null
     private val binding get() = _binding!!
+    private lateinit var viewModel: ResultDetailViewModel
+    private val repository = ProductRepository()
+    private val viewModelFactory = ResultDetailViewModelFactory(repository)
     private val sortingSheet = SortingSheetFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivitySearchDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ResultDetailViewModel::class.java)
 
+        onClickListener()
+        setSearchView()
+        var type:String = intent.getStringExtra("type").toString()
+        setTextByType(type)
 
-        binding.btnSorting.setOnClickListener{
-            sortingSheet.show(supportFragmentManager, SortingSheetFragment.TAG)
-        }
+        // binding.recyclerCourseItem.layoutManager = LinearLayoutManager(this)
 
-        binding.recyclerCourseItem.layoutManager = LinearLayoutManager(this)
+        viewModel.getData()
+        setObserver()
+    }
 
-        
+    private fun setObserver() {
+        viewModel.product.observe(this, Observer {
+            if(it.isSuccessful) {
+                Log.d("Response", "ID:${it.body()?.postId}")
+                Log.d("Response", "Title:${it.body()?.title}")
+            }
+            else {
+                Log.d("Response", "ERROR:${it.errorBody().toString()}")
+            }
+        })
+    }
+
+    private fun setSearchView() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 finish()
@@ -48,9 +71,12 @@ class ResultDetailActivity : AppCompatActivity(){
         val intent = intent
         var searchKeyword = intent.getStringExtra("keyword").toString()
         binding.searchView.setQuery(searchKeyword, false)
+    }
 
-        var type:String = intent.getStringExtra("type").toString()
-        setTextByType(type)
+    private fun onClickListener() {
+        binding.btnSorting.setOnClickListener{
+            sortingSheet.show(supportFragmentManager, SortingSheetFragment.TAG)
+        }
     }
 
     private fun setTextByType(type:String) {
