@@ -3,12 +3,9 @@ package com.ildango.capstone.mypages.mywishlist
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ildango.capstone.mypages.MyViewModel
 import com.ildango.capstone.databinding.ActivityWishListBinding
 
 
@@ -36,8 +33,8 @@ class MyWishListActivity : AppCompatActivity() {
     private fun setObserver() {
         viewModel.items.observe(this, Observer {
             if(it.isSuccessful) {
-                Log.d("Response", "Wish ID:${it.body()?.get(0)!!.myPostId}")
-                Log.d("Response", "Wish Title:${it.body()?.get(0)!!.post.title}")
+                val mAdapter = MyWishListAdapter(viewModel.items)
+                binding.recyclerviewWishList.adapter = mAdapter
             }
             else {
                 Log.d("Response", "ERROR:${it.errorBody().toString()}")
