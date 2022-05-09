@@ -27,9 +27,6 @@ class MyWishListActivity : AppCompatActivity() {
         // list view
         binding.recyclerviewWishList.layoutManager = LinearLayoutManager(this)
 
-        // dummy data
-        viewModel.addWishItems()
-
         val dataObserver:Observer<ArrayList<MyWishItem>> =
             Observer { livedata ->
                 mItems.value = livedata

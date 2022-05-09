@@ -26,9 +26,6 @@ class MyAlarmListActivity : AppCompatActivity() {
         // list view
         binding.recyclerviewAlarmList.layoutManager = LinearLayoutManager(this)
 
-        // dummy data
-        viewModel.addAlarmItems()
-
         val dataObserver: Observer<ArrayList<MyAlarmItem>> =
             Observer { livedata ->
                 mItems.value = livedata
