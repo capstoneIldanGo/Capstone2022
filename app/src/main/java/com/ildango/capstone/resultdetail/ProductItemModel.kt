@@ -1,4 +1,4 @@
-package com.ildango.capstone.service
+package com.ildango.capstone.resultdetail
 
 import com.google.gson.annotations.SerializedName
 import java.time.LocalDateTime

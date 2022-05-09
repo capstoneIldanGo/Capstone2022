@@ -1,6 +1,7 @@
 package com.ildango.capstone.service
 
 import com.ildango.capstone.mypages.mywishlist.MyWishItem
+import com.ildango.capstone.resultdetail.ProductItem
 import retrofit2.Response
 import retrofit2.http.GET
 
