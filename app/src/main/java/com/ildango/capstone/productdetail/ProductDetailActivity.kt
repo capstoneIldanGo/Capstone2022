@@ -47,7 +47,6 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
     private fun getStringFromIntent(keyword:String) : String {
-        val intent = intent
         return intent.getStringExtra(keyword).toString()
     }
 

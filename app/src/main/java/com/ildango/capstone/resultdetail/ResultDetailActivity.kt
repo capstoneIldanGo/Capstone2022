@@ -37,8 +37,7 @@ class ResultDetailActivity : AppCompatActivity(){
 
         onClickListener()
         setSearchView()
-        var type:String = intent.getStringExtra("type").toString()
-        setTextByType(type)
+        setTextByType(intent.getStringExtra("type").toString())
         binding.recyclerCourseItem.layoutManager = LinearLayoutManager(this)
         viewModel.getData()
         setObserver()
@@ -79,8 +78,6 @@ class ResultDetailActivity : AppCompatActivity(){
                 return false
             }
         })
-
-        val intent = intent
         searchKeyword = intent.getStringExtra("keyword").toString()
         binding.searchView.setQuery(searchKeyword, false)
     }

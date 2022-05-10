@@ -38,21 +38,25 @@ class ResultActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(ResultViewModel::class.java)
 
-        val intent = intent
-        val searchKeyword = intent.getStringExtra("keyword").toString()
-        binding.searchView.setQuery(searchKeyword, false)
+        setPriceInfoList()
+        setSearchView()
 
-        // listview
+        // chart
+        makeChart()
+    }
+
+    private fun setPriceInfoList() {
         var priceListPrice = viewModel.getPricesByTag()
         val adapter = PriceListAdapter(priceListTags, priceListPrice)
         binding.listviewPriceList.adapter = adapter
 
-        // chart
-        makeChart()
+        setListListener()
+    }
 
+    private fun setListListener() {
         binding.listviewPriceList.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
             val nextIntent = Intent(this, ResultDetailActivity::class.java)
-            nextIntent.putExtra("keyword", searchKeyword)
+            nextIntent.putExtra("keyword", intent.getStringExtra("keyword").toString())
             when(position) {
                 0->nextIntent.putExtra("type", type1)
                 1->nextIntent.putExtra("type", type2)
@@ -60,7 +64,9 @@ class ResultActivity : AppCompatActivity() {
             }
             startActivity(nextIntent)
         }
+    }
 
+    private fun setSearchView() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 finish()
@@ -75,6 +81,8 @@ class ResultActivity : AppCompatActivity() {
                 return false
             }
         })
+
+        binding.searchView.setQuery(intent.getStringExtra("keyword").toString(), false)
     }
 
     override fun onDestroy() {
