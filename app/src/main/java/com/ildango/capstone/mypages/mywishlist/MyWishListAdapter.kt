@@ -1,5 +1,6 @@
 package com.ildango.capstone.mypages.mywishlist
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +12,8 @@ class MyWishListAdapter(private var items: MutableLiveData<Response<List<MyWishI
     : RecyclerView.Adapter<ProductViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        return ProductViewHolder(parent)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_product_listview, parent, false)
+        return ProductViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
