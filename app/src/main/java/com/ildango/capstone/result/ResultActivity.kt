@@ -93,11 +93,12 @@ class ResultActivity : AppCompatActivity() {
         lineList.add(Entry(0f, 100f))
         lineList.add(Entry(1f, 300f))
         lineList.add(Entry(2f, 200f))
-        lineList.add(Entry(3f, 600f))
+        lineList.add(Entry(3f, 1200f))
         lineList.add(Entry(4f, 500f))
 
         lineDataSet = LineDataSet(lineList, null)
         lineData = LineData(lineDataSet)
+        lineData.setValueTextSize(10f)
         lineChart.data = lineData
         lineChart.invalidate()
     }
