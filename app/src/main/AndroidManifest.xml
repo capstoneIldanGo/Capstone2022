@@ -2,13 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ildango.capstone">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Capstone">
+        android:theme="@style/Theme.Capstone"
+        android:usesCleartextTraffic="true">
         <activity
             android:name="com.ildango.capstone.MainActivity"
             android:exported="true">
@@ -23,7 +26,8 @@
         <activity android:name=".mypages.myalarmlist.MyAlarmListActivity"/>
         <activity android:name="com.ildango.capstone.result.ResultActivity"/>
         <activity android:name="com.ildango.capstone.resultdetail.ResultDetailActivity" />
-        <activity android:name=".SearchActivity" />
+        <activity android:name=".SearchActivity"/>
+        <activity android:name=".productdetail.ProductDetailActivity" />
 
     </application>
 
