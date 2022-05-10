@@ -1,13 +1,12 @@
-package com.ildango.capstone.mypages.mywishlist
+package com.ildango.capstone.resultdetail
 
 import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.ildango.capstone.R
-import com.ildango.capstone.resultdetail.ProductViewHolder
 import retrofit2.Response
 
-class MyWishListAdapter(private var items: MutableLiveData<Response<List<MyWishItem>>>)
+class ProductListAdapter(private val items: MutableLiveData<Response<ProductItemList>>)
     : RecyclerView.Adapter<ProductViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -15,17 +14,16 @@ class MyWishListAdapter(private var items: MutableLiveData<Response<List<MyWishI
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        items.value!!.body()!!.get(position).let { item ->
+        items.value!!.body()!!.productList.let { item ->
             with(holder) {
-                iv_thumbnail.setImageResource(R.drawable.logo)  //productImage
-                tv_title.text = item.post.title
-                tv_price.text = "${item.post.price}원"
+                iv_thumbnail.setImageResource(R.drawable.logo)
+                tv_title.text = item.get(position).title
+                tv_price.text = "${item.get(position).price}원"
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return items.value!!.body()!!.size
+        return items.value!!.body()!!.productList.size
     }
-
 }

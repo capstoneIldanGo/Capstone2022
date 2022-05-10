@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.ildango.capstone.databinding.ActivitySearchDetailBinding
 import com.ildango.capstone.result.ResultActivity
 import com.ildango.capstone.result.type1
@@ -43,8 +42,8 @@ class ResultDetailActivity : AppCompatActivity(){
     private fun setObserver() {
         viewModel.product.observe(this, Observer {
             if(it.isSuccessful) {
-                Log.d("Response", "ID:${it.body()?.postId}")
-                Log.d("Response", "Title:${it.body()?.title}")
+                val mAdapter = ProductListAdapter(viewModel.product)
+                binding.recyclerCourseItem.adapter = mAdapter
             }
             else {
                 Log.d("Response", "ERROR:${it.errorBody().toString()}")

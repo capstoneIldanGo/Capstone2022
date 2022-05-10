@@ -10,7 +10,7 @@ import retrofit2.Response
 class ResultDetailViewModel(private val productRepository: ProductRepository)
     : ViewModel() {
 
-    val product : MutableLiveData<Response<ProductItem>> = MutableLiveData()
+    val product : MutableLiveData<Response<ProductItemList>> = MutableLiveData()
     // val product: LiveData<ProductItem> = _product
 
     fun getData() {
