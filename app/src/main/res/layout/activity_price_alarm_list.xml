@@ -5,7 +5,7 @@
     <data>
         <variable
             name="model"
-            type="com.ildango.capstone.mypages.MyViewModel" />
+            type="com.ildango.capstone.mypages.myalarmlist.MyAlarmListViewModel" />
     </data>
 
     <LinearLayout

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="model"
-            type="com.ildango.capstone.mypages.MyViewModel" />
+            type="com.ildango.capstone.mypages.mywishlist.MyWishListViewModel" />
     </data>
 
     <LinearLayout

@@ -1,39 +1,44 @@
 package com.ildango.capstone.mypages.myalarmlist
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ildango.capstone.mypages.MyViewModel
 import com.ildango.capstone.databinding.ActivityPriceAlarmListBinding
 
 class MyAlarmListActivity : AppCompatActivity() {
 
     private var _binding: ActivityPriceAlarmListBinding?= null
     private val binding get() = _binding!!
-    private lateinit var viewModel: MyViewModel
-
-    private val mItems = MutableLiveData<ArrayList<MyAlarmItem>>()
+    private lateinit var viewModel: MyAlarmListViewModel
+    private val repository = MyAlarmListRepository()
+    private val viewModelFactory = MyAlarmListViewModelFactory(repository)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityPriceAlarmListBinding.inflate(this.layoutInflater)
         setContentView(binding.root)
-        viewModel = ViewModelProvider(this).get(MyViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MyAlarmListViewModel::class.java)
 
         // list view
         binding.recyclerviewAlarmList.layoutManager = LinearLayoutManager(this)
 
-        val dataObserver: Observer<ArrayList<MyAlarmItem>> =
-            Observer { livedata ->
-                mItems.value = livedata
-                val mAdapter = MyAlarmListAdapter(mItems)
+        viewModel.getData()
+        setObserver()
+    }
+
+    private fun setObserver() {
+        viewModel.items.observe(this, Observer {
+            if(it.isSuccessful) {
+                val mAdapter = MyAlarmListAdapter(viewModel.items)
                 binding.recyclerviewAlarmList.adapter = mAdapter
             }
-        viewModel.alarmLiveData.observe(this, dataObserver)
-
+            else {
+                Log.d("Response", "ERROR:${it.errorBody().toString()}")
+            }
+        })
     }
 
     override fun onDestroy() {
