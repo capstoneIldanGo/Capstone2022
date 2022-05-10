@@ -53,6 +53,7 @@ class ResultDetailActivity : AppCompatActivity(){
                     override fun onClick(v: View, position: Int) {
                         Intent(this@ResultDetailActivity, ProductDetailActivity::class.java).apply {
                             putExtra("keyword", searchKeyword)
+                            putExtra("url", viewModel.getUrl(position))
                         }.run { startActivity(this) }
                     }
                 })
