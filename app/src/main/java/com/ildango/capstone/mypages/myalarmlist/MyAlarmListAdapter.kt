@@ -5,11 +5,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.ildango.capstone.R
 import com.ildango.capstone.mypages.mywishlist.MyWishItem
+import retrofit2.Response
 
-class MyAlarmListAdapter(private var items: LiveData<ArrayList<MyAlarmItem>>)
+class MyAlarmListAdapter(private var items: MutableLiveData<Response<List<MyAlarmItem>>>)
     : RecyclerView.Adapter<MyAlarmListAdapter.MyAlarmListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyAlarmListViewHolder {
@@ -17,16 +19,16 @@ class MyAlarmListAdapter(private var items: LiveData<ArrayList<MyAlarmItem>>)
     }
 
     override fun onBindViewHolder(holder: MyAlarmListViewHolder, position: Int) {
-        items.value!!.get(position).let { item ->
+        items.value!!.body()!!.get(position).let { item ->
             with(holder) {
-                tv_keyword.text = item.keyword
-                tv_price.text = item.price
+                tv_keyword.text = item.itemName
+                tv_price.text = "${item.targetPrice}원"
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return items.value!!.size
+        return items.value!!.body()!!.size
     }
 
     inner class MyAlarmListViewHolder constructor(parent: ViewGroup) : RecyclerView.ViewHolder(

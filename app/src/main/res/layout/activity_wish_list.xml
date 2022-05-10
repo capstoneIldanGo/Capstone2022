@@ -6,7 +6,7 @@
     <data>
         <variable
             name="model"
-            type="com.ildango.capstone.mypages.MyViewModel" />
+            type="com.ildango.capstone.mypages.mywishlist.MyWishListViewModel" />
     </data>
 
     <LinearLayout
@@ -58,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            tools:listitem="@layout/item_wish_listview"/>
+            tools:listitem="@layout/item_product_listview"/>
 
     </LinearLayout>
 </layout>

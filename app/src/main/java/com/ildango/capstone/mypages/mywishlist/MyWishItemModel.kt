@@ -1,9 +1,10 @@
 package com.ildango.capstone.mypages.mywishlist
 
+import com.ildango.capstone.resultdetail.ProductItem
+
 class MyWishItemModel:ArrayList<MyWishItem>()
 
 data class MyWishItem (
-    var thumbnailImg : String,
-    var title : String,
-    var price : String
+    val myPostId:Long,
+    val post: ProductItem
 )
