@@ -1,57 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
-<androidx.cardview.widget.CardView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:background="@color/gray"
-    app:cardCornerRadius="15dp">
-
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:padding="5dp">
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/gray"
+        app:cardCornerRadius="15dp">
 
-        <ImageView
-            android:id="@+id/ivProductThumbnail"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter" />
-
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="10dp" >
+            android:layout_height="90dp"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/ivProductThumbnail"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
                 android:id="@+id/tvWishlistTitle"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:textSize="17sp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
+                app:layout_constraintLeft_toRightOf="@id/ivProductThumbnail"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tvWishlistPrice"/>
 
             <TextView
                 android:id="@+id/tvWishlistPrice"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                android:textColor="@color/black"
                 android:textSize="17sp"
-                android:textColor="@color/black" />
+                android:layout_marginBottom="3dp"
+                android:includeFontPadding="false"
+                app:layout_constraintLeft_toLeftOf="@id/tvWishlistTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvWishlistTitle"
+                app:layout_constraintBottom_toTopOf="@id/tvWishlistTitle"/>
 
-        </LinearLayout>
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
-
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </layout>
