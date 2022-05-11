@@ -17,7 +17,8 @@ class ProductDetailActivity : AppCompatActivity() {
         _binding = ActivityProductDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSearchView()
+        // setSearchView()
+        binding.tvKeyword.text = getStringFromIntent("keyword")
         setWebView()
     }
 
@@ -27,7 +28,7 @@ class ProductDetailActivity : AppCompatActivity() {
         binding.webView.loadUrl(getStringFromIntent("url"))
     }
 
-    private fun setSearchView() {
+    /*private fun setSearchView() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 finish()
@@ -43,8 +44,8 @@ class ProductDetailActivity : AppCompatActivity() {
             }
         })
 
-        binding.searchView.setQuery(getStringFromIntent("keyword"), false)
-    }
+
+    }*/
 
     private fun getStringFromIntent(keyword:String) : String {
         return intent.getStringExtra(keyword).toString()
