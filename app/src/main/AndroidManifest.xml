@@ -26,7 +26,6 @@
         <activity android:name=".mypages.myalarmlist.MyAlarmListActivity"/>
         <activity android:name="com.ildango.capstone.result.ResultActivity"/>
         <activity android:name="com.ildango.capstone.resultdetail.ResultDetailActivity" />
-        <activity android:name=".SearchActivity"/>
         <activity android:name=".productdetail.ProductDetailActivity" />
 
     </application>
