@@ -5,6 +5,6 @@ import retrofit2.Response
 
 class MyWishListRepository {
     suspend fun getWishItem() : Response<List<MyWishItem>> {
-        return RetrofitClient.productApi.getAllWishProduct()
+        return RetrofitClient.wishApi.getAllWishProduct()
     }
 }

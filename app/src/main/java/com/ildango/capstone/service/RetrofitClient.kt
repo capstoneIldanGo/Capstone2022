@@ -22,5 +22,11 @@ object RetrofitClient {
     val productApi:ProductService by lazy {
         instance.create(ProductService::class.java)
     }
+    val alarmApi:MyAlarmService by lazy {
+        instance.create(MyAlarmService::class.java)
+    }
+    val wishApi:MyWishService by lazy {
+        instance.create(MyWishService::class.java)
+    }
 
 }

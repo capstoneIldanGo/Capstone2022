@@ -5,6 +5,6 @@ import retrofit2.Response
 
 class MyAlarmListRepository {
     suspend fun getAlarmItem(): Response<List<MyAlarmItem>> {
-        return RetrofitClient.productApi.getAllAlarmList()
+        return RetrofitClient.alarmApi.getAllAlarmList()
     }
 }
