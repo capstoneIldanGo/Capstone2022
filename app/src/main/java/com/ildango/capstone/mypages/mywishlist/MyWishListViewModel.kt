@@ -17,6 +17,10 @@ class MyWishListViewModel(private val wishListRepository: MyWishListRepository) 
         }
     }
 
+    fun getUrl(pos:Int): String {
+        return items.value!!.body()!!.get(pos).post.url
+    }
+
     fun deleteItems() {
 
     }

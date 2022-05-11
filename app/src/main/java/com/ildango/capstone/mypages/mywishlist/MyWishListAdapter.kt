@@ -11,6 +11,8 @@ import retrofit2.Response
 class MyWishListAdapter(private var items: MutableLiveData<Response<List<MyWishItem>>>)
     : RecyclerView.Adapter<ProductViewHolder>() {
 
+    private lateinit var itemClickListener : ProductViewHolder.OnItemClickListener
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_product_listview, parent, false)
         return ProductViewHolder(view)
@@ -24,10 +26,17 @@ class MyWishListAdapter(private var items: MutableLiveData<Response<List<MyWishI
                 tv_price.text = "${item.post.price}원"
             }
         }
+        holder.itemView.setOnClickListener {
+            itemClickListener.onClick(it, position)
+        }
     }
 
     override fun getItemCount(): Int {
         return items.value!!.body()!!.size
+    }
+
+    fun setItemClickListener(onItemClickListener: ProductViewHolder.OnItemClickListener) {
+        this.itemClickListener = onItemClickListener
     }
 
 }
