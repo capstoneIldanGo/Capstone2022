@@ -39,9 +39,17 @@ class ResultActivity : AppCompatActivity() {
 
         setPriceInfoList()
         setSearchView()
+        setAlarmDialog()
 
         // chart
         makeChart()
+    }
+
+    private fun setAlarmDialog() {
+        binding.btnMakeAlarm.setOnClickListener {
+            // dialog 생성
+            AlarmDialog(context = this).show()
+       }
     }
 
     private fun setPriceInfoList() {
