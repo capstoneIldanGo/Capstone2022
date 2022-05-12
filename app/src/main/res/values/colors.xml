@@ -15,4 +15,8 @@
 
     <color name="selected">#E82C2C2C</color>
     <color name="unselected">#E8E6E6E6</color>
+
+    <color name="colorPrimary"></color>
+    <color name="colorPrimaryDark"></color>
+    <color name="colorAccent"></color>
 </resources>
