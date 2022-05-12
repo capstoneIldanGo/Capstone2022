@@ -66,8 +66,8 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_chart_title"
         app:selectionRequired="true"
         app:singleSelection="true"
-        android:gravity="center">
-
+        android:gravity="center"
+        app:checkedButton="@id/btnOneMonth">
 
         <Button
             android:id="@+id/btnOneMonth"

@@ -37,11 +37,17 @@ class ResultActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(ResultViewModel::class.java)
 
+
         setPriceInfoList()
         setSearchView()
+        makeOneMonthChart()
 
-        // chart
-        makeChart()
+        binding.btnOneMonth.setOnClickListener {
+            makeOneMonthChart()
+        }
+        binding.btnOneWeek.setOnClickListener {
+            makeOneWeekChart()
+        }
     }
 
     private fun setPriceInfoList() {
@@ -89,31 +95,50 @@ class ResultActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-    private fun makeChart() {
+    private fun makeOneWeekChart() {
+        lineChart.setNoDataText("데이터가 없습니다.")
+
+        setChart()
+
+        lineList = ArrayList()
+        // db에서 값 가져와 값 집어 넣기 : ArrayList<Int>()
+        val priceList = arrayOf(700,300,200,1200,500,200,500)
+        for(i in priceList.indices){
+            lineList.add(Entry(i.toFloat(), priceList[i].toFloat()))
+        }
+
+        lineDataSet = LineDataSet(lineList, null)
+        lineData = LineData(lineDataSet)
+        lineData.setValueTextSize(0f)
+        lineChart.data = lineData
+        lineChart.invalidate()
+    }
+
+    private fun makeOneMonthChart() {
         lineChart.setNoDataText("데이터가 없습니다.")
 
         setChart()
 
         // 데이터 삽입 y값에..
         lineList = ArrayList()
-        lineList.add(Entry(0f, 100f))
-        lineList.add(Entry(1f, 300f))
-        lineList.add(Entry(2f, 200f))
-        lineList.add(Entry(3f, 1200f))
-        lineList.add(Entry(4f, 500f))
+        // db에서 값 가져와 값 집어 넣기
+        val priceList = arrayOf(700, 300, 200, 1234, 500, 200, 500,700, 300, 200, 1200, 500, 200, 500,700, 300, 200, 1200, 500, 200, 500,700, 300, 200, 1200, 500, 200, 500)
+        for (i in priceList.indices) {
+            lineList.add(Entry(i.toFloat(), priceList[i].toFloat()))
+        }
 
-        lineDataSet = LineDataSet(lineList, null)
-        lineData = LineData(lineDataSet)
-        lineData.setValueTextSize(10f)
-        lineChart.data = lineData
-        lineChart.invalidate()
+            lineDataSet = LineDataSet(lineList, null)
+            lineData = LineData(lineDataSet)
+            lineData.setValueTextSize(0f)
+            lineChart.data = lineData
+            lineChart.invalidate()
     }
 
     private fun setChart() {
         lineChart.legend.isEnabled = false
         lineChart.apply() {
             setExtraOffsets(2f, 2f, 2f, 2f)
-            axisLeft.setDrawLabels(false)
+            axisLeft.setDrawLabels(true)
             axisRight.setDrawLabels(false)
             description.isEnabled = false
             isDoubleTapToZoomEnabled = false
@@ -122,5 +147,4 @@ class ResultActivity : AppCompatActivity() {
             xAxis.isEnabled = false
         }
     }
-
 }
