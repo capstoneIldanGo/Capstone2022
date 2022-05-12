@@ -21,15 +21,15 @@ const val type3 = "미개봉/S급"
 
 class ResultActivity : AppCompatActivity() {
 
-    private var _binding: ActivitySearchResultBinding?= null
+    private var _binding: ActivitySearchResultBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel : ResultViewModel
+    private lateinit var viewModel: ResultViewModel
 
     private val priceListTags = arrayListOf(type1, type2, type3)
 
-    lateinit var lineData : LineData
-    lateinit var lineList : ArrayList<Entry>
-    lateinit var lineDataSet : LineDataSet
+    lateinit var lineData: LineData
+    lateinit var lineList: ArrayList<Entry>
+    lateinit var lineDataSet: LineDataSet
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,40 +89,48 @@ class ResultActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-    private fun makeChart(){
+    private fun makeChart() {
         lineChart.setNoDataText("데이터가 없습니다.")
 
         setChart()
 
+        // 데이터 삽입 y값에..
         lineList = ArrayList()
-        lineList.add(Entry(10f, 100f))
-        lineList.add(Entry(20f, 300f))
-        lineList.add(Entry(30f, 200f))
-        lineList.add(Entry(40f, 600f))
-        lineList.add(Entry(50f, 500f))
+        lineList.add(Entry(0f, 100f))
+        lineList.add(Entry(1f, 300f))
+        lineList.add(Entry(2f, 200f))
+        lineList.add(Entry(3f, 1200f))
+        lineList.add(Entry(4f, 500f))
 
-        lineDataSet = LineDataSet(lineList, "count")
+        lineDataSet = LineDataSet(lineList, null)
         lineData = LineData(lineDataSet)
-        lineChart.data=lineData
+        lineData.setValueTextSize(10f)
+        lineChart.data = lineData
         lineChart.invalidate()
     }
 
     private fun setChart() {
         val xAxis = lineChart.xAxis
-        val xAxisVals = arrayOf<String>("세달 전", "한달 전", "이주일 전", "일주일 전", "어제")
+        val xAxisValues = arrayOf<String>("세달 전", "한달 전", "이주일 전", "일주일 전", "어제")
 
         xAxis.apply {
+            isEnabled = true
             position = XAxis.XAxisPosition.BOTTOM
             granularity = 1f
-            valueFormatter = IndexAxisValueFormatter(xAxisVals)
+            valueFormatter = IndexAxisValueFormatter(xAxisValues)
+            textSize = 12f
         }
-
 
         lineChart.apply() {
             setVisibleXRangeMaximum(4f)
-            setPinchZoom(false)
             setExtraOffsets(2f, 2f, 2f, 2f)
+            axisLeft.setDrawLabels(false)
+            axisRight.setDrawLabels(false)
+            description.isEnabled = false
+            isDoubleTapToZoomEnabled = false
+            isScaleYEnabled = false
+            isScaleXEnabled = false
         }
     }
 
-    }
+}
