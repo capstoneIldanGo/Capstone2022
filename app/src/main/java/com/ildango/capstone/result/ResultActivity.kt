@@ -47,9 +47,9 @@ class ResultActivity : AppCompatActivity() {
 
     private fun setAlarmDialog() {
         binding.btnMakeAlarm.setOnClickListener {
-            // dialog 생성
-            AlarmDialog(context = this).show()
+            AlarmDialog(intent.getStringExtra("keyword").toString()).show(supportFragmentManager, "AlarmDialog")
        }
+
     }
 
     private fun setPriceInfoList() {

@@ -1,28 +1,48 @@
 package com.ildango.capstone.result
 
-import android.app.Dialog
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.Window
+import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModelProvider
+import com.ildango.capstone.data.repository.MyAlarmListRepository
 import com.ildango.capstone.databinding.DialogSetAlarmBinding
+import com.ildango.capstone.mypages.myalarmlist.MyAlarmItem
+import com.ildango.capstone.mypages.myalarmlist.MyAlarmListViewModel
+import com.ildango.capstone.mypages.myalarmlist.MyAlarmListViewModelFactory
 
-class AlarmDialog(context: Context) : Dialog(context), View.OnClickListener {
+class AlarmDialog(val keyword:String) : DialogFragment(), View.OnClickListener {
 
     private var _binding: DialogSetAlarmBinding ?= null
     private val binding  get() = _binding!!
+    private val repository = MyAlarmListRepository()
+    private val viewModelFactory = MyAlarmListViewModelFactory(repository)
+    private var viewModel: MyAlarmListViewModel ?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = DialogSetAlarmBinding.inflate(LayoutInflater.from(context))
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MyAlarmListViewModel::class.java)
+        isCancelable = false
+    }
 
-        setCanceledOnTouchOutside(false)
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
-        setContentView(binding.root)
-        window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = DialogSetAlarmBinding.inflate(inflater, container, false)
+        dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.btnCancelMakingAlarm.setOnClickListener(this)
         binding.btnSubmitAlarm.setOnClickListener(this)
@@ -34,8 +54,7 @@ class AlarmDialog(context: Context) : Dialog(context), View.OnClickListener {
                 dismiss()
             }
             binding.btnSubmitAlarm-> {
-                val price = binding.editTextGetPrice.text
-                // price 값 전달 필요
+                val price = Integer.parseInt(binding.editTextGetPrice.text.toString())
                 dismiss()
             }
         }
