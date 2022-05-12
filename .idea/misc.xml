@@ -6,6 +6,7 @@
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.287962962962963" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/drawable-v24/selector.xml" value="0.3275" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/drawable/btnstyle.xml" value="0.3101851851851852" />
+        <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.147" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.3265" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/drawable/ic_baseline_tune_24.xml" value="0.3265" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/drawable/ic_launcher_background.xml" value="0.287962962962963" />
@@ -20,7 +21,7 @@
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/activity_main.xml" value="0.30572916666666666" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/activity_price_alarm.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/activity_price_alarm_list.xml" value="0.36614583333333334" />
-        <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/activity_product_detail.xml" value="0.17806484295845998" />
+        <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/activity_product_detail.xml" value="0.22" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/activity_search.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/activity_search_detail.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/activity_search_result.xml" value="0.276268115942029" />
@@ -28,6 +29,7 @@
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/bottom_sheet.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/custom_item_list.xml" value="0.1" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/fragment_main_bottom_sheet.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/fragment_product_bottom_bar.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/fragment_search_result.xml" value="0.1" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/fragment_sorting_bottom_sheet.xml" value="0.19947916666666668" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/item_alarm_listview.xml" value="0.36614583333333334" />
@@ -40,6 +42,7 @@
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/main_bottom_navigation_drawer.xml" value="0.3328125" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/main_bottom_sheet.xml" value="0.33" />
         <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/layout/search_result.xml" value="0.32708333333333334" />
+        <entry key="..\:/Users/sujin/AndroidStudioProjects/Capstone2022/app/src/main/res/menu/menu_bottomappbar.xml" value="0.33645833333333336" />
       </map>
     </option>
   </component>
