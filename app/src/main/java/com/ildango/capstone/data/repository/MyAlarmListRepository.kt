@@ -1,6 +1,7 @@
-package com.ildango.capstone.mypages.myalarmlist
+package com.ildango.capstone.data.repository
 
-import com.ildango.capstone.service.RetrofitClient
+import com.ildango.capstone.mypages.myalarmlist.MyAlarmItem
+import com.ildango.capstone.data.service.RetrofitClient
 import retrofit2.Response
 
 class MyAlarmListRepository {

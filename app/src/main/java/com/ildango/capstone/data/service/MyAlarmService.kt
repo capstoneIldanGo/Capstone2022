@@ -1,4 +1,4 @@
-package com.ildango.capstone.service
+package com.ildango.capstone.data.service
 
 import com.ildango.capstone.mypages.myalarmlist.MyAlarmItem
 import retrofit2.Response

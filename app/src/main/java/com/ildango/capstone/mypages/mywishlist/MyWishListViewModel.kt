@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.ildango.capstone.data.repository.MyWishListRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 

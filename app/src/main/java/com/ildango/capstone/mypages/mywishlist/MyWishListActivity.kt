@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ildango.capstone.databinding.ActivityWishListBinding
 import com.ildango.capstone.productdetail.ProductDetailActivity
+import com.ildango.capstone.data.repository.MyWishListRepository
 import com.ildango.capstone.resultdetail.ProductViewHolder
 
 
