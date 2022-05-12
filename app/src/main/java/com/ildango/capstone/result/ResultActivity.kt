@@ -31,37 +31,41 @@ class ResultActivity : AppCompatActivity() {
     lateinit var lineList: ArrayList<Entry>
     lateinit var lineDataSet: LineDataSet
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivitySearchResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(ResultViewModel::class.java)
 
-        val intent = intent
-        val searchKeyword = intent.getStringExtra("keyword").toString()
-        binding.searchView.setQuery(searchKeyword, false)
+        setPriceInfoList()
+        setSearchView()
 
-        // listview
+        // chart
+        makeChart()
+    }
+
+    private fun setPriceInfoList() {
         var priceListPrice = viewModel.getPricesByTag()
         val adapter = PriceListAdapter(priceListTags, priceListPrice)
         binding.listviewPriceList.adapter = adapter
 
-        // chart
-        makeChart()
+        setListListener()
+    }
 
-        binding.listviewPriceList.onItemClickListener =
-            AdapterView.OnItemClickListener { _, _, position, _ ->
-                val nextIntent = Intent(this, ResultDetailActivity::class.java)
-                nextIntent.putExtra("keyword", searchKeyword)
-                when (position) {
-                    0 -> nextIntent.putExtra("type", type1)
-                    1 -> nextIntent.putExtra("type", type2)
-                    2 -> nextIntent.putExtra("type", type3)
-                }
-                startActivity(nextIntent)
+    private fun setListListener() {
+        binding.listviewPriceList.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+            val nextIntent = Intent(this, ResultDetailActivity::class.java)
+            nextIntent.putExtra("keyword", intent.getStringExtra("keyword").toString())
+            when(position) {
+                0->nextIntent.putExtra("type", type1)
+                1->nextIntent.putExtra("type", type2)
+                2->nextIntent.putExtra("type", type3)
             }
+            startActivity(nextIntent)
+        }
+    }
 
+    private fun setSearchView() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 finish()
@@ -76,6 +80,8 @@ class ResultActivity : AppCompatActivity() {
                 return false
             }
         })
+
+        binding.searchView.setQuery(intent.getStringExtra("keyword").toString(), false)
     }
 
     override fun onDestroy() {

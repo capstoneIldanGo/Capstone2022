@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
@@ -12,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ildango.capstone.databinding.ActivitySearchDetailBinding
 import com.ildango.capstone.productdetail.ProductDetailActivity
+import com.ildango.capstone.data.repository.ProductRepository
 import com.ildango.capstone.result.ResultActivity
 import com.ildango.capstone.result.type1
 import com.ildango.capstone.result.type2
@@ -37,8 +37,7 @@ class ResultDetailActivity : AppCompatActivity(){
 
         onClickListener()
         setSearchView()
-        var type:String = intent.getStringExtra("type").toString()
-        setTextByType(type)
+        setTextByType(intent.getStringExtra("type").toString())
         binding.recyclerCourseItem.layoutManager = LinearLayoutManager(this)
         viewModel.getData()
         setObserver()
@@ -79,8 +78,6 @@ class ResultDetailActivity : AppCompatActivity(){
                 return false
             }
         })
-
-        val intent = intent
         searchKeyword = intent.getStringExtra("keyword").toString()
         binding.searchView.setQuery(searchKeyword, false)
     }

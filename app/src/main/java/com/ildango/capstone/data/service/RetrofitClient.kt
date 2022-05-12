@@ -1,4 +1,4 @@
-package com.ildango.capstone.service
+package com.ildango.capstone.data.service
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -19,8 +19,14 @@ object RetrofitClient {
             .build()
     }
 
-    val productApi:ProductService by lazy {
+    val productApi: ProductService by lazy {
         instance.create(ProductService::class.java)
+    }
+    val alarmApi: MyAlarmService by lazy {
+        instance.create(MyAlarmService::class.java)
+    }
+    val wishApi: MyWishService by lazy {
+        instance.create(MyWishService::class.java)
     }
 
 }

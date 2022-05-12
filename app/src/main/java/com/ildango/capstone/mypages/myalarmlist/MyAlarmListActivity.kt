@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ildango.capstone.databinding.ActivityPriceAlarmListBinding
+import com.ildango.capstone.data.repository.MyAlarmListRepository
 
 class MyAlarmListActivity : AppCompatActivity() {
 

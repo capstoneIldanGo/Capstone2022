@@ -1,14 +1,14 @@
 package com.ildango.capstone.productdetail
 
-import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
+import com.ildango.capstone.R
 import com.ildango.capstone.databinding.ActivityProductDetailBinding
-import com.ildango.capstone.result.ResultActivity
 
-class ProductDetailActivity : AppCompatActivity() {
+class ProductDetailActivity : AppCompatActivity(){
     private var _binding : ActivityProductDetailBinding ?= null
     private val binding get() = _binding!!
 
@@ -17,8 +17,19 @@ class ProductDetailActivity : AppCompatActivity() {
         _binding = ActivityProductDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSearchView()
+        binding.activity = this@ProductDetailActivity
+        setSupportActionBar(binding.bottomAppBar)
+
+        binding.tvKeyword.text = getStringFromIntent("keyword")
         setWebView()
+    }
+
+    fun onBtnClick() {
+        Toast.makeText(applicationContext, "share", Toast.LENGTH_SHORT).show()
+    }
+
+    fun onWishBtnClick() {
+        Toast.makeText(applicationContext, "wish", Toast.LENGTH_SHORT).show()
     }
 
     private fun setWebView() {
@@ -27,27 +38,7 @@ class ProductDetailActivity : AppCompatActivity() {
         binding.webView.loadUrl(getStringFromIntent("url"))
     }
 
-    private fun setSearchView() {
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                finish()
-                var intent = Intent(this@ProductDetailActivity, ResultActivity::class.java)
-                intent.putExtra("keyword", binding.searchView.query.toString())
-                startActivity(intent)
-                return true
-            }
-
-            override fun onQueryTextChange(p0: String?): Boolean {
-                // 텍스트 값 바뀔 때
-                return false
-            }
-        })
-
-        binding.searchView.setQuery(getStringFromIntent("keyword"), false)
-    }
-
     private fun getStringFromIntent(keyword:String) : String {
-        val intent = intent
         return intent.getStringExtra(keyword).toString()
     }
 

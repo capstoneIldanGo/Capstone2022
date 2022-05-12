@@ -21,9 +21,21 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
         setContentView(binding.root)
     }
 
-
     override fun onStart() {
         super.onStart()
+        setSearchView()
+        setBottomSheet()
+    }
+
+    private fun setBottomSheet() {
+        binding.viewUnderSearchBar.setOnTouchListener(object:OnSwipeTouchListener(this@MainActivity) {
+            override fun onSwipeTop() {
+                bottomSheet.show(supportFragmentManager, BottomSheetFragment.TAG)
+            }
+        })
+    }
+
+    private fun setSearchView() {
         binding.searchView.setQuery("", false)
         binding.searchView.clearFocus()
 
@@ -41,13 +53,6 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
                 return false
             }
         })
-
-        binding.viewUnderSearchBar.setOnTouchListener(object:OnSwipeTouchListener(this@MainActivity) {
-            override fun onSwipeTop() {
-                bottomSheet.show(supportFragmentManager, BottomSheetFragment.TAG)
-            }
-        })
-
     }
 
     override fun onButtonClicked(id: Int) {
