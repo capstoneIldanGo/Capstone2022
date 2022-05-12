@@ -110,19 +110,8 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private fun setChart() {
-        val xAxis = lineChart.xAxis
-        val xAxisValues = arrayOf<String>("세달 전", "한달 전", "이주일 전", "일주일 전", "어제")
-
-        xAxis.apply {
-            isEnabled = true
-            position = XAxis.XAxisPosition.BOTTOM
-            granularity = 1f
-            valueFormatter = IndexAxisValueFormatter(xAxisValues)
-            textSize = 12f
-        }
-
+        lineChart.legend.isEnabled = false
         lineChart.apply() {
-            setVisibleXRangeMaximum(4f)
             setExtraOffsets(2f, 2f, 2f, 2f)
             axisLeft.setDrawLabels(false)
             axisRight.setDrawLabels(false)
@@ -130,6 +119,7 @@ class ResultActivity : AppCompatActivity() {
             isDoubleTapToZoomEnabled = false
             isScaleYEnabled = false
             isScaleXEnabled = false
+            xAxis.isEnabled = false
         }
     }
 
