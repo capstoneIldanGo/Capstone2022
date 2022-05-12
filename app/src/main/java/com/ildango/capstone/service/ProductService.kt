@@ -7,4 +7,7 @@ import retrofit2.http.GET
 interface ProductService {
     @GET("post")         // 40 : postId
     suspend fun getAllProduct() : Response<ProductItemList>
+
+ //   post?ordering=UPLOADDATE_DESC
+ //   post?ordering=PRICE_ASC
 }

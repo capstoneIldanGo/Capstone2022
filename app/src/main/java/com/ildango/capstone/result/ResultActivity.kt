@@ -31,7 +31,6 @@ class ResultActivity : AppCompatActivity() {
     lateinit var lineList : ArrayList<Entry>
     lateinit var lineDataSet : LineDataSet
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivitySearchResultBinding.inflate(layoutInflater)
