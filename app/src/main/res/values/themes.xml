@@ -57,9 +57,14 @@
     </style>
 
     <style name="MaterialAppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/selectedChartButton</item>
+        <item name="colorPrimaryDark">@color/selectedChartText</item>
+        <item name="colorAccent">@color/unselectedChartButton</item>
+    </style>
+
+    <style name="Rounded" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
     </style>
 
 </resources>
