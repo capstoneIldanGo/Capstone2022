@@ -37,10 +37,9 @@ class ResultActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(ResultViewModel::class.java)
 
-
         setPriceInfoList()
         setSearchView()
-        makeOneMonthChart()
+        setAlarmDialog()
 
         binding.btnOneMonth.setOnClickListener {
             makeOneMonthChart()
@@ -48,6 +47,13 @@ class ResultActivity : AppCompatActivity() {
         binding.btnOneWeek.setOnClickListener {
             makeOneWeekChart()
         }
+    }
+
+    private fun setAlarmDialog() {
+        binding.btnMakeAlarm.setOnClickListener {
+            AlarmDialog(intent.getStringExtra("keyword").toString()).show(supportFragmentManager, "AlarmDialog")
+       }
+
     }
 
     private fun setPriceInfoList() {
@@ -121,30 +127,41 @@ class ResultActivity : AppCompatActivity() {
 
         // 데이터 삽입 y값에..
         lineList = ArrayList()
-        // db에서 값 가져와 값 집어 넣기
-        val priceList = arrayOf(700, 300, 200, 1234, 500, 200, 500,700, 300, 200, 1200, 500, 200, 500,700, 300, 200, 1200, 500, 200, 500,700, 300, 200, 1200, 500, 200, 500)
-        for (i in priceList.indices) {
-            lineList.add(Entry(i.toFloat(), priceList[i].toFloat()))
-        }
+        lineList.add(Entry(0f, 100f))
+        lineList.add(Entry(1f, 300f))
+        lineList.add(Entry(2f, 200f))
+        lineList.add(Entry(3f, 1200f))
+        lineList.add(Entry(4f, 500f))
 
-            lineDataSet = LineDataSet(lineList, null)
-            lineData = LineData(lineDataSet)
-            lineData.setValueTextSize(0f)
-            lineChart.data = lineData
-            lineChart.invalidate()
+        lineDataSet = LineDataSet(lineList, null)
+        lineData = LineData(lineDataSet)
+        lineData.setValueTextSize(10f)
+        lineChart.data = lineData
+        lineChart.invalidate()
     }
 
     private fun setChart() {
-        lineChart.legend.isEnabled = false
+        val xAxis = lineChart.xAxis
+        val xAxisValues = arrayOf<String>("세달 전", "한달 전", "이주일 전", "일주일 전", "어제")
+
+        xAxis.apply {
+            isEnabled = true
+            position = XAxis.XAxisPosition.BOTTOM
+            granularity = 1f
+            valueFormatter = IndexAxisValueFormatter(xAxisValues)
+            textSize = 12f
+        }
+
         lineChart.apply() {
+            setVisibleXRangeMaximum(4f)
             setExtraOffsets(2f, 2f, 2f, 2f)
-            axisLeft.setDrawLabels(true)
+            axisLeft.setDrawLabels(false)
             axisRight.setDrawLabels(false)
             description.isEnabled = false
             isDoubleTapToZoomEnabled = false
             isScaleYEnabled = false
             isScaleXEnabled = false
-            xAxis.isEnabled = false
         }
     }
+
 }
