@@ -41,8 +41,12 @@ class ResultActivity : AppCompatActivity() {
         setSearchView()
         setAlarmDialog()
 
-        // chart
-        makeChart()
+        binding.btnOneMonth.setOnClickListener {
+            makeOneMonthChart()
+        }
+        binding.btnOneWeek.setOnClickListener {
+            makeOneWeekChart()
+        }
     }
 
     private fun setAlarmDialog() {
@@ -97,7 +101,26 @@ class ResultActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-    private fun makeChart() {
+    private fun makeOneWeekChart() {
+        lineChart.setNoDataText("데이터가 없습니다.")
+
+        setChart()
+
+        lineList = ArrayList()
+        // db에서 값 가져와 값 집어 넣기 : ArrayList<Int>()
+        val priceList = arrayOf(700,300,200,1200,500,200,500)
+        for(i in priceList.indices){
+            lineList.add(Entry(i.toFloat(), priceList[i].toFloat()))
+        }
+
+        lineDataSet = LineDataSet(lineList, null)
+        lineData = LineData(lineDataSet)
+        lineData.setValueTextSize(0f)
+        lineChart.data = lineData
+        lineChart.invalidate()
+    }
+
+    private fun makeOneMonthChart() {
         lineChart.setNoDataText("데이터가 없습니다.")
 
         setChart()
