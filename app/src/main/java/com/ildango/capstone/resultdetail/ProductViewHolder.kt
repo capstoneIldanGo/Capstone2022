@@ -9,8 +9,8 @@ import com.ildango.capstone.R
 
 class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     var iv_thumbnail = itemView.findViewById<ImageView>(R.id.ivProductThumbnail)
-    var tv_title = itemView.findViewById<TextView>(R.id.tvWishlistTitle)
-    var tv_price = itemView.findViewById<TextView>(R.id.tvWishlistPrice)
+    var tv_title = itemView.findViewById<TextView>(R.id.tvProductTitle)
+    var tv_price = itemView.findViewById<TextView>(R.id.tvProductPrice)
 
     interface OnItemClickListener {
         fun onClick(v: View, position: Int)
