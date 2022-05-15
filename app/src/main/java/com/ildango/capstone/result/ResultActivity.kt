@@ -13,6 +13,7 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.ildango.capstone.databinding.ActivitySearchResultBinding
 import com.ildango.capstone.resultdetail.ResultDetailActivity
+import com.ildango.capstone.resultdetail.SortingSheetFragment
 import kotlinx.android.synthetic.main.activity_search_result.*
 
 const val type1 = "내 주변"
@@ -37,17 +38,10 @@ class ResultActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(ResultViewModel::class.java)
 
-
+        onClickListener()
         setPriceInfoList()
         setSearchView()
-        makeOneMonthChart()
-
-        binding.btnOneMonth.setOnClickListener {
-            makeOneMonthChart()
-        }
-        binding.btnOneWeek.setOnClickListener {
-            makeOneWeekChart()
-        }
+        makeChart(10)
     }
 
     private fun setPriceInfoList() {
@@ -95,14 +89,26 @@ class ResultActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-    private fun makeOneWeekChart() {
+    private fun onClickListener() {
+        binding.btnOneMonth.setOnClickListener {
+            makeChart(10)
+            //showall_viewpager.setCurrentItem
+        }
+        binding.btnOneWeek.setOnClickListener {
+            makeChart(7)
+        }
+    }
+
+    private fun makeChart(k : Int) {
         lineChart.setNoDataText("데이터가 없습니다.")
 
         setChart()
 
         lineList = ArrayList()
         // db에서 값 가져와 값 집어 넣기 : ArrayList<Int>()
+        //k개 만큼 배열 생성 하기
         val priceList = arrayOf(700,300,200,1200,500,200,500)
+
         for(i in priceList.indices){
             lineList.add(Entry(i.toFloat(), priceList[i].toFloat()))
         }
@@ -112,26 +118,6 @@ class ResultActivity : AppCompatActivity() {
         lineData.setValueTextSize(0f)
         lineChart.data = lineData
         lineChart.invalidate()
-    }
-
-    private fun makeOneMonthChart() {
-        lineChart.setNoDataText("데이터가 없습니다.")
-
-        setChart()
-
-        // 데이터 삽입 y값에..
-        lineList = ArrayList()
-        // db에서 값 가져와 값 집어 넣기
-        val priceList = arrayOf(700, 300, 200, 1234, 500, 200, 500,700, 300, 200, 1200, 500, 200, 500,700, 300, 200, 1200, 500, 200, 500,700, 300, 200, 1200, 500, 200, 500)
-        for (i in priceList.indices) {
-            lineList.add(Entry(i.toFloat(), priceList[i].toFloat()))
-        }
-
-            lineDataSet = LineDataSet(lineList, null)
-            lineData = LineData(lineDataSet)
-            lineData.setValueTextSize(0f)
-            lineChart.data = lineData
-            lineChart.invalidate()
     }
 
     private fun setChart() {
