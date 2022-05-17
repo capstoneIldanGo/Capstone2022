@@ -34,7 +34,7 @@ class ProductDetailActivity : AppCompatActivity(){
     }
 
     private fun setWishItem() {
-        viewModel.setItem(MyWishPostItem(21, 45))
+        viewModel.setItem(MyWishPostItem(21, intent.getLongExtra("postid", 0)))
     }
 
     fun onShareBtnClick() {
