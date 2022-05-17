@@ -69,7 +69,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:onClick="@{()->activity.onBtnClick()}"
+                    android:onClick="@{()->activity.onShareBtnClick()}"
                     android:src="@drawable/ic_baseline_share_24"
                     android:tint="@color/white" />
 

@@ -22,6 +22,19 @@ class MyWishListViewModel(private val wishListRepository: MyWishListRepository) 
         return items.value!!.body()!!.get(pos).post.url
     }
 
+
+    fun setItem(item:MyWishPostItem) {
+        viewModelScope.launch {
+            wishListRepository.setWishItem(item)
+                .onSuccess {
+                //    getData()
+                }
+                .onFailure {
+
+                }
+        }
+    }
+
     fun deleteItems() {
 
     }
