@@ -80,7 +80,6 @@
                     android:layout_gravity="center"
                     android:background="@android:color/transparent"
                     android:onClick="@{()->activity.onWishBtnClick()}"
-                    android:src="@drawable/ic_baseline_favorite_border_24"
                     android:tint="@color/white" />
             </com.google.android.material.bottomappbar.BottomAppBar>
 

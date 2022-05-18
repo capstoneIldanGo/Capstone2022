@@ -11,4 +11,10 @@ interface MyWishService {
 
     @POST("myposts/add")
     suspend fun setMyPost(@Body item:MyWishPostItem): Response<Int>
+
+    @GET("myposts/exist")   /// myposts/exist?userId=3&postId=4
+    suspend fun isItemExistInMyPosts(
+        @Query("userId") userId:Long,
+        @Query("postId") postId:Long
+    ): Response<Boolean>
 }

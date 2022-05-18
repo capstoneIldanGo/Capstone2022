@@ -25,4 +25,19 @@ class MyWishListRepository {
             Result.failure(Throwable(e.message))
         }
     }
+
+    suspend fun isItemExistInMyPosts(userId:Long, postId:Long): Result<Boolean> {
+        return try {
+            val result = RetrofitClient.wishApi.isItemExistInMyPosts(userId, postId)
+            if(result.isSuccessful) {
+                result.body()?.let {
+                    Result.success(it)
+                }?: Result.failure(Throwable(result.message()))
+            } else {
+                Result.failure(Throwable(result.message()))
+            }
+        } catch (e:Exception) {
+            Result.failure(Throwable(e.message))
+        }
+    }
 }
