@@ -44,6 +44,7 @@ class MyWishListActivity : AppCompatActivity() {
                     override fun onClick(v: View, position: Int) {
                         Intent(this@MyWishListActivity, ProductDetailActivity::class.java).apply {
                             putExtra("keyword", "")
+                            putExtra("postid", viewModel.getId(position))
                             putExtra("url", viewModel.getUrl(position))
                         }.run { startActivity(this) }
                     }

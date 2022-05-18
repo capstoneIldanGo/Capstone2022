@@ -8,3 +8,8 @@ data class MyWishItem (
     val myPostId:Long,
     val post: ProductItem
 )
+
+data class MyWishPostItem (
+    val userId:Long,
+    val postId:Long
+)

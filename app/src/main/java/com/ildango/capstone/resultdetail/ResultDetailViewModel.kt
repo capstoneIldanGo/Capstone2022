@@ -24,6 +24,10 @@ class ResultDetailViewModel(private val productRepository: ProductRepository)
     fun getUrl(pos:Int): String {
         return product.value!!.body()!!.productList.get(pos).url
     }
+
+    fun getId(pos: Int): Long {
+        return product.value!!.body()!!.productList.get(pos).postId
+    }
 }
 
 class ResultDetailViewModelFactory (private val repository: ProductRepository)
