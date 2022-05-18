@@ -1,8 +1,12 @@
 package com.ildango.capstone.productdetail
 
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +18,7 @@ import com.ildango.capstone.databinding.ActivityProductDetailBinding
 import com.ildango.capstone.mypages.mywishlist.MyWishListViewModel
 import com.ildango.capstone.mypages.mywishlist.MyWishListViewModelFactory
 import com.ildango.capstone.mypages.mywishlist.MyWishPostItem
+import java.lang.Exception
 
 class ProductDetailActivity : AppCompatActivity() {
     private var _binding: ActivityProductDetailBinding? = null
@@ -72,10 +77,18 @@ class ProductDetailActivity : AppCompatActivity() {
         viewModel.addWishItem(MyWishPostItem(21, intent.getLongExtra("postid", 0)))
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun setWebView() {
-        binding.webView.webViewClient = WebViewClient()
-        // binding.webView.loadUrl("https://www.google.com/")
-        binding.webView.loadUrl(getStringFromIntent("url"))
+        var url = getStringFromIntent("url")
+
+        binding.webView.apply {
+            webViewClient = WebViewClient()
+            webChromeClient = WebChromeClient()
+            setNetworkAvailable(true)
+            settings.javaScriptEnabled = true
+            settings.domStorageEnabled = true
+            loadUrl(url)
+        }
     }
 
     private fun getStringFromIntent(keyword: String): String {
@@ -86,5 +99,4 @@ class ProductDetailActivity : AppCompatActivity() {
         _binding = null
         super.onDestroy()
     }
-
 }
