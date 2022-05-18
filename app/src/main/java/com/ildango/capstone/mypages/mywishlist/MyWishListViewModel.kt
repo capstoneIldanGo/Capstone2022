@@ -35,9 +35,9 @@ class MyWishListViewModel(private val wishListRepository: MyWishListRepository) 
         return items.value!!.body()!!.get(pos).post.postId
     }
 
-    fun setItem(item: MyWishPostItem) {
+    fun addWishItem(item: MyWishPostItem) {
         viewModelScope.launch {
-            wishListRepository.setWishItem(item)
+            wishListRepository.addWishItem(item)
                 .onSuccess {
                     //    getData()
                 }

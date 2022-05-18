@@ -61,12 +61,12 @@ class ProductDetailActivity : AppCompatActivity() {
             // delete from wish lists
         }
         else {
-            setWishItem()
+            addWishItem()
         }
     }
 
-    private fun setWishItem() {
-        viewModel.setItem(MyWishPostItem(21, intent.getLongExtra("postid", 0)))
+    private fun addWishItem() {
+        viewModel.addWishItem(MyWishPostItem(21, intent.getLongExtra("postid", 0)))
     }
 
     private fun setWebView() {
