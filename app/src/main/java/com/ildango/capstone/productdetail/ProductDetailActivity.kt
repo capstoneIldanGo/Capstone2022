@@ -56,12 +56,15 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
     fun onWishBtnClick() {
-        // Toast.makeText(applicationContext, "wish", Toast.LENGTH_SHORT).show()
         if(isExistsInWishList) {
             // delete from wish lists
+            // isExistsInWishList = false
+            // binding.imgBtnWish.setImageResource(R.drawable.ic_baseline_favorite_border_24)
         }
         else {
             addWishItem()
+            isExistsInWishList = true
+            binding.imgBtnWish.setImageResource(R.drawable.ic_baseline_favorite_24)
         }
     }
 
