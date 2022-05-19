@@ -12,7 +12,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="90dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="5dp">
 
@@ -27,31 +27,32 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
-                android:id="@+id/tvWishlistTitle"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvProductTitle"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginTop="3dp"
                 app:layout_constraintLeft_toRightOf="@id/ivProductThumbnail"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/tvWishlistPrice"/>
+                app:layout_constraintBottom_toTopOf="@id/tvProductPrice"/>
 
             <TextView
-                android:id="@+id/tvWishlistPrice"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvProductPrice"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:textColor="@color/black"
                 android:textSize="17sp"
                 android:layout_marginBottom="3dp"
                 android:includeFontPadding="false"
-                app:layout_constraintLeft_toLeftOf="@id/tvWishlistTitle"
-                app:layout_constraintTop_toBottomOf="@id/tvWishlistTitle"
-                app:layout_constraintBottom_toTopOf="@id/tvWishlistTitle"/>
-
+                app:layout_constraintLeft_toLeftOf="@id/tvProductTitle"
+                app:layout_constraintRight_toRightOf="@id/tvProductTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvProductTitle"
+                app:layout_constraintBottom_toTopOf="@id/tvProductTitle"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
