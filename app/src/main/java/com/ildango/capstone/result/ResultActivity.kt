@@ -36,6 +36,14 @@ class ResultActivity : AppCompatActivity() {
         onClickListener()
         setPriceInfoList()
         setSearchView()
+        setAlarmDialog()
+    }
+
+    private fun setAlarmDialog() {
+        binding.btnMakeAlarm.setOnClickListener {
+            AlarmDialog(intent.getStringExtra("keyword").toString()).show(supportFragmentManager, "AlarmDialog")
+        }
+
     }
 
     private fun setPriceInfoList() {
