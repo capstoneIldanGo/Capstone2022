@@ -5,15 +5,14 @@ import android.os.Bundle
 import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
-import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.ildango.capstone.databinding.ActivitySearchResultBinding
 import com.ildango.capstone.resultdetail.ResultDetailActivity
 import kotlinx.android.synthetic.main.activity_search_result.*
+import kotlinx.android.synthetic.main.fragment_one_week_chart_page.*
 
 const val type1 = "내 주변"
 const val type2 = "전국"
@@ -27,32 +26,23 @@ class ResultActivity : AppCompatActivity() {
 
     private val priceListTags = arrayListOf(type1, type2, type3)
 
-    lateinit var lineData: LineData
-    lateinit var lineList: ArrayList<Entry>
-    lateinit var lineDataSet: LineDataSet
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivitySearchResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(ResultViewModel::class.java)
 
+        vp_chart.adapter = ChartPagerAdapter(this)
+        onClickListener()
         setPriceInfoList()
         setSearchView()
         setAlarmDialog()
-
-        binding.btnOneMonth.setOnClickListener {
-            makeOneMonthChart()
-        }
-        binding.btnOneWeek.setOnClickListener {
-            makeOneWeekChart()
-        }
     }
 
     private fun setAlarmDialog() {
         binding.btnMakeAlarm.setOnClickListener {
             AlarmDialog(intent.getStringExtra("keyword").toString()).show(supportFragmentManager, "AlarmDialog")
-       }
+        }
 
     }
 
@@ -65,16 +55,17 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private fun setListListener() {
-        binding.listviewPriceList.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-            val nextIntent = Intent(this, ResultDetailActivity::class.java)
-            nextIntent.putExtra("keyword", intent.getStringExtra("keyword").toString())
-            when(position) {
-                0->nextIntent.putExtra("type", type1)
-                1->nextIntent.putExtra("type", type2)
-                2->nextIntent.putExtra("type", type3)
+        binding.listviewPriceList.onItemClickListener =
+            AdapterView.OnItemClickListener { _, _, position, _ ->
+                val nextIntent = Intent(this, ResultDetailActivity::class.java)
+                nextIntent.putExtra("keyword", intent.getStringExtra("keyword").toString())
+                when (position) {
+                    0 -> nextIntent.putExtra("type", type1)
+                    1 -> nextIntent.putExtra("type", type2)
+                    2 -> nextIntent.putExtra("type", type3)
+                }
+                startActivity(nextIntent)
             }
-            startActivity(nextIntent)
-        }
     }
 
     private fun setSearchView() {
@@ -101,67 +92,23 @@ class ResultActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-    private fun makeOneWeekChart() {
-        lineChart.setNoDataText("데이터가 없습니다.")
-
-        setChart()
-
-        lineList = ArrayList()
-        // db에서 값 가져와 값 집어 넣기 : ArrayList<Int>()
-        val priceList = arrayOf(700,300,200,1200,500,200,500)
-        for(i in priceList.indices){
-            lineList.add(Entry(i.toFloat(), priceList[i].toFloat()))
+    private fun onClickListener() {
+        binding.btnOneMonth.setOnClickListener {
+            vp_chart.setCurrentItem(0, true)
         }
-
-        lineDataSet = LineDataSet(lineList, null)
-        lineData = LineData(lineDataSet)
-        lineData.setValueTextSize(0f)
-        lineChart.data = lineData
-        lineChart.invalidate()
-    }
-
-    private fun makeOneMonthChart() {
-        lineChart.setNoDataText("데이터가 없습니다.")
-
-        setChart()
-
-        // 데이터 삽입 y값에..
-        lineList = ArrayList()
-        lineList.add(Entry(0f, 100f))
-        lineList.add(Entry(1f, 300f))
-        lineList.add(Entry(2f, 200f))
-        lineList.add(Entry(3f, 1200f))
-        lineList.add(Entry(4f, 500f))
-
-        lineDataSet = LineDataSet(lineList, null)
-        lineData = LineData(lineDataSet)
-        lineData.setValueTextSize(10f)
-        lineChart.data = lineData
-        lineChart.invalidate()
-    }
-
-    private fun setChart() {
-        val xAxis = lineChart.xAxis
-        val xAxisValues = arrayOf<String>("세달 전", "한달 전", "이주일 전", "일주일 전", "어제")
-
-        xAxis.apply {
-            isEnabled = true
-            position = XAxis.XAxisPosition.BOTTOM
-            granularity = 1f
-            valueFormatter = IndexAxisValueFormatter(xAxisValues)
-            textSize = 12f
-        }
-
-        lineChart.apply() {
-            setVisibleXRangeMaximum(4f)
-            setExtraOffsets(2f, 2f, 2f, 2f)
-            axisLeft.setDrawLabels(false)
-            axisRight.setDrawLabels(false)
-            description.isEnabled = false
-            isDoubleTapToZoomEnabled = false
-            isScaleYEnabled = false
-            isScaleXEnabled = false
+        binding.btnOneWeek.setOnClickListener {
+            vp_chart.setCurrentItem(1, true)
         }
     }
 
+    private class ChartPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
+        override fun createFragment(position: Int): Fragment {
+            return when(position){
+                0->OneMonthChartFragment()
+                else->OneWeekChartFragment()
+            }
+        }
+
+        override fun getItemCount(): Int = 2
+    }
 }
