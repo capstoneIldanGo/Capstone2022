@@ -32,7 +32,7 @@ class ResultActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(ResultViewModel::class.java)
 
-        vp_chart.adapter = ChartPagerAdapter(this)
+        setChartAdapter()
         onClickListener()
         setPriceInfoList()
         setSearchView()
@@ -110,5 +110,11 @@ class ResultActivity : AppCompatActivity() {
         }
 
         override fun getItemCount(): Int = 2
+    }
+
+    private fun setChartAdapter(){
+        vp_chart.adapter = ChartPagerAdapter(this)
+        vp_chart.isUserInputEnabled = false
+
     }
 }
