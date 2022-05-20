@@ -44,7 +44,7 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
     private fun setWishBtnImage() {
-        viewModel.isItemExistInMyPosts(21, intent.getLongExtra("postid", 0)).observe(this, Observer {
+        viewModel.isItemExistInMyPosts(1, intent.getLongExtra("postid", 0)).observe(this, Observer {
             if (it) {
                 isExistsInWishList = true
                 binding.imgBtnWish.setImageResource(R.drawable.ic_baseline_favorite_24)
@@ -74,7 +74,7 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
     private fun addWishItem() {
-        viewModel.addWishItem(MyWishPostItem(21, intent.getLongExtra("postid", 0)))
+        viewModel.addWishItem(MyWishPostItem(1, intent.getLongExtra("postid", 0)))
     }
 
     @SuppressLint("SetJavaScriptEnabled")

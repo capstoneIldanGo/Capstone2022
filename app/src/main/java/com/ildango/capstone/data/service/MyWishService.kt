@@ -6,7 +6,7 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface MyWishService {
-    @GET("myposts/21")      // 21 : userId
+    @GET("myposts/1")      // 21 : userId
     suspend fun getAllWishProduct() : Response<List<MyWishItem>>
 
     @POST("myposts/add")
