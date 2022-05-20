@@ -67,5 +67,4 @@ class ChartFragment(private val priceList: Array<Int>): Fragment() {
         }
     }
 
-
 }
