@@ -1,8 +1,6 @@
 package com.ildango.capstone.resultdetail
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
@@ -11,10 +9,18 @@ import com.ildango.capstone.R
 import retrofit2.Response
 import java.lang.Exception
 
-class ProductListAdapter(private val items: MutableLiveData<Response<ProductItemList>>)
-    : RecyclerView.Adapter<ProductViewHolder>() {
+class ProductListAdapter() : RecyclerView.Adapter<ProductViewHolder>() {
 
+    private val items = mutableListOf<ProductItem>()
     private lateinit var itemClickListener : ProductViewHolder.OnItemClickListener
+
+    fun setItems(items: List<ProductItem>) {
+        this.items.apply {
+            clear()
+            addAll(items)
+        }
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_product_listview, parent, false)
@@ -22,7 +28,7 @@ class ProductListAdapter(private val items: MutableLiveData<Response<ProductItem
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        items.value!!.body()!!.productList.let { item ->
+        items.let { item ->
             with(holder) {
                 try {
                     Glide.with(holder.itemView.context)
@@ -30,7 +36,6 @@ class ProductListAdapter(private val items: MutableLiveData<Response<ProductItem
                         .override(100,100)
                         .fitCenter()
                         .into(iv_thumbnail)
-                    Log.d("CheckUrl", item.get(position).productImage)
                 } catch (e:Exception) {
                     Glide.with(holder.itemView.context)
                         .load(R.drawable.logo)
@@ -46,7 +51,7 @@ class ProductListAdapter(private val items: MutableLiveData<Response<ProductItem
     }
 
     override fun getItemCount(): Int {
-        return items.value!!.body()!!.productList.size
+        return items.size
     }
 
     fun setItemClickListener(onItemClickListener: ProductViewHolder.OnItemClickListener) {

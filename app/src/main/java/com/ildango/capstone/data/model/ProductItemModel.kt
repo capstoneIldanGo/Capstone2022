@@ -7,7 +7,7 @@ class ProductItemModel:ArrayList<ProductItem>()
 
 data class ProductItemList(
     @SerializedName("content")
-    val productList : List<ProductItem>
+    val productList : List<ProductItem>,
 )
 
 data class ProductItem (
