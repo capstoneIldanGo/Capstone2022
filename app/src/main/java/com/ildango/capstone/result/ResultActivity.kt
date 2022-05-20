@@ -12,7 +12,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.ildango.capstone.databinding.ActivitySearchResultBinding
 import com.ildango.capstone.resultdetail.ResultDetailActivity
 import kotlinx.android.synthetic.main.activity_search_result.*
-import kotlinx.android.synthetic.main.fragment_one_week_chart_page.*
 
 const val type1 = "내 주변"
 const val type2 = "전국"
@@ -101,11 +100,12 @@ class ResultActivity : AppCompatActivity() {
         }
     }
 
-    private class ChartPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
+    private inner class ChartPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
         override fun createFragment(position: Int): Fragment {
-            return when(position){
-                0->OneMonthChartFragment()
-                else->OneWeekChartFragment()
+            return when(position) {
+                0-> ChartFragment(viewModel.getTwoWeeksChartData())
+                1-> ChartFragment(viewModel.getOneWeekChartData())
+                else-> throw Exception()
             }
         }
 

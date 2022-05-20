@@ -8,11 +8,10 @@ import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-import com.ildango.capstone.databinding.FragmentOneWeekChartPageBinding
-import kotlinx.android.synthetic.main.fragment_one_week_chart_page.*
+import com.ildango.capstone.databinding.FragmentChartPageBinding
 
-class OneWeekChartFragment  : Fragment(){
-    private var _binding: FragmentOneWeekChartPageBinding? = null
+class ChartFragment(private val priceList: Array<Int>): Fragment() {
+    private var _binding: FragmentChartPageBinding? = null
     private val binding get() = _binding!!
 
     lateinit var lineData: LineData
@@ -24,7 +23,7 @@ class OneWeekChartFragment  : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentOneWeekChartPageBinding.inflate(inflater, container, false)
+        _binding = FragmentChartPageBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -34,14 +33,14 @@ class OneWeekChartFragment  : Fragment(){
     }
 
     private fun makeChart(k : Int) {
-        oneWeekChart.setNoDataText("데이터가 없습니다.")
+        binding.priceChart.setNoDataText("데이터가 없습니다.")
 
         setChart()
 
         lineList = ArrayList()
         // db에서 값 가져와 값 집어 넣기 : ArrayList<Int>()
         //k개 만큼 배열 생성 하기
-        val priceList = arrayOf(700,300,200,1200,500,200,500)
+        // val priceList = arrayOf(700,300,200,1200,500,200,500)
 
         for(i in priceList.indices){
             lineList.add(Entry(i.toFloat(), priceList[i].toFloat()))
@@ -50,13 +49,13 @@ class OneWeekChartFragment  : Fragment(){
         lineDataSet = LineDataSet(lineList, null)
         lineData = LineData(lineDataSet)
         lineData.setValueTextSize(0f)
-        oneWeekChart.data = lineData
-        oneWeekChart.invalidate()
+        binding.priceChart.data = lineData
+        binding.priceChart.invalidate()
     }
 
     private fun setChart() {
-        oneWeekChart.legend.isEnabled = false
-        oneWeekChart.apply() {
+        binding.priceChart.legend.isEnabled = false
+        binding.priceChart.apply() {
             setExtraOffsets(2f, 2f, 2f, 2f)
             axisLeft.setDrawLabels(true)
             axisRight.setDrawLabels(false)
@@ -67,4 +66,6 @@ class OneWeekChartFragment  : Fragment(){
             xAxis.isEnabled = false
         }
     }
+
+
 }
