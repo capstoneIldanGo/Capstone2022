@@ -13,7 +13,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.ildango.capstone.databinding.FragmentSortingBottomSheetBinding
-import kotlinx.android.synthetic.main.fragment_sorting_bottom_sheet.*
 
 
 interface SortingSheetClickListener {
@@ -77,15 +76,15 @@ class SortingSheetFragment() : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnAllPlatform.setOnClickListener {
-            if(btnAllPlatform?.isChecked == true) {
-                btnJunggoMarket?.isChecked = true;
-                btnCarrotMarket?.isChecked = true;
-                btnThunderMarket?.isChecked = true;
+            if(binding.btnAllPlatform?.isChecked == true) {
+                binding.btnJunggoMarket?.isChecked = true;
+                binding.btnCarrotMarket?.isChecked = true;
+                binding.btnThunderMarket?.isChecked = true;
             }
             else {
-                btnJunggoMarket?.isChecked = false;
-                btnCarrotMarket?.isChecked = false;
-                btnThunderMarket?.isChecked = false;
+                binding.btnJunggoMarket?.isChecked = false;
+                binding.btnCarrotMarket?.isChecked = false;
+                binding.btnThunderMarket?.isChecked = false;
             }
         }
         binding.btnCarrotMarket.setOnClickListener{
@@ -107,10 +106,10 @@ class SortingSheetFragment() : BottomSheetDialogFragment() {
     }
 
     private fun checkButtons() {
-        if(btnCarrotMarket.isChecked==true && btnJunggoMarket.isChecked==true && btnThunderMarket.isChecked==true)
-            btnAllPlatform.isChecked = true
+        if(binding.btnCarrotMarket.isChecked==true && binding.btnJunggoMarket.isChecked==true && binding.btnThunderMarket.isChecked==true)
+            binding.btnAllPlatform.isChecked = true
         else
-            btnAllPlatform.isChecked = false
+            binding.btnAllPlatform.isChecked = false
     }
 
 }

@@ -9,6 +9,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ildango.capstone.databinding.ActivitySearchDetailBinding
 import com.ildango.capstone.productdetail.ProductDetailActivity
 import com.ildango.capstone.data.repository.ProductRepository
@@ -28,6 +29,7 @@ class ResultDetailActivity : AppCompatActivity(){
     private val sortingSheet = SortingSheetFragment()
 
     private var searchKeyword = ""
+    private var page = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,31 +37,56 @@ class ResultDetailActivity : AppCompatActivity(){
         setContentView(binding.root)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ResultDetailViewModel::class.java)
 
+        initView()
         onClickListener()
+        setItemClickListener()
+
+    }
+
+    private fun initView() {
         setSearchView()
         setTextByType(intent.getStringExtra("type").toString())
-        binding.recyclerCourseItem.layoutManager = LinearLayoutManager(this)
-        viewModel.getData()
+        setRecyclerView()
+        setScrollListener()
         setObserver()
+    }
+
+    private fun setRecyclerView() {
+        binding.recyclerCourseItem.layoutManager = LinearLayoutManager(this)
+        adapter = ProductListAdapter()
+        binding.recyclerCourseItem.adapter = adapter
+        viewModel.getData(page++)
     }
 
     private fun setObserver() {
         viewModel.product.observe(this, Observer {
-            if(it.isSuccessful) {
-                adapter = ProductListAdapter(viewModel.product)
-                binding.recyclerCourseItem.adapter = adapter
-                adapter.setItemClickListener(object : ProductViewHolder.OnItemClickListener {
-                    override fun onClick(v: View, position: Int) {
-                        Intent(this@ResultDetailActivity, ProductDetailActivity::class.java).apply {
-                            putExtra("keyword", searchKeyword)
-                            putExtra("postid", viewModel.getId(position))
-                            putExtra("url", viewModel.getUrl(position))
-                        }.run { startActivity(this) }
-                    }
-                })
+            adapter.setItems(it)
+        })
+    }
+
+    private fun setScrollListener() {
+        binding.recyclerCourseItem.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val lastVisibleItemPos = (binding.recyclerCourseItem.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+                val itemTotalCount = adapter!!.itemCount - 1
+
+                if(!binding.recyclerCourseItem.canScrollVertically(1) && lastVisibleItemPos == itemTotalCount) {
+                    viewModel.getData(page++)
+                }
             }
-            else {
-                Log.d("Response", "ERROR:${it.errorBody().toString()}")
+        })
+    }
+
+    private fun setItemClickListener() {
+        adapter.setItemClickListener(object : ProductViewHolder.OnItemClickListener {
+            override fun onClick(v: View, position: Int) {
+                Intent(this@ResultDetailActivity, ProductDetailActivity::class.java).apply {
+                    putExtra("keyword", searchKeyword)
+                    putExtra("postid", viewModel.getId(position))
+                    putExtra("url", viewModel.getUrl(position))
+                }.run { startActivity(this) }
             }
         })
     }

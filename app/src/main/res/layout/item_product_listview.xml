@@ -31,7 +31,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="17sp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="3dp"
@@ -46,13 +46,13 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:textColor="@color/black"
-                android:textSize="17sp"
+                android:textSize="15sp"
                 android:layout_marginBottom="3dp"
                 android:includeFontPadding="false"
                 app:layout_constraintLeft_toLeftOf="@id/tvProductTitle"
                 app:layout_constraintRight_toRightOf="@id/tvProductTitle"
                 app:layout_constraintTop_toBottomOf="@id/tvProductTitle"
-                app:layout_constraintBottom_toTopOf="@id/tvProductTitle"/>
+                app:layout_constraintBottom_toTopOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

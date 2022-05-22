@@ -1,9 +1,6 @@
 package com.ildango.capstone.resultdetail
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.ildango.capstone.data.repository.ProductRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -11,22 +8,26 @@ import retrofit2.Response
 class ResultDetailViewModel(private val productRepository: ProductRepository)
     : ViewModel() {
 
-    val product : MutableLiveData<Response<ProductItemList>> = MutableLiveData()
-    // val product: LiveData<ProductItem> = _product
+    private val productList = mutableListOf<ProductItem>()
+    private val _product : MutableLiveData<List<ProductItem>> = MutableLiveData()
+    val product: LiveData<List<ProductItem>> = _product
 
-    fun getData() {
+    fun getData(page:Int) {
         viewModelScope.launch {
-            val response = productRepository.getAllProduct()
-            product.value = response
+            productRepository.getAllProduct(page)
+                .onSuccess {
+                    productList.addAll(it.productList)
+                    _product.value = productList
+                }
         }
     }
 
     fun getUrl(pos:Int): String {
-        return product.value!!.body()!!.productList.get(pos).url
+        return product.value!!.get(pos).url
     }
 
     fun getId(pos: Int): Long {
-        return product.value!!.body()!!.productList.get(pos).postId
+        return product.value!!.get(pos).postId
     }
 }
 

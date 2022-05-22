@@ -9,9 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.ildango.capstone.databinding.ActivitySearchResultBinding
 import com.ildango.capstone.resultdetail.ResultDetailActivity
-import kotlinx.android.synthetic.main.activity_search_result.*
 
 const val type1 = "내 주변"
 const val type2 = "전국"
@@ -23,6 +24,7 @@ class ResultActivity : AppCompatActivity() {
     private val binding get() = _binding!!
     private lateinit var viewModel: ResultViewModel
 
+    private val chartTitles = arrayListOf("이주일", "일주일")
     private val priceListTags = arrayListOf(type1, type2, type3)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,8 +33,7 @@ class ResultActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(ResultViewModel::class.java)
 
-        setChartAdapter()
-        onClickListener()
+        setChartAndTabs()
         setPriceInfoList()
         setSearchView()
         setAlarmDialog()
@@ -91,13 +92,25 @@ class ResultActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-    private fun onClickListener() {
-        binding.btnOneMonth.setOnClickListener {
-            vp_chart.setCurrentItem(0, true)
+    private fun setChartAndTabs() {
+        binding.vpChart.adapter = ChartPagerAdapter(this)
+        for (title in chartTitles) {
+            binding.tabLayout.addTab(binding.tabLayout.newTab().setText(title))
         }
-        binding.btnOneWeek.setOnClickListener {
-            vp_chart.setCurrentItem(1, true)
-        }
+        binding.tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                binding.vpChart.setCurrentItem(tab!!.position)
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+        })
+        TabLayoutMediator(binding.tabLayout, binding.vpChart) { tab, position ->
+            tab.text = chartTitles[position]
+        }.attach()
     }
 
     private inner class ChartPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
@@ -112,9 +125,4 @@ class ResultActivity : AppCompatActivity() {
         override fun getItemCount(): Int = 2
     }
 
-    private fun setChartAdapter(){
-        vp_chart.adapter = ChartPagerAdapter(this)
-        vp_chart.isUserInputEnabled = false
-
-    }
 }
