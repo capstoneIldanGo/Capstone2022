@@ -6,9 +6,9 @@ import retrofit2.Response
 import java.lang.Exception
 
 class ProductRepository {
-    suspend fun getAllProduct(page:Int) : Result<ProductItemList> {
+    suspend fun getAllProduct(order:String, page:Int) : Result<ProductItemList> {
         return try {
-            val data = RetrofitClient.productApi.getAllProduct(page)
+            val data = RetrofitClient.productApi.getAllProduct(order, page, false)
             if(data.isSuccessful) {
                 data.body()?.let {
                     Result.success(it)

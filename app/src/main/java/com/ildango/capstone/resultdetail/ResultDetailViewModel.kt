@@ -12,9 +12,9 @@ class ResultDetailViewModel(private val productRepository: ProductRepository)
     private val _product : MutableLiveData<List<ProductItem>> = MutableLiveData()
     val product: LiveData<List<ProductItem>> = _product
 
-    fun getData(page:Int) {
+    fun getData(order:String, page:Int) {
         viewModelScope.launch {
-            productRepository.getAllProduct(page)
+            productRepository.getAllProduct(order, page)
                 .onSuccess {
                     productList.addAll(it.productList)
                     _product.value = productList

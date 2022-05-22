@@ -17,6 +17,9 @@ import com.ildango.capstone.result.type1
 import com.ildango.capstone.result.type2
 import com.ildango.capstone.result.type3
 
+const val orderByDate = "UPLOADDATE_DESC"
+const val orderByPrice = "PRICE_ASC"
+
 class ResultDetailActivity : AppCompatActivity(){
 
     private var _binding: ActivitySearchDetailBinding?= null
@@ -49,16 +52,16 @@ class ResultDetailActivity : AppCompatActivity(){
     private fun initView() {
         setSearchView()
         setTextByType(intent.getStringExtra("type").toString())
-        setRecyclerView()
-        setScrollListener()
+        setRecyclerView(orderByDate)
+        setScrollListener(orderByDate)
         setObserver()
     }
 
-    private fun setRecyclerView() {
+    private fun setRecyclerView(order:String) {
         binding.recyclerCourseItem.layoutManager = LinearLayoutManager(this)
         adapter = ProductListAdapter()
         binding.recyclerCourseItem.adapter = adapter
-        viewModel.getData(page++)
+        viewModel.getData(order, page++)
     }
 
     private fun setObserver() {
@@ -67,7 +70,7 @@ class ResultDetailActivity : AppCompatActivity(){
         })
     }
 
-    private fun setScrollListener() {
+    private fun setScrollListener(order:String) {
         binding.recyclerCourseItem.addOnScrollListener(object: RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -76,7 +79,7 @@ class ResultDetailActivity : AppCompatActivity(){
                 val itemTotalCount = adapter!!.itemCount - 1
 
                 if(!binding.recyclerCourseItem.canScrollVertically(1) && lastVisibleItemPos == itemTotalCount) {
-                    viewModel.getData(page++)
+                    viewModel.getData(order, page++)
                 }
             }
         })
