@@ -1,21 +1,29 @@
 package com.ildango.capstone.resultdetail
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.ildango.capstone.data.repository.ProductRepository
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class ResultDetailViewModel(private val productRepository: ProductRepository)
     : ViewModel() {
 
-    private val productList = mutableListOf<ProductItem>()
-    private val _product : MutableLiveData<List<ProductItem>> = MutableLiveData()
-    val product: LiveData<List<ProductItem>> = _product
+    private var productList = mutableListOf<ProductItem>()
+    private var _product : MutableLiveData<List<ProductItem>> = MutableLiveData()
+    var product: LiveData<List<ProductItem>> = _product
 
-    val productOrderType = MutableLiveData<String>()
-    val productPlatform = MutableLiveData<List<Boolean>>()
-    val productTag = MutableLiveData<List<Boolean>>()
+    var productOrderType = MutableLiveData<String>()
+    var productPlatform = MutableLiveData<List<Boolean>>()
+    var productTag = MutableLiveData<List<Boolean>>()
 
+    var isDismissed = MutableLiveData<Boolean>()
+
+    fun resetData() {
+        productList.clear()
+        _product.value = productList
+    }
 
     fun getData(order:String, page:Int) {
         viewModelScope.launch {
@@ -36,6 +44,9 @@ class ResultDetailViewModel(private val productRepository: ProductRepository)
     }
 
     // sorting
+    fun setDismissed(value:Boolean) {
+        isDismissed.value = value
+    }
     fun setOrderType(value:String) {
         productOrderType.value = value
     }
