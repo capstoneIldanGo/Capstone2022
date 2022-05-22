@@ -13,13 +13,16 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.ildango.capstone.databinding.FragmentSortingBottomSheetBinding
+import com.ildango.capstone.result.type1
+import com.ildango.capstone.result.type2
+import com.ildango.capstone.result.type3
 
 
 interface SortingSheetClickListener {
     fun onButtonClicked(id: Int)
 }
 
-class SortingSheetFragment() : BottomSheetDialogFragment() {
+class SortingSheetFragment(private val type:String) : BottomSheetDialogFragment() {
 
     private var _binding: FragmentSortingBottomSheetBinding? = null
     private val binding get() = _binding!!
@@ -36,6 +39,7 @@ class SortingSheetFragment() : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentSortingBottomSheetBinding.inflate(inflater, container, false)
+        initButtonState()
         return binding.root
     }
 
@@ -46,6 +50,57 @@ class SortingSheetFragment() : BottomSheetDialogFragment() {
             setupRatio(bottomSheetDialog)
         }
         return dialog
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setPlatformButton()
+
+        binding.btnCarrotMarket.setOnClickListener{
+            checkButtons()
+        }
+        binding.btnJunggoMarket.setOnClickListener{
+            checkButtons()
+        }
+        binding.btnThunderMarket.setOnClickListener{
+            checkButtons()
+        }
+    }
+
+    private fun initButtonState() {
+        binding.btnSortingLatest.isChecked = true
+        binding.btnAllPlatform.isChecked = true
+        when (type) {
+            type1->{
+                binding.btnTagFavoriteArea.isChecked = true
+            }
+            type2-> {
+
+            }
+            type3-> {
+                binding.btnTagSclass.isChecked = true
+            }
+        }
+    }
+
+    private fun setPlatformButton() {
+        binding.btnAllPlatform.setOnClickListener {
+            if(binding.btnAllPlatform.isChecked) {
+                binding.btnJunggoMarket.isChecked = true;
+                binding.btnCarrotMarket.isChecked = true;
+                binding.btnThunderMarket.isChecked = true;
+            }
+            else {
+                binding.btnJunggoMarket.isChecked = false;
+                binding.btnCarrotMarket.isChecked = false;
+                binding.btnThunderMarket.isChecked = false;
+            }
+        }
+    }
+
+    private fun checkButtons() {
+        binding.btnAllPlatform.isChecked = binding.btnCarrotMarket.isChecked && binding.btnJunggoMarket.isChecked && binding.btnThunderMarket.isChecked
     }
 
     private fun setupRatio(bottomSheetDialog: BottomSheetDialog) {
@@ -72,41 +127,11 @@ class SortingSheetFragment() : BottomSheetDialogFragment() {
     companion object {
         const val TAG = "SortingSheet"
     }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-        binding.btnAllPlatform.setOnClickListener {
-            if(binding.btnAllPlatform.isChecked) {
-                binding.btnJunggoMarket.isChecked = true;
-                binding.btnCarrotMarket.isChecked = true;
-                binding.btnThunderMarket.isChecked = true;
-            }
-            else {
-                binding.btnJunggoMarket.isChecked = false;
-                binding.btnCarrotMarket.isChecked = false;
-                binding.btnThunderMarket.isChecked = false;
-            }
-        }
-        binding.btnCarrotMarket.setOnClickListener{
-            checkButtons()
-        }
-        binding.btnJunggoMarket.setOnClickListener{
-            checkButtons()
-        }
-        binding.btnThunderMarket.setOnClickListener{
-            checkButtons()
-        }
-    }
-
-    // 글자 클릭시 변화주기 추가
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun checkButtons() {
-        binding.btnAllPlatform.isChecked = binding.btnCarrotMarket.isChecked && binding.btnJunggoMarket.isChecked && binding.btnThunderMarket.isChecked
     }
 
 }

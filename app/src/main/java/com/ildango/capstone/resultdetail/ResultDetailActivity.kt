@@ -2,7 +2,6 @@ package com.ildango.capstone.resultdetail
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -26,16 +25,20 @@ class ResultDetailActivity : AppCompatActivity(){
     private val repository = ProductRepository()
     private val viewModelFactory = ResultDetailViewModelFactory(repository)
     private lateinit var adapter: ProductListAdapter
-    private val sortingSheet = SortingSheetFragment()
+    private lateinit var sortingSheet : SortingSheetFragment
 
     private var searchKeyword = ""
     private var page = 0
+    private var type = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivitySearchDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ResultDetailViewModel::class.java)
+
+        type = intent.getStringExtra("type").toString()
+        sortingSheet = SortingSheetFragment(type)
 
         initView()
         onClickListener()
