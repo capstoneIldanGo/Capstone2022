@@ -76,7 +76,7 @@ class SortingSheetFragment() : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnAllPlatform.setOnClickListener {
-            if(binding.btnAllPlatform?.isChecked == true) {
+            if(binding.btnAllPlatform?.isChecked) {
                 binding.btnJunggoMarket?.isChecked = true;
                 binding.btnCarrotMarket?.isChecked = true;
                 binding.btnThunderMarket?.isChecked = true;
