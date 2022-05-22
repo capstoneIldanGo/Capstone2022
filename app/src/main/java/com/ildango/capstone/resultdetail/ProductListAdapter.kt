@@ -2,11 +2,9 @@ package com.ildango.capstone.resultdetail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ildango.capstone.R
-import retrofit2.Response
 import java.lang.Exception
 
 class ProductListAdapter() : RecyclerView.Adapter<ProductViewHolder>() {

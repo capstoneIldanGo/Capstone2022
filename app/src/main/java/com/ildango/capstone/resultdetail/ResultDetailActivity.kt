@@ -31,8 +31,8 @@ class ResultDetailActivity : AppCompatActivity(){
     private lateinit var sortingSheet : SortingSheetFragment
 
     private var searchKeyword = ""
-    private var page = 0
     private var type = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +47,8 @@ class ResultDetailActivity : AppCompatActivity(){
         initView()
         onClickListener()
         setItemClickListener()
+
+        observeSortingFilterChanging()
     }
 
     private fun initView() {
@@ -58,6 +60,7 @@ class ResultDetailActivity : AppCompatActivity(){
     }
 
     private fun initSortingFilter() {
+        viewModel.setDismissed(false)
         viewModel.setOrderType(orderByDate)
         viewModel.setPlatform(listOf(true, true, true))
         when(type) {
@@ -67,11 +70,22 @@ class ResultDetailActivity : AppCompatActivity(){
         }
     }
 
+    private fun observeSortingFilterChanging() {
+        viewModel.isDismissed.observe(this, Observer{
+            if(it) {
+                setRecyclerView(viewModel.productOrderType.value!!)
+                binding.recyclerCourseItem.clearOnScrollListeners()
+                setScrollListener(viewModel.productOrderType.value!!)
+                setItemClickListener()
+            }
+        })
+    }
+
     private fun setRecyclerView(order:String) {
         binding.recyclerCourseItem.layoutManager = LinearLayoutManager(this)
         adapter = ProductListAdapter()
         binding.recyclerCourseItem.adapter = adapter
-        viewModel.getData(order, page++)
+        viewModel.getData(order, 0)
     }
 
     private fun setObserver() {
@@ -81,12 +95,13 @@ class ResultDetailActivity : AppCompatActivity(){
     }
 
     private fun setScrollListener(order:String) {
+        var page = 1
         binding.recyclerCourseItem.addOnScrollListener(object: RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
                 val lastVisibleItemPos = (binding.recyclerCourseItem.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
-                val itemTotalCount = adapter!!.itemCount - 1
+                val itemTotalCount = adapter.itemCount - 1
 
                 if(!binding.recyclerCourseItem.canScrollVertically(1) && lastVisibleItemPos == itemTotalCount) {
                     viewModel.getData(order, page++)
