@@ -9,23 +9,25 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.ildango.capstone.data.repository.ProductRepository
 import com.ildango.capstone.databinding.FragmentSortingBottomSheetBinding
-import com.ildango.capstone.result.type1
-import com.ildango.capstone.result.type2
-import com.ildango.capstone.result.type3
 
 
 interface SortingSheetClickListener {
     fun onButtonClicked(id: Int)
 }
 
-class SortingSheetFragment(private val type:String) : BottomSheetDialogFragment() {
+class SortingSheetFragment: BottomSheetDialogFragment() {
 
     private var _binding: FragmentSortingBottomSheetBinding? = null
     private val binding get() = _binding!!
+    private lateinit var viewModel: ResultDetailViewModel
+    private val repository = ProductRepository()
+    private val viewModelFactory = ResultDetailViewModelFactory(repository)
     private lateinit var bottomSheetClickListener: BottomSheetClickListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +41,6 @@ class SortingSheetFragment(private val type:String) : BottomSheetDialogFragment(
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentSortingBottomSheetBinding.inflate(inflater, container, false)
-        initButtonState()
         return binding.root
     }
 
@@ -54,34 +55,31 @@ class SortingSheetFragment(private val type:String) : BottomSheetDialogFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(requireActivity(), viewModelFactory).get(ResultDetailViewModel::class.java)
+        initButtonState()
 
         setPlatformButton()
-
-        binding.btnCarrotMarket.setOnClickListener{
-            checkButtons()
-        }
-        binding.btnJunggoMarket.setOnClickListener{
-            checkButtons()
-        }
-        binding.btnThunderMarket.setOnClickListener{
-            checkButtons()
-        }
     }
 
+    // radio, check buttons
     private fun initButtonState() {
-        binding.btnSortingLatest.isChecked = true
-        binding.btnAllPlatform.isChecked = true
-        when (type) {
-            type1->{
-                binding.btnTagFavoriteArea.isChecked = true
-            }
-            type2-> {
+        if(viewModel.productOrderType.value == orderByDate)
+            binding.btnSortingLatest.isChecked = true
+        else if(viewModel.productOrderType.value == orderByPrice)
+            binding.btnSortingLowest.isChecked = true
 
-            }
-            type3-> {
-                binding.btnTagSclass.isChecked = true
-            }
-        }
+        if(viewModel.productPlatform.value!![0])
+            binding.btnCarrotMarket.isChecked = true
+        if(viewModel.productPlatform.value!![1])
+            binding.btnJunggoMarket.isChecked = true
+        if(viewModel.productPlatform.value!![2])
+            binding.btnThunderMarket.isChecked = true
+        checkAllPlatformButton()
+
+        if(viewModel.productTag.value!![0])
+            binding.btnTagFavoriteArea.isChecked = true
+        if(viewModel.productTag.value!![1])
+            binding.btnTagSclass.isChecked = true
     }
 
     private fun setPlatformButton() {
@@ -97,12 +95,23 @@ class SortingSheetFragment(private val type:String) : BottomSheetDialogFragment(
                 binding.btnThunderMarket.isChecked = false;
             }
         }
+        binding.btnCarrotMarket.setOnClickListener{
+            checkAllPlatformButton()
+        }
+        binding.btnJunggoMarket.setOnClickListener{
+            checkAllPlatformButton()
+        }
+        binding.btnThunderMarket.setOnClickListener{
+            checkAllPlatformButton()
+        }
     }
 
-    private fun checkButtons() {
+    private fun checkAllPlatformButton() {
         binding.btnAllPlatform.isChecked = binding.btnCarrotMarket.isChecked && binding.btnJunggoMarket.isChecked && binding.btnThunderMarket.isChecked
     }
 
+
+    // bottom sheet
     private fun setupRatio(bottomSheetDialog: BottomSheetDialog) {
         val bottomSheet =
             bottomSheetDialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) as View
@@ -127,7 +136,6 @@ class SortingSheetFragment(private val type:String) : BottomSheetDialogFragment(
     companion object {
         const val TAG = "SortingSheet"
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

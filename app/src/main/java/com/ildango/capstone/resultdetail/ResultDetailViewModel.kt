@@ -12,6 +12,11 @@ class ResultDetailViewModel(private val productRepository: ProductRepository)
     private val _product : MutableLiveData<List<ProductItem>> = MutableLiveData()
     val product: LiveData<List<ProductItem>> = _product
 
+    val productOrderType = MutableLiveData<String>()
+    val productPlatform = MutableLiveData<List<Boolean>>()
+    val productTag = MutableLiveData<List<Boolean>>()
+
+
     fun getData(order:String, page:Int) {
         viewModelScope.launch {
             productRepository.getAllProduct(order, page)
@@ -28,6 +33,17 @@ class ResultDetailViewModel(private val productRepository: ProductRepository)
 
     fun getId(pos: Int): Long {
         return product.value!!.get(pos).postId
+    }
+
+    // sorting
+    fun setOrderType(value:String) {
+        productOrderType.value = value
+    }
+    fun setPlatform(value:List<Boolean>) {
+        productPlatform.value = value
+    }
+    fun setTag(value:List<Boolean>) {
+        productTag.value = value
     }
 }
 

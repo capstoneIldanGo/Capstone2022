@@ -41,20 +41,30 @@ class ResultDetailActivity : AppCompatActivity(){
         viewModel = ViewModelProvider(this, viewModelFactory).get(ResultDetailViewModel::class.java)
 
         type = intent.getStringExtra("type").toString()
-        sortingSheet = SortingSheetFragment(type)
+        sortingSheet = SortingSheetFragment()
 
+        initSortingFilter()
         initView()
         onClickListener()
         setItemClickListener()
-
     }
 
     private fun initView() {
         setSearchView()
         setTextByType(intent.getStringExtra("type").toString())
-        setRecyclerView(orderByDate)
-        setScrollListener(orderByDate)
+        setRecyclerView(viewModel.productOrderType.value!!)
+        setScrollListener(viewModel.productOrderType.value!!)
         setObserver()
+    }
+
+    private fun initSortingFilter() {
+        viewModel.setOrderType(orderByDate)
+        viewModel.setPlatform(listOf(true, true, true))
+        when(type) {
+            type1-> viewModel.setTag(listOf(true, false))
+            type2-> viewModel.setTag(listOf(false, false))
+            type3-> viewModel.setTag(listOf(false, true))
+        }
     }
 
     private fun setRecyclerView(order:String) {
