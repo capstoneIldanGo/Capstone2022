@@ -1,13 +1,19 @@
 package com.ildango.capstone.result
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.github.mikephil.charting.components.MarkerView
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.utils.MPPointF
+import com.ildango.capstone.R
 import com.ildango.capstone.databinding.FragmentChartPageBinding
 
 class ChartFragment(private val priceList: Array<Int>): Fragment() {
@@ -39,7 +45,6 @@ class ChartFragment(private val priceList: Array<Int>): Fragment() {
 
         lineList = ArrayList()
         // db에서 값 가져와 값 집어 넣기 : ArrayList<Int>()
-        //k개 만큼 배열 생성 하기
         // val priceList = arrayOf(700,300,200,1200,500,200,500)
 
         for(i in priceList.indices){
@@ -54,6 +59,8 @@ class ChartFragment(private val priceList: Array<Int>): Fragment() {
     }
 
     private fun setChart() {
+        val mymarker = MyMarkerView(context, R.layout.fragment_chart_page)
+
         binding.priceChart.legend.isEnabled = false
         binding.priceChart.apply() {
             setExtraOffsets(2f, 2f, 2f, 2f)
@@ -64,8 +71,23 @@ class ChartFragment(private val priceList: Array<Int>): Fragment() {
             isScaleYEnabled = false
             isScaleXEnabled = false
             xAxis.isEnabled = false
+            marker = mymarker
         }
     }
 
+    inner class MyMarkerView(context: Context?, layoutResource: Int) : MarkerView(context, layoutResource){
+        private lateinit var textView: TextView
+        var price = ""
 
+        override fun refreshContent(e: Entry?, highlight: Highlight?) {
+            textView = binding.tvChartValue
+            price = e?.y.toString()
+            textView.text = "${price} 원"
+            super.refreshContent(e, highlight)
+        }
+
+        override fun getOffset(): MPPointF {
+            return MPPointF(-(width / 2f), -height.toFloat())
+        }
+    }
 }
