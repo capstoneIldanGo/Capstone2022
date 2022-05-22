@@ -76,15 +76,15 @@ class SortingSheetFragment() : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnAllPlatform.setOnClickListener {
-            if(binding.btnAllPlatform?.isChecked) {
-                binding.btnJunggoMarket?.isChecked = true;
-                binding.btnCarrotMarket?.isChecked = true;
-                binding.btnThunderMarket?.isChecked = true;
+            if(binding.btnAllPlatform.isChecked) {
+                binding.btnJunggoMarket.isChecked = true;
+                binding.btnCarrotMarket.isChecked = true;
+                binding.btnThunderMarket.isChecked = true;
             }
             else {
-                binding.btnJunggoMarket?.isChecked = false;
-                binding.btnCarrotMarket?.isChecked = false;
-                binding.btnThunderMarket?.isChecked = false;
+                binding.btnJunggoMarket.isChecked = false;
+                binding.btnCarrotMarket.isChecked = false;
+                binding.btnThunderMarket.isChecked = false;
             }
         }
         binding.btnCarrotMarket.setOnClickListener{
@@ -106,10 +106,7 @@ class SortingSheetFragment() : BottomSheetDialogFragment() {
     }
 
     private fun checkButtons() {
-        if(binding.btnCarrotMarket.isChecked==true && binding.btnJunggoMarket.isChecked==true && binding.btnThunderMarket.isChecked==true)
-            binding.btnAllPlatform.isChecked = true
-        else
-            binding.btnAllPlatform.isChecked = false
+        binding.btnAllPlatform.isChecked = binding.btnCarrotMarket.isChecked && binding.btnJunggoMarket.isChecked && binding.btnThunderMarket.isChecked
     }
 
 }
