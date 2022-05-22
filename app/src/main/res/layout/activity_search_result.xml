@@ -57,46 +57,17 @@
         app:layout_constraintLeft_toLeftOf="@id/tv_recentTransaction"
         app:layout_constraintTop_toBottomOf="@id/tv_latestPrice" />
 
-<!--    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/btnToggle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="@+id/tv_chart_title"
-        app:layout_constraintRight_toRightOf="@+id/btnMakeAlarm"
-        app:layout_constraintTop_toBottomOf="@+id/tv_chart_title"
-        app:selectionRequired="true"
-        app:singleSelection="true"
-        app:checkedButton="@id/btnOneMonth">
-
-        <Button
-            android:id="@+id/btnOneMonth"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="180dp"
-            android:layout_height="match_parent"
-            android:text="이주일"
-            android:backgroundTint="@drawable/selector_btn"
-            android:textColor="@color/white"
-            app:shapeAppearance="@style/Rounded" />
-
-        <Button
-            android:id="@+id/btnOneWeek"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="180dp"
-            android:layout_height="match_parent"
-            android:text="일주일"
-            android:backgroundTint="@drawable/selector_btn"
-            android:textColor="@color/white"
-            app:shapeAppearance="@style/Rounded" />
-
-    </com.google.android.material.button.MaterialButtonToggleGroup>-->
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/tv_chart_title"
         app:layout_constraintLeft_toLeftOf="@id/listview_price_list"
-        app:layout_constraintRight_toRightOf="@id/listview_price_list" />
+        app:layout_constraintRight_toRightOf="@id/listview_price_list"
+        app:tabBackground="@drawable/tab_selector"
+        android:background="@drawable/tab_unselected"
+        app:tabTextColor="@color/white"
+        app:tabIndicatorColor="#00FFFFFF"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_chart"
