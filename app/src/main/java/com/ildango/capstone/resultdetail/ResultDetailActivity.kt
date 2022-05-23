@@ -33,7 +33,6 @@ class ResultDetailActivity : AppCompatActivity(){
     private var searchKeyword = ""
     private var type = ""
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivitySearchDetailBinding.inflate(layoutInflater)
@@ -60,7 +59,6 @@ class ResultDetailActivity : AppCompatActivity(){
     }
 
     private fun initSortingFilter() {
-        viewModel.setDismissed(false)
         viewModel.setOrderType(orderByDate)
         viewModel.setPlatform(listOf(true, true, true))
         when(type) {
@@ -73,9 +71,8 @@ class ResultDetailActivity : AppCompatActivity(){
     private fun observeSortingFilterChanging() {
         viewModel.isDismissed.observe(this, Observer{
             if(it) {
-                viewModel.resetData()
-                binding.recyclerCourseItem.clearOnScrollListeners()
                 setRecyclerView(viewModel.productOrderType.value!!)
+                binding.recyclerCourseItem.clearOnScrollListeners()
                 setScrollListener(viewModel.productOrderType.value!!)
                 setItemClickListener()
             }

@@ -1,9 +1,7 @@
 package com.ildango.capstone.resultdetail
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.ildango.capstone.data.repository.ProductRepository
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
