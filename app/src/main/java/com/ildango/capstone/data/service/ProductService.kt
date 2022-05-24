@@ -8,7 +8,11 @@ import retrofit2.http.Query
 interface ProductService {
     @GET("post")         // 40 : postId
     suspend fun getAllProduct(
-        @Query("page") page:Int
+        @Query("keyword", encoded = true) keyword:String,
+        @Query("ordering") order:String,
+        @Query("page") page:Int,
+        @Query("isMint") mint:Boolean ?= null
+    //    @Query("isSold") sold:Boolean
     ) : Response<ProductItemList>
 
  //   post?ordering=UPLOADDATE_DESC

@@ -8,13 +8,24 @@ import retrofit2.Response
 class ResultDetailViewModel(private val productRepository: ProductRepository)
     : ViewModel() {
 
-    private val productList = mutableListOf<ProductItem>()
-    private val _product : MutableLiveData<List<ProductItem>> = MutableLiveData()
-    val product: LiveData<List<ProductItem>> = _product
+    private var productList = mutableListOf<ProductItem>()
+    private var _product : MutableLiveData<List<ProductItem>> = MutableLiveData()
+    var product: LiveData<List<ProductItem>> = _product
 
-    fun getData(page:Int) {
+    var productOrderType = MutableLiveData<String>()
+    var productPlatform = MutableLiveData<List<Boolean>>()
+    var productTag = MutableLiveData<List<Boolean>>()
+
+    var isDismissed = MutableLiveData<Boolean>()
+
+    fun resetData() {
+        productList.clear()
+        _product.value = productList
+    }
+
+    fun getData(keyword:String, page:Int) {
         viewModelScope.launch {
-            productRepository.getAllProduct(page)
+            productRepository.getAllProduct(keyword, productOrderType.value!!, page, productTag.value!!)
                 .onSuccess {
                     productList.addAll(it.productList)
                     _product.value = productList
@@ -28,6 +39,20 @@ class ResultDetailViewModel(private val productRepository: ProductRepository)
 
     fun getId(pos: Int): Long {
         return product.value!!.get(pos).postId
+    }
+
+    // sorting
+    fun setDismissed(value:Boolean) {
+        isDismissed.value = value
+    }
+    fun setOrderType(value:String) {
+        productOrderType.value = value
+    }
+    fun setPlatform(value:List<Boolean>) {
+        productPlatform.value = value
+    }
+    fun setTag(value:List<Boolean>) {
+        productTag.value = value
     }
 }
 

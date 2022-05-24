@@ -18,6 +18,9 @@ import com.ildango.capstone.result.type1
 import com.ildango.capstone.result.type2
 import com.ildango.capstone.result.type3
 
+const val orderByDate = "UPLOADDATE_DESC"
+const val orderByPrice = "PRICE_ASC"
+
 class ResultDetailActivity : AppCompatActivity(){
 
     private var _binding: ActivitySearchDetailBinding?= null
@@ -26,10 +29,10 @@ class ResultDetailActivity : AppCompatActivity(){
     private val repository = ProductRepository()
     private val viewModelFactory = ResultDetailViewModelFactory(repository)
     private lateinit var adapter: ProductListAdapter
-    private val sortingSheet = SortingSheetFragment()
+    private lateinit var sortingSheet : SortingSheetFragment
 
     private var searchKeyword = ""
-    private var page = 0
+    private var type = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,10 +40,16 @@ class ResultDetailActivity : AppCompatActivity(){
         setContentView(binding.root)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ResultDetailViewModel::class.java)
 
+        type = intent.getStringExtra("type").toString()
+        sortingSheet = SortingSheetFragment()
+        searchKeyword = intent.getStringExtra("keyword").toString()
+
+        initSortingFilter()
         initView()
         onClickListener()
         setItemClickListener()
 
+        observeSortingFilterChanging()
     }
 
     private fun initView() {
@@ -51,11 +60,33 @@ class ResultDetailActivity : AppCompatActivity(){
         setObserver()
     }
 
+    private fun initSortingFilter() {
+        viewModel.setOrderType(orderByPrice)
+        viewModel.setPlatform(listOf(true, true, true))
+        when(type) {
+            type1-> viewModel.setTag(listOf(true, false))
+            type2-> viewModel.setTag(listOf(false, false))
+            type3-> viewModel.setTag(listOf(false, true))
+        }
+    }
+
+    private fun observeSortingFilterChanging() {
+        viewModel.isDismissed.observe(this, Observer{
+            if(it) {
+                viewModel.resetData()
+                setRecyclerView()
+                binding.recyclerCourseItem.clearOnScrollListeners()
+                setScrollListener()
+                setItemClickListener()
+            }
+        })
+    }
+
     private fun setRecyclerView() {
         binding.recyclerCourseItem.layoutManager = LinearLayoutManager(this)
         adapter = ProductListAdapter()
         binding.recyclerCourseItem.adapter = adapter
-        viewModel.getData(page++)
+        viewModel.getData(searchKeyword, 0)
     }
 
     private fun setObserver() {
@@ -65,15 +96,16 @@ class ResultDetailActivity : AppCompatActivity(){
     }
 
     private fun setScrollListener() {
+        var page = 1
         binding.recyclerCourseItem.addOnScrollListener(object: RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
                 val lastVisibleItemPos = (binding.recyclerCourseItem.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
-                val itemTotalCount = adapter!!.itemCount - 1
+                val itemTotalCount = adapter.itemCount - 1
 
                 if(!binding.recyclerCourseItem.canScrollVertically(1) && lastVisibleItemPos == itemTotalCount) {
-                    viewModel.getData(page++)
+                    viewModel.getData(searchKeyword, page++)
                 }
             }
         })
@@ -106,7 +138,6 @@ class ResultDetailActivity : AppCompatActivity(){
                 return false
             }
         })
-        searchKeyword = intent.getStringExtra("keyword").toString()
         binding.searchView.setQuery(searchKeyword, false)
     }
 

@@ -33,7 +33,6 @@ class ResultActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(ResultViewModel::class.java)
 
-    //    onClickListener()
         setChartAndTabs()
         setPriceInfoList()
         setSearchView()
@@ -92,15 +91,6 @@ class ResultActivity : AppCompatActivity() {
         _binding = null
         super.onDestroy()
     }
-
-/*    private fun onClickListener() {
-        binding.btnOneMonth.setOnClickListener {
-            vp_chart.setCurrentItem(0, true)
-        }
-        binding.btnOneWeek.setOnClickListener {
-            vp_chart.setCurrentItem(1, true)
-        }
-    }*/
 
     private fun setChartAndTabs() {
         binding.vpChart.adapter = ChartPagerAdapter(this)
