@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sorting1_tag1"
-            android:textColor="@drawable/selector"
+            android:textColor="@color/selector"
             app:layout_constraintLeft_toLeftOf="@id/tvSorting1Title"
             app:layout_constraintTop_toBottomOf="@id/tvSorting1Title" />
 
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="@string/sorting1_tag2"
-            android:textColor="@drawable/selector"
+            android:textColor="@color/selector"
             app:layout_constraintLeft_toRightOf="@id/btnSortingLatest"
             app:layout_constraintTop_toBottomOf="@id/tvSorting1Title" />
 
@@ -67,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sorting2_tag1"
-        android:textColor="@drawable/selector"
+        android:textColor="@color/selector"
         app:layout_constraintLeft_toLeftOf="@id/tvSorting2Title"
         app:layout_constraintTop_toBottomOf="@id/tvSorting2Title" />
 
@@ -78,7 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="@string/sorting2_tag2"
-        android:textColor="@drawable/selector"
+        android:textColor="@color/selector"
         app:layout_constraintLeft_toRightOf="@id/btnAllPlatform"
         app:layout_constraintTop_toBottomOf="@id/tvSorting2Title" />
 
@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="@string/sorting2_tag3"
-        android:textColor="@drawable/selector"
+        android:textColor="@color/selector"
         app:layout_constraintLeft_toRightOf="@id/btnCarrotMarket"
         app:layout_constraintTop_toBottomOf="@id/tvSorting2Title" />
 
@@ -100,7 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="@string/sorting2_tag4"
-        android:textColor="@drawable/selector"
+        android:textColor="@color/selector"
         app:layout_constraintLeft_toRightOf="@id/btnJunggoMarket"
         app:layout_constraintTop_toBottomOf="@id/tvSorting2Title" />
 
@@ -120,7 +120,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/sorting3_tag1"
-        android:textColor="@drawable/selector"
+        android:textColor="@color/selector"
         app:layout_constraintLeft_toLeftOf="@id/tvSorting3Title"
         app:layout_constraintTop_toBottomOf="@id/tvSorting3Title" />
 
@@ -131,7 +131,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:text="@string/sorting3_tag2"
-        android:textColor="@drawable/selector"
+        android:textColor="@color/selector"
         app:layout_constraintLeft_toRightOf="@id/btnTagFavoriteArea"
         app:layout_constraintTop_toBottomOf="@id/tvSorting3Title" />
 
