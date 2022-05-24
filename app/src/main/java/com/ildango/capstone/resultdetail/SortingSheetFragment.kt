@@ -16,10 +16,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.ildango.capstone.data.repository.ProductRepository
 import com.ildango.capstone.databinding.FragmentSortingBottomSheetBinding
 
-interface SortingSheetClickListener {
-    fun onButtonClicked(id: Int)
-}
-
 class SortingSheetFragment: BottomSheetDialogFragment() {
 
     private var _binding: FragmentSortingBottomSheetBinding? = null
@@ -27,10 +23,11 @@ class SortingSheetFragment: BottomSheetDialogFragment() {
     private lateinit var viewModel: ResultDetailViewModel
     private val repository = ProductRepository()
     private val viewModelFactory = ResultDetailViewModelFactory(repository)
-    private lateinit var bottomSheetClickListener: BottomSheetClickListener
 
     private var isChanged = false
     private lateinit var originalOrder: String
+    private lateinit var originalTag: List<Boolean>
+    private lateinit var originalPlatform: List<Boolean>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +58,8 @@ class SortingSheetFragment: BottomSheetDialogFragment() {
         initButtonState()
 
         viewModel.setDismissed(false)
-        setPlatformButton()
+        onPlatformButtonClick()
+        onTagButtonClick()
         onOrderButtonClick()
     }
 
@@ -86,20 +84,29 @@ class SortingSheetFragment: BottomSheetDialogFragment() {
             binding.btnTagSclass.isChecked = true
 
         originalOrder = viewModel.productOrderType.value!!
+        originalTag = viewModel.productTag.value!!
+        originalPlatform = viewModel.productPlatform.value!!
     }
 
     private fun onOrderButtonClick() {
         binding.btnSortingLatest.setOnClickListener {
             viewModel.setOrderType(orderByDate)
-            isChanged = originalOrder != orderByDate
         }
         binding.btnSortingLowest.setOnClickListener {
             viewModel.setOrderType(orderByPrice)
-            isChanged = originalOrder != orderByPrice
         }
     }
 
-    private fun setPlatformButton() {
+    private fun onTagButtonClick() {
+        binding.btnTagSclass.setOnClickListener {
+            viewModel.setTag(listOf(viewModel.productTag.value!![0], !viewModel.productTag.value!![1]))
+        }
+        binding.btnTagFavoriteArea.setOnClickListener {
+            viewModel.setTag(listOf(!viewModel.productTag.value!![0], viewModel.productTag.value!![1]))
+        }
+    }
+
+    private fun onPlatformButtonClick() {
         binding.btnAllPlatform.setOnClickListener {
             if(binding.btnAllPlatform.isChecked) {
                 binding.btnJunggoMarket.isChecked = true
@@ -113,18 +120,31 @@ class SortingSheetFragment: BottomSheetDialogFragment() {
             }
         }
         binding.btnCarrotMarket.setOnClickListener{
+            viewModel.setPlatform(listOf(!viewModel.productPlatform.value!![0], viewModel.productPlatform.value!![1], viewModel.productPlatform.value!![2]))
             checkAllPlatformButton()
         }
         binding.btnJunggoMarket.setOnClickListener{
+            viewModel.setPlatform(listOf(viewModel.productPlatform.value!![0], !viewModel.productPlatform.value!![1], viewModel.productPlatform.value!![2]))
             checkAllPlatformButton()
         }
         binding.btnThunderMarket.setOnClickListener{
+            viewModel.setPlatform(listOf(viewModel.productPlatform.value!![0], viewModel.productPlatform.value!![1], !viewModel.productPlatform.value!![2]))
             checkAllPlatformButton()
         }
     }
 
     private fun checkAllPlatformButton() {
         binding.btnAllPlatform.isChecked = binding.btnCarrotMarket.isChecked && binding.btnJunggoMarket.isChecked && binding.btnThunderMarket.isChecked
+    }
+
+    private fun checkStateChanged() {
+        if(originalOrder != viewModel.productOrderType.value!!)
+            isChanged = true
+        if(originalTag != viewModel.productTag.value!!)
+            isChanged = true
+        if(originalPlatform != viewModel.productPlatform.value!!)
+            isChanged = true
+
     }
 
 
@@ -157,6 +177,9 @@ class SortingSheetFragment: BottomSheetDialogFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+
+        checkStateChanged()
+
         if(isChanged) {
             viewModel.setDismissed(true)
             isChanged = false
