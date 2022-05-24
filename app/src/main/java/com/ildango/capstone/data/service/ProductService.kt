@@ -11,7 +11,8 @@ interface ProductService {
         @Query("keyword", encoded = true) keyword:String,
         @Query("ordering") order:String,
         @Query("page") page:Int,
-//        @Query("sold") sold:Boolean
+        @Query("isMint") mint:Boolean ?= null
+    //    @Query("isSold") sold:Boolean
     ) : Response<ProductItemList>
 
  //   post?ordering=UPLOADDATE_DESC
