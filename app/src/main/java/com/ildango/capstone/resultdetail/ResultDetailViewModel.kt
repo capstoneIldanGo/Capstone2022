@@ -23,9 +23,9 @@ class ResultDetailViewModel(private val productRepository: ProductRepository)
         _product.value = productList
     }
 
-    fun getData(order:String, page:Int) {
+    fun getData(keyword:String, page:Int) {
         viewModelScope.launch {
-            productRepository.getAllProduct(order, page)
+            productRepository.getAllProduct(keyword, productOrderType.value!!, page)
                 .onSuccess {
                     productList.addAll(it.productList)
                     _product.value = productList

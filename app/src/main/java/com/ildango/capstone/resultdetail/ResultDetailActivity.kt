@@ -2,6 +2,7 @@ package com.ildango.capstone.resultdetail
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -41,6 +42,7 @@ class ResultDetailActivity : AppCompatActivity(){
 
         type = intent.getStringExtra("type").toString()
         sortingSheet = SortingSheetFragment()
+        searchKeyword = intent.getStringExtra("keyword").toString()
 
         initSortingFilter()
         initView()
@@ -53,13 +55,13 @@ class ResultDetailActivity : AppCompatActivity(){
     private fun initView() {
         setSearchView()
         setTextByType(intent.getStringExtra("type").toString())
-        setRecyclerView(viewModel.productOrderType.value!!)
-        setScrollListener(viewModel.productOrderType.value!!)
+        setRecyclerView()
+        setScrollListener()
         setObserver()
     }
 
     private fun initSortingFilter() {
-        viewModel.setOrderType(orderByDate)
+        viewModel.setOrderType(orderByPrice)
         viewModel.setPlatform(listOf(true, true, true))
         when(type) {
             type1-> viewModel.setTag(listOf(true, false))
@@ -71,19 +73,20 @@ class ResultDetailActivity : AppCompatActivity(){
     private fun observeSortingFilterChanging() {
         viewModel.isDismissed.observe(this, Observer{
             if(it) {
-                setRecyclerView(viewModel.productOrderType.value!!)
+                viewModel.resetData()
+                setRecyclerView()
                 binding.recyclerCourseItem.clearOnScrollListeners()
-                setScrollListener(viewModel.productOrderType.value!!)
+                setScrollListener()
                 setItemClickListener()
             }
         })
     }
 
-    private fun setRecyclerView(order:String) {
+    private fun setRecyclerView() {
         binding.recyclerCourseItem.layoutManager = LinearLayoutManager(this)
         adapter = ProductListAdapter()
         binding.recyclerCourseItem.adapter = adapter
-        viewModel.getData(order, 0)
+        viewModel.getData(searchKeyword, 0)
     }
 
     private fun setObserver() {
@@ -92,7 +95,7 @@ class ResultDetailActivity : AppCompatActivity(){
         })
     }
 
-    private fun setScrollListener(order:String) {
+    private fun setScrollListener() {
         var page = 1
         binding.recyclerCourseItem.addOnScrollListener(object: RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -102,7 +105,7 @@ class ResultDetailActivity : AppCompatActivity(){
                 val itemTotalCount = adapter.itemCount - 1
 
                 if(!binding.recyclerCourseItem.canScrollVertically(1) && lastVisibleItemPos == itemTotalCount) {
-                    viewModel.getData(order, page++)
+                    viewModel.getData(searchKeyword, page++)
                 }
             }
         })
@@ -135,7 +138,6 @@ class ResultDetailActivity : AppCompatActivity(){
                 return false
             }
         })
-        searchKeyword = intent.getStringExtra("keyword").toString()
         binding.searchView.setQuery(searchKeyword, false)
     }
 

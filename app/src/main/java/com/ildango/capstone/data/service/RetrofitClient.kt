@@ -8,6 +8,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
     private const val BASE_URL = "http://3.36.254.182/api/"
@@ -19,7 +20,11 @@ object RetrofitClient {
     }
 
     private fun getApiClient():Retrofit {
-        val client : OkHttpClient = OkHttpClient.Builder().addInterceptor(getInterceptor()).build()
+        val client : OkHttpClient = OkHttpClient.Builder()
+            .connectTimeout(100, TimeUnit.SECONDS)
+            .readTimeout(100, TimeUnit.SECONDS)
+            .writeTimeout(100, TimeUnit.SECONDS)
+            .addInterceptor(getInterceptor()).build()
         val gson = GsonBuilder().setLenient().create()
 
         return Retrofit.Builder()
@@ -30,14 +35,16 @@ object RetrofitClient {
             .build()
     }
 
+    private val instance = getApiClient()
+
     val productApi: ProductService by lazy {
-        getApiClient().create(ProductService::class.java)
+        instance.create(ProductService::class.java)
     }
     val alarmApi: MyAlarmService by lazy {
-        getApiClient().create(MyAlarmService::class.java)
+        instance.create(MyAlarmService::class.java)
     }
     val wishApi: MyWishService by lazy {
-        getApiClient().create(MyWishService::class.java)
+        instance.create(MyWishService::class.java)
     }
 
 }
