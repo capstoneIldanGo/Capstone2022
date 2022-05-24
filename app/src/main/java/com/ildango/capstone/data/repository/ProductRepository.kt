@@ -7,20 +7,24 @@ import retrofit2.Response
 import java.lang.Exception
 
 class ProductRepository {
-    suspend fun getAllProduct(keyword:String, order:String, page:Int, tag:List<Boolean>) : Result<ProductItemList> {
-        var data : Response<ProductItemList>
-        val isMint = tag[1]
+    suspend fun getAllProduct(
+        keyword: String,
+        order: String,
+        page: Int,
+        tag: List<Boolean>
+    ): Result<ProductItemList> {
+
+        val data: Response<ProductItemList>
 
         return try {
-            if(isMint)
-                data = RetrofitClient.productApi.getAllProduct(keyword, order, page, tag[1])
-            else
-                data = RetrofitClient.productApi.getAllProduct(keyword, order, page)
+            val mint = if(tag[1]) true else null
 
-            if(data.isSuccessful) {
+            data = RetrofitClient.productApi.getAllProduct(keyword, order, page, mint = mint)
+
+            if (data.isSuccessful) {
                 data.body()?.let {
                     Result.success(it)
-                }?: Result.failure(Throwable(data.message()))
+                } ?: Result.failure(Throwable(data.message()))
             } else {
                 Result.failure(Throwable(data.message()))
             }

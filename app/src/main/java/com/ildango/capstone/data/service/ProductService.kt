@@ -17,4 +17,5 @@ interface ProductService {
 
  //   post?ordering=UPLOADDATE_DESC
  //   post?ordering=PRICE_ASC
+ //   post?platform=중고나라,당근마켓
 }
