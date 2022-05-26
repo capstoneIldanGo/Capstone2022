@@ -10,11 +10,9 @@ interface ProductService {
     suspend fun getAllProduct(
         @Query("keyword", encoded = true) keyword:String,
         @Query("ordering") order:String,
+        @Query("isSold") sold:Boolean = false,
         @Query("page") page:Int,
-        @Query("isMint") mint:Boolean ?= null
-    //    @Query("isSold") sold:Boolean
+        @Query("isMint") mint:Boolean ?= null,
+        @Query("platform") platform:String ?= null
     ) : Response<ProductItemList>
-
- //   post?ordering=UPLOADDATE_DESC
- //   post?ordering=PRICE_ASC
 }
