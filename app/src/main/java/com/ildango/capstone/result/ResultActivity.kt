@@ -124,4 +124,5 @@ class ResultActivity : AppCompatActivity() {
 
         override fun getItemCount(): Int = 2
     }
+
 }
