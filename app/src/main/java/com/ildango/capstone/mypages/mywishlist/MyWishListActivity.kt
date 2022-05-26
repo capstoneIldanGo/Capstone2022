@@ -2,7 +2,6 @@ package com.ildango.capstone.mypages.mywishlist
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -28,9 +27,9 @@ class MyWishListActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MyWishListViewModel::class.java)
 
-        // list view
         setRecyclerview()
         setObserver()
+        setItemClickListener()
     }
 
     private fun setRecyclerview() {
@@ -43,6 +42,18 @@ class MyWishListActivity : AppCompatActivity() {
     private fun setObserver() {
         viewModel.items.observe(this, Observer {
             adapter.setItems(it)
+        })
+    }
+
+    private fun setItemClickListener() {
+        adapter.setItemClickListener(object : ProductViewHolder.OnItemClickListener {
+            override fun onClick(v: View, position: Int) {
+                Intent(this@MyWishListActivity, ProductDetailActivity::class.java).apply {
+                    putExtra("keyword", "")
+                    putExtra("postid", viewModel.getId(position))
+                    putExtra("url", viewModel.getUrl(position))
+                }.run { startActivity(this) }
+            }
         })
     }
 
