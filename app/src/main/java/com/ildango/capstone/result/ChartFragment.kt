@@ -16,7 +16,7 @@ import com.github.mikephil.charting.utils.MPPointF
 import com.ildango.capstone.R
 import com.ildango.capstone.databinding.FragmentChartPageBinding
 
-class ChartFragment(private val priceList: Array<Int>): Fragment() {
+class ChartFragment(private val priceList: MutableList<Int>): Fragment() {
     private var _binding: FragmentChartPageBinding? = null
     private val binding get() = _binding!!
 
@@ -35,17 +35,15 @@ class ChartFragment(private val priceList: Array<Int>): Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        makeChart(7)
+        makeChart()
     }
 
-    private fun makeChart(k : Int) {
+    private fun makeChart() {
         binding.priceChart.setNoDataText("데이터가 없습니다.")
 
         setChart()
 
         lineList = ArrayList()
-        // db에서 값 가져와 값 집어 넣기 : ArrayList<Int>()
-        // val priceList = arrayOf(700,300,200,1200,500,200,500)
 
         for(i in priceList.indices){
             lineList.add(Entry(i.toFloat(), priceList[i].toFloat()))
