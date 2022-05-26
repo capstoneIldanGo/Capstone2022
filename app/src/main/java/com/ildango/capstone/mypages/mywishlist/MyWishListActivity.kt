@@ -13,7 +13,6 @@ import com.ildango.capstone.productdetail.ProductDetailActivity
 import com.ildango.capstone.data.repository.MyWishListRepository
 import com.ildango.capstone.resultdetail.ProductViewHolder
 
-
 class MyWishListActivity : AppCompatActivity() {
 
     private var _binding: ActivityWishListBinding?= null

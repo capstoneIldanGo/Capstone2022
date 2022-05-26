@@ -1,9 +1,9 @@
 package com.ildango.capstone.resultdetail
 
 import androidx.lifecycle.*
+import com.ildango.capstone.data.model.ProductItem
 import com.ildango.capstone.data.repository.ProductRepository
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
 class ResultDetailViewModel(private val productRepository: ProductRepository)
     : ViewModel() {

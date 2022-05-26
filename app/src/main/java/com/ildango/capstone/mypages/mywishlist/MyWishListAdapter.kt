@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.ildango.capstone.R
+import com.ildango.capstone.data.model.MyWishItem
 import com.ildango.capstone.resultdetail.ProductViewHolder
 import retrofit2.Response
 

@@ -3,7 +3,6 @@ package com.ildango.capstone.result
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.ildango.capstone.data.repository.MyAlarmListRepository
 import com.ildango.capstone.databinding.DialogSetAlarmBinding
-import com.ildango.capstone.mypages.myalarmlist.MyAlarmItem
 import com.ildango.capstone.mypages.myalarmlist.MyAlarmListViewModel
 import com.ildango.capstone.mypages.myalarmlist.MyAlarmListViewModelFactory
 

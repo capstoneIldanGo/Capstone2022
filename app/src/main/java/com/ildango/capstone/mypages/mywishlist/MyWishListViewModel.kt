@@ -1,7 +1,8 @@
 package com.ildango.capstone.mypages.mywishlist
 
-import android.util.Log
 import androidx.lifecycle.*
+import com.ildango.capstone.data.model.MyWishItem
+import com.ildango.capstone.data.model.MyWishPostItem
 import com.ildango.capstone.data.repository.MyWishListRepository
 import kotlinx.coroutines.*
 import retrofit2.Response

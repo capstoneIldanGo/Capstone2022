@@ -1,8 +1,8 @@
 package com.ildango.capstone.data.repository
 
-import com.ildango.capstone.mypages.mywishlist.MyWishItem
+import com.ildango.capstone.data.model.MyWishItem
 import com.ildango.capstone.data.service.RetrofitClient
-import com.ildango.capstone.mypages.mywishlist.MyWishPostItem
+import com.ildango.capstone.data.model.MyWishPostItem
 import retrofit2.Response
 import java.lang.Exception
 

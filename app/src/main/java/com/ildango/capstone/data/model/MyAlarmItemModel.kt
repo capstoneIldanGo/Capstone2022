@@ -1,4 +1,4 @@
-package com.ildango.capstone.mypages.myalarmlist
+package com.ildango.capstone.data.model
 
 class MyAlarmItemModel:ArrayList<MyAlarmItem>()
 

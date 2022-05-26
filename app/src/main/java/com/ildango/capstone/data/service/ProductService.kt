@@ -1,6 +1,6 @@
 package com.ildango.capstone.data.service
 
-import com.ildango.capstone.resultdetail.ProductItemList
+import com.ildango.capstone.data.model.ProductItemList
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

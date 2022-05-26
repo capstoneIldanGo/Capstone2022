@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ildango.capstone.R
+import com.ildango.capstone.data.model.ProductItem
 import java.lang.Exception
 
 class ProductListAdapter() : RecyclerView.Adapter<ProductViewHolder>() {
