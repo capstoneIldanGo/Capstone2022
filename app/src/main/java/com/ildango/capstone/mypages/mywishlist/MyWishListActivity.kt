@@ -20,6 +20,7 @@ class MyWishListActivity : AppCompatActivity() {
     private lateinit var viewModel: MyWishListViewModel
     private val repository = MyWishListRepository()
     private val viewModelFactory = MyWishListViewModelFactory(repository)
+    private lateinit var adapter: MyWishListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,30 +29,20 @@ class MyWishListActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(MyWishListViewModel::class.java)
 
         // list view
-        binding.recyclerviewWishList.layoutManager = LinearLayoutManager(this)
-
-        viewModel.getData()
+        setRecyclerview()
         setObserver()
+    }
+
+    private fun setRecyclerview() {
+        binding.recyclerviewWishList.layoutManager = LinearLayoutManager(this)
+        adapter = MyWishListAdapter()
+        binding.recyclerviewWishList.adapter = adapter
+        viewModel.getData()
     }
 
     private fun setObserver() {
         viewModel.items.observe(this, Observer {
-            if(it.isSuccessful) {
-                val adapter = MyWishListAdapter(viewModel.items)
-                binding.recyclerviewWishList.adapter = adapter
-                adapter.setItemClickListener(object : ProductViewHolder.OnItemClickListener {
-                    override fun onClick(v: View, position: Int) {
-                        Intent(this@MyWishListActivity, ProductDetailActivity::class.java).apply {
-                            putExtra("keyword", "")
-                            putExtra("postid", viewModel.getId(position))
-                            putExtra("url", viewModel.getUrl(position))
-                        }.run { startActivity(this) }
-                    }
-                })
-            }
-            else {
-                Log.d("Response", "ERROR:${it.errorBody().toString()}")
-            }
+            adapter.setItems(it)
         })
     }
 

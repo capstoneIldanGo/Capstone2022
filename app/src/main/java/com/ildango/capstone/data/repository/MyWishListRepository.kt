@@ -7,8 +7,19 @@ import retrofit2.Response
 import java.lang.Exception
 
 class MyWishListRepository {
-    suspend fun getWishItem() : Response<List<MyWishItem>> {
-        return RetrofitClient.wishApi.getAllWishProduct()
+    suspend fun getWishItem() : Result<List<MyWishItem>> {
+        return try {
+            val data = RetrofitClient.wishApi.getAllWishProduct()
+            if(data.isSuccessful) {
+                data.body()?.let {
+                    Result.success(it)
+                }?: Result.failure(Throwable(data.message()))
+            } else {
+                Result.failure(Throwable(data.message()))
+            }
+        } catch (e:Exception) {
+            Result.failure(Throwable(e.message))
+        }
     }
 
     suspend fun addWishItem(item: MyWishPostItem) : Result<Int> {
