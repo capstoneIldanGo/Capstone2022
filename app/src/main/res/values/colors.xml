@@ -22,4 +22,6 @@
     <color name="selectedChartButton">#F0F0F0F0</color>
     <color name="selectedChartText">#F0F0F0F0</color>
     <color name="unselectedChartButton">#F0F0F0F0</color>
+
+    <color name="deleteButton">#FFD14B4B</color>
 </resources>

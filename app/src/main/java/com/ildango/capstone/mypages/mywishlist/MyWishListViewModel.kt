@@ -51,10 +51,6 @@ class MyWishListViewModel(private val wishListRepository: MyWishListRepository) 
                 }
         }
     }
-
-    fun deleteItems() {
-
-    }
 }
 
 class MyWishListViewModelFactory(private val repository: MyWishListRepository) :
