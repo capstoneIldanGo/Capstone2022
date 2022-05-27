@@ -1,6 +1,4 @@
-package com.ildango.capstone.mypages.mywishlist
-
-import com.ildango.capstone.resultdetail.ProductItem
+package com.ildango.capstone.data.model
 
 class MyWishItemModel:ArrayList<MyWishItem>()
 

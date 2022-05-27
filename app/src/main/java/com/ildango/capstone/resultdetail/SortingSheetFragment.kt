@@ -112,23 +112,27 @@ class SortingSheetFragment: BottomSheetDialogFragment() {
                 binding.btnJunggoMarket.isChecked = true
                 binding.btnCarrotMarket.isChecked = true
                 binding.btnThunderMarket.isChecked = true
+                viewModel.setPlatform(listOf(true, true, true))
+
             }
             else {
                 binding.btnJunggoMarket.isChecked = false
                 binding.btnCarrotMarket.isChecked = false
                 binding.btnThunderMarket.isChecked = false
+                viewModel.setPlatform(listOf(false, false, false))
             }
         }
-        binding.btnCarrotMarket.setOnClickListener{
-            viewModel.setPlatform(listOf(!viewModel.productPlatform.value!![0], viewModel.productPlatform.value!![1], viewModel.productPlatform.value!![2]))
-            checkAllPlatformButton()
-        }
         binding.btnJunggoMarket.setOnClickListener{
-            viewModel.setPlatform(listOf(viewModel.productPlatform.value!![0], !viewModel.productPlatform.value!![1], viewModel.productPlatform.value!![2]))
+            viewModel.setPlatform(listOf(binding.btnJunggoMarket.isChecked, viewModel.productPlatform.value!![1], viewModel.productPlatform.value!![2]))
             checkAllPlatformButton()
         }
         binding.btnThunderMarket.setOnClickListener{
-            viewModel.setPlatform(listOf(viewModel.productPlatform.value!![0], viewModel.productPlatform.value!![1], !viewModel.productPlatform.value!![2]))
+            viewModel.setPlatform(listOf(viewModel.productPlatform.value!![0], binding.btnThunderMarket.isChecked, viewModel.productPlatform.value!![2]))
+            checkAllPlatformButton()
+        }
+
+        binding.btnCarrotMarket.setOnClickListener{
+            viewModel.setPlatform(listOf(!viewModel.productPlatform.value!![0], viewModel.productPlatform.value!![1], binding.btnCarrotMarket.isChecked))
             checkAllPlatformButton()
         }
     }

@@ -19,4 +19,5 @@
     <color name="selectedTab">#FF4EADE3</color>
     <color name="unselectedTab">#E8E6E6E6</color>
 
+    <color name="deleteButton">#FFD14B4B</color>
 </resources>

@@ -41,7 +41,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:includeFontPadding="false"
-        android:text="18000원"
         android:textSize="30sp"
         app:layout_constraintLeft_toLeftOf="@id/tv_recentTransaction"
         app:layout_constraintTop_toBottomOf="@id/tv_recentTransaction" />

@@ -1,9 +1,9 @@
 package com.ildango.capstone.resultdetail
 
 import androidx.lifecycle.*
+import com.ildango.capstone.data.model.ProductItem
 import com.ildango.capstone.data.repository.ProductRepository
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
 class ResultDetailViewModel(private val productRepository: ProductRepository)
     : ViewModel() {
@@ -25,7 +25,7 @@ class ResultDetailViewModel(private val productRepository: ProductRepository)
 
     fun getData(keyword:String, page:Int) {
         viewModelScope.launch {
-            productRepository.getAllProduct(keyword, productOrderType.value!!, page, productTag.value!!)
+            productRepository.getAllProduct(keyword, productOrderType.value!!, page, productTag.value!!, productPlatform.value!!)
                 .onSuccess {
                     productList.addAll(it.productList)
                     _product.value = productList

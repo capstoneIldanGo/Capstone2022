@@ -1,11 +1,7 @@
 package com.ildango.capstone.productdetail
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
 import android.widget.Toast
@@ -17,8 +13,7 @@ import com.ildango.capstone.data.repository.MyWishListRepository
 import com.ildango.capstone.databinding.ActivityProductDetailBinding
 import com.ildango.capstone.mypages.mywishlist.MyWishListViewModel
 import com.ildango.capstone.mypages.mywishlist.MyWishListViewModelFactory
-import com.ildango.capstone.mypages.mywishlist.MyWishPostItem
-import java.lang.Exception
+import com.ildango.capstone.data.model.MyWishPostItem
 
 class ProductDetailActivity : AppCompatActivity() {
     private var _binding: ActivityProductDetailBinding? = null
