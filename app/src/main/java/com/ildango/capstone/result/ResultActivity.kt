@@ -40,6 +40,7 @@ class ResultActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(ResultViewModel::class.java)
 
         keyword = intent.getStringExtra("keyword").toString()
+        setLatestTransPrice()
         setChartAndTabs()
         setPriceInfoList()
         setSearchView()
@@ -49,6 +50,13 @@ class ResultActivity : AppCompatActivity() {
     private fun setAlarmDialog() {
         binding.btnMakeAlarm.setOnClickListener {
             AlarmDialog(keyword).show(supportFragmentManager, "AlarmDialog")
+        }
+    }
+
+    private fun setLatestTransPrice() {
+        viewModel.getLastSoldPrice(keyword)
+        viewModel.lastSoldPrice.observe(this) {
+            binding.tvLatestPrice.text = "${it}원"
         }
     }
 

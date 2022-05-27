@@ -44,13 +44,16 @@ class ProductRepository {
 
     suspend fun getProductPrice(
         keyword: String,
+        order: String,
+        sold: Boolean ?= false,
         mint: Boolean ?= null,
         area: Boolean ?= null
     ): Result<ProductItem> {
         return try {
             val data = RetrofitClient.productApi.getAllProduct(
                 keyword = keyword,
-                order = orderByPrice,
+                order = order,
+                sold = sold,
                 page = 0,
                 mint = mint
             )
