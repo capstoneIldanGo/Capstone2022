@@ -2,15 +2,18 @@ package com.ildango.capstone.result
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.ildango.capstone.data.repository.ProductRepository
 import com.ildango.capstone.databinding.ActivitySearchResultBinding
 import com.ildango.capstone.resultdetail.ResultDetailActivity
 
@@ -23,7 +26,10 @@ class ResultActivity : AppCompatActivity() {
     private var _binding: ActivitySearchResultBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: ResultViewModel
+    private val repository = ProductRepository()
+    private val viewModelFactory = ResultViewModelFactory(repository)
 
+    private var keyword = ""
     private val chartTitles = arrayListOf("이주일", "일주일")
     private val priceListTags = arrayListOf(type1, type2, type3)
 
@@ -31,8 +37,9 @@ class ResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivitySearchResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel = ViewModelProvider(this).get(ResultViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ResultViewModel::class.java)
 
+        keyword = intent.getStringExtra("keyword").toString()
         setChartAndTabs()
         setPriceInfoList()
         setSearchView()
@@ -41,24 +48,41 @@ class ResultActivity : AppCompatActivity() {
 
     private fun setAlarmDialog() {
         binding.btnMakeAlarm.setOnClickListener {
-            AlarmDialog(intent.getStringExtra("keyword").toString()).show(supportFragmentManager, "AlarmDialog")
+            AlarmDialog(keyword).show(supportFragmentManager, "AlarmDialog")
         }
-
     }
 
     private fun setPriceInfoList() {
-        var priceListPrice = viewModel.getPricesByTag()
-        val adapter = PriceListAdapter(priceListTags, priceListPrice)
+        getPriceData()
+        val adapter = PriceListAdapter(priceListTags)
         binding.listviewPriceList.adapter = adapter
-
+        setPriceObserver(adapter)
         setListListener()
+    }
+
+    private fun getPriceData() {
+        viewModel.getLowestAroundMyArea()
+        viewModel.getLowestOfAll(keyword)
+        viewModel.getLowestOfSClass(keyword)
+    }
+
+    private fun setPriceObserver(adapter:PriceListAdapter) {
+        viewModel.lowestPriceAroundArea.observe(this) {
+            adapter.setPrice1(it)
+        }
+        viewModel.lowestPriceOfAll.observe(this) {
+            adapter.setPrice2(it)
+        }
+        viewModel.lowestPriceOfSClass.observe(this) {
+            adapter.setPrice3(it)
+        }
     }
 
     private fun setListListener() {
         binding.listviewPriceList.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 val nextIntent = Intent(this, ResultDetailActivity::class.java)
-                nextIntent.putExtra("keyword", intent.getStringExtra("keyword").toString())
+                nextIntent.putExtra("keyword", keyword)
                 when (position) {
                     0 -> nextIntent.putExtra("type", type1)
                     1 -> nextIntent.putExtra("type", type2)
@@ -73,7 +97,8 @@ class ResultActivity : AppCompatActivity() {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 finish()
                 val intent = Intent(this@ResultActivity, ResultActivity::class.java)
-                intent.putExtra("keyword", binding.searchView.query.toString())
+                keyword = binding.searchView.query.toString()
+                intent.putExtra("keyword", keyword)
                 startActivity(intent)
                 return true
             }
@@ -84,12 +109,7 @@ class ResultActivity : AppCompatActivity() {
             }
         })
 
-        binding.searchView.setQuery(intent.getStringExtra("keyword").toString(), false)
-    }
-
-    override fun onDestroy() {
-        _binding = null
-        super.onDestroy()
+        binding.searchView.setQuery(keyword, false)
     }
 
     private fun setChartAndTabs() {
@@ -125,4 +145,8 @@ class ResultActivity : AppCompatActivity() {
         override fun getItemCount(): Int = 2
     }
 
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
+    }
 }
