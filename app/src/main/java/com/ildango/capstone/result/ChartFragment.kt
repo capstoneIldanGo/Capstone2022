@@ -16,7 +16,7 @@ import com.github.mikephil.charting.utils.MPPointF
 import com.ildango.capstone.R
 import com.ildango.capstone.databinding.FragmentChartPageBinding
 
-class ChartFragment(private val priceList: Array<Int>): Fragment() {
+class ChartFragment(private val priceList: ArrayList<Int>): Fragment() {
     private var _binding: FragmentChartPageBinding? = null
     private val binding get() = _binding!!
 
@@ -46,7 +46,8 @@ class ChartFragment(private val priceList: Array<Int>): Fragment() {
         lineList = ArrayList()
 
         for(i in priceList.indices){
-            lineList.add(Entry(i.toFloat(), priceList[i].toFloat()))
+            if(priceList[i]>0)
+                lineList.add(Entry(i.toFloat(), priceList[i].toFloat()))
         }
 
         lineDataSet = LineDataSet(lineList, null)

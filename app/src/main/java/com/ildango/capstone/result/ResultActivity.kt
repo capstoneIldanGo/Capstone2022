@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayout
@@ -26,16 +25,22 @@ class ResultActivity : AppCompatActivity() {
 
     private var _binding: ActivitySearchResultBinding? = null
     private val binding get() = _binding!!
+    //resultViewModel
     private lateinit var viewModel: ResultViewModel
-    private lateinit var viewModel2 : ChartItemViewModel
     private val repository = ProductRepository()
-    private val repository2 = ChartRepository()
     private val viewModelFactory = ResultViewModelFactory(repository)
+    //chartItemViewModel
+    private lateinit var viewModel2 : ChartItemViewModel
+    private val repository2 = ChartRepository()
     private val viewModelFactory2 = ChartItemViewModelFactory(repository2)
 
     private var keyword = ""
     private val chartTitles = arrayListOf("이주일", "일주일")
     private val priceListTags = arrayListOf(type1, type2, type3)
+    private var chartPriceValues = arrayListOf<Int>()
+    val chartOneWeekList = arrayListOf<Int>()
+    val chartTwoWeekList = arrayListOf<Int>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,11 +50,23 @@ class ResultActivity : AppCompatActivity() {
         viewModel2 = ViewModelProvider(this, viewModelFactory2).get(ChartItemViewModel::class.java)
 
         keyword = intent.getStringExtra("keyword").toString()
+
+        setChartValues()
         setLatestTransPrice()
-        setChartAndTabs()
         setPriceInfoList()
         setSearchView()
         setAlarmDialog()
+    }
+
+    private fun setChartValues(){
+        viewModel2.getData(keyword)
+
+        viewModel2.items.observe(this){
+            for(i in 0..13)
+                chartPriceValues.add(viewModel2.getValue(i))
+            setChartAndTabs(chartPriceValues)
+        }
+
     }
 
     private fun setAlarmDialog() {
@@ -125,7 +142,11 @@ class ResultActivity : AppCompatActivity() {
         binding.searchView.setQuery(keyword, false)
     }
 
-    private fun setChartAndTabs() {
+    private fun setChartAndTabs(chartPriceValues: ArrayList<Int>) {
+        chartTwoWeekList.addAll(chartPriceValues)
+        for(i in 7..13)
+            chartOneWeekList.add(chartPriceValues.get(i))
+
         binding.vpChart.adapter = ChartPagerAdapter(this)
         for (title in chartTitles) {
             binding.tabLayout.addTab(binding.tabLayout.newTab().setText(title))
@@ -147,10 +168,14 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private inner class ChartPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
+
+
         override fun createFragment(position: Int): Fragment {
+
+
             return when(position) {
-                0-> ChartFragment(viewModel2.getTwoWeeksChartData())
-                1-> ChartFragment(viewModel2.getOneWeekChartData())
+                0-> ChartFragment(chartTwoWeekList)
+                1-> ChartFragment(chartOneWeekList)
                 else-> throw Exception()
             }
         }
@@ -161,5 +186,9 @@ class ResultActivity : AppCompatActivity() {
     override fun onDestroy() {
         _binding = null
         super.onDestroy()
+    }
+
+    companion object {
+        const val TAG = "jotgatne"
     }
 }

@@ -1,15 +1,20 @@
 package com.ildango.capstone.result
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import android.util.Log
+import androidx.lifecycle.*
+import com.ildango.capstone.data.model.MyWishItem
 import com.ildango.capstone.data.repository.ChartRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class ChartItemViewModel(private val chartRepository: ChartRepository) : ViewModel() {
-    val items: MutableLiveData<Response<List<ChartItem>>> = MutableLiveData()
+
+    private var itemList = mutableListOf<ChartItem>()
+    private var _items : MutableLiveData<List<ChartItem>> = MutableLiveData()
+    val items: LiveData<List<ChartItem>> = _items
+
+
+    var chartPriceList = MutableLiveData<List<Int>>()
 
     private val twoWeeksChartData = arrayOf(700,300,200,1200,500,200,500)
     private val oneWeekChartData = arrayOf(700,300,200,1200,500,200,500)
@@ -18,16 +23,22 @@ class ChartItemViewModel(private val chartRepository: ChartRepository) : ViewMod
     fun getTwoWeeksChartData() : Array<Int> { return twoWeeksChartData }
     fun getOneWeekChartData() : Array<Int> { return oneWeekChartData }
 
-
     fun getData(keyword:String) {
         viewModelScope.launch {
-            val response = chartRepository.getChartPrice(keyword)
-            items.value = response
+            chartRepository.getChartPrice(keyword)
+                    .onSuccess {
+                        itemList.addAll(it)
+                        _items.value = itemList
+                    }
         }
     }
 
     fun getValue(pos :Int) : Int{
-        return items.value!!.body()!!.get(pos).avgPrice
+        return items.value!!.get(pos).avgPrice
+    }
+
+    companion object {
+        const val TAG = "chartGood"
     }
 
 }
