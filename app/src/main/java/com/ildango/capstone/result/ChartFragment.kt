@@ -16,7 +16,7 @@ import com.github.mikephil.charting.utils.MPPointF
 import com.ildango.capstone.R
 import com.ildango.capstone.databinding.FragmentChartPageBinding
 
-class ChartFragment(private val priceList: MutableList<Int>): Fragment() {
+class ChartFragment(private val priceList: Array<Int>): Fragment() {
     private var _binding: FragmentChartPageBinding? = null
     private val binding get() = _binding!!
 

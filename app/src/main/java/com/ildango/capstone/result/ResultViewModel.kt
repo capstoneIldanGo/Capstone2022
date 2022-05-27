@@ -13,13 +13,6 @@ class ResultViewModel(private val productRepository: ProductRepository) : ViewMo
     var lowestPriceOfAll = MutableLiveData<Int>()
     var lowestPriceOfSClass = MutableLiveData<Int>()
 
-    private val twoWeeksChartData = arrayOf(700,300,200,1200,500,200,500)
-    private val oneWeekChartData = arrayOf(700,300,200,1200,500,200,500)
-
-    // Chart 관련
-    fun getTwoWeeksChartData() : Array<Int> { return twoWeeksChartData }
-    fun getOneWeekChartData() : Array<Int> { return oneWeekChartData }
-
     // 최근 거래가
     fun getLastSoldPrice(keyword:String) {
         viewModelScope.launch {
