@@ -2,13 +2,11 @@ package com.ildango.capstone.mypages.myalarmlist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.ildango.capstone.R
-import com.ildango.capstone.mypages.mywishlist.MyWishItem
+import com.ildango.capstone.data.model.MyAlarmItem
 import retrofit2.Response
 
 class MyAlarmListAdapter(private var items: MutableLiveData<Response<List<MyAlarmItem>>>)

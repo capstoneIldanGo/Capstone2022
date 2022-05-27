@@ -1,7 +1,6 @@
-package com.ildango.capstone.resultdetail
+package com.ildango.capstone.data.model
 
 import com.google.gson.annotations.SerializedName
-import java.time.LocalDateTime
 
 class ProductItemModel:ArrayList<ProductItem>()
 

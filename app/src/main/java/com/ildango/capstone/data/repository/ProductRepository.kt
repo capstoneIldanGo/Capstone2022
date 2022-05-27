@@ -1,7 +1,10 @@
 package com.ildango.capstone.data.repository
 
-import com.ildango.capstone.resultdetail.ProductItemList
+import android.util.Log
+import com.ildango.capstone.data.model.ProductItem
+import com.ildango.capstone.data.model.ProductItemList
 import com.ildango.capstone.data.service.RetrofitClient
+import com.ildango.capstone.resultdetail.orderByPrice
 import retrofit2.Response
 import java.lang.Exception
 
@@ -24,11 +27,40 @@ class ProductRepository {
             val area = if(tag[0]) true else null
             val platform = getPlatform(platform)
 
-            data = RetrofitClient.productApi.getAllProduct(keyword=keyword, order=order, page=page, mint = mint, platform = platform)
+            data = RetrofitClient.productApi.getAllProduct(
+                keyword=keyword, order=order, page=page, mint = mint, platform = platform)
 
             if (data.isSuccessful) {
                 data.body()?.let {
                     Result.success(it)
+                } ?: Result.failure(Throwable(data.message()))
+            } else {
+                Result.failure(Throwable(data.message()))
+            }
+        } catch (e: Exception) {
+            Result.failure(Throwable(e.message))
+        }
+    }
+
+    suspend fun getProductPrice(
+        keyword: String,
+        order: String,
+        sold: Boolean ?= false,
+        mint: Boolean ?= null,
+        area: Boolean ?= null
+    ): Result<ProductItem> {
+        return try {
+            val data = RetrofitClient.productApi.getAllProduct(
+                keyword = keyword,
+                order = order,
+                sold = sold,
+                page = 0,
+                mint = mint
+            )
+
+            if (data.isSuccessful) {
+                data.body()?.let {
+                    Result.success(it.productList[0])
                 } ?: Result.failure(Throwable(data.message()))
             } else {
                 Result.failure(Throwable(data.message()))
