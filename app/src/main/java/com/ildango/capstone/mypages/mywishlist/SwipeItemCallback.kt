@@ -6,7 +6,8 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.drawable.VectorDrawable
-import android.util.Log
+import android.view.MotionEvent
+import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -22,11 +23,13 @@ class SwipeItemCallback(private val context: Context, private val adapter: MyWis
     private var clamp = 0f
     private var isClamped = false
 
+    private var iconDest:RectF ?= null
+
     override fun getMovementFlags(
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder
     ): Int {
-        return makeMovementFlags(UP or DOWN, LEFT or RIGHT)
+        return makeMovementFlags(0, LEFT or RIGHT)
     }
 
     override fun onMove(
@@ -49,13 +52,12 @@ class SwipeItemCallback(private val context: Context, private val adapter: MyWis
         actionState: Int,
         isCurrentlyActive: Boolean
     ) {
+        val itemView = viewHolder.itemView
+        val newX = clampViewPositionHorizontal(dX, isCurrentlyActive)
+        val height: Float = itemView.bottom.toFloat() - itemView.top.toFloat()
+        val width: Float = height / 3
+
         if (actionState == ACTION_STATE_SWIPE) {
-
-            val itemView = viewHolder.itemView
-            val newX = clampViewPositionHorizontal(dX, isCurrentlyActive)
-            val height: Float = itemView.bottom.toFloat() - itemView.top.toFloat()
-            val width: Float = height / 3
-
             // 빨간 박스 및 삭제 아이콘
             val p = Paint()
             p.color = ContextCompat.getColor(context, R.color.deleteButton)
@@ -69,14 +71,14 @@ class SwipeItemCallback(private val context: Context, private val adapter: MyWis
 
             val icon: Bitmap =
                 (context.getDrawable(R.drawable.ic_baseline_delete_24) as VectorDrawable).toBitmap()
-            val iconDest = RectF(
+            iconDest = RectF(
                 itemView.right.toFloat() - 2 * width,
                 itemView.top.toFloat() + width,
                 itemView.right.toFloat() - width,
                 itemView.bottom.toFloat() - width
             )
 
-            c.drawBitmap(icon, null, iconDest, p)
+            c.drawBitmap(icon, null, iconDest!!, p)
 
             // swipe 고정
             if (newX == -clamp) {
@@ -85,15 +87,25 @@ class SwipeItemCallback(private val context: Context, private val adapter: MyWis
             }
 
             curDx = newX
-            getDefaultUIUtil().onDraw(
-                c,
-                recyclerView,
-                itemView,
-                dX,
-                dY,
-                actionState,
-                isCurrentlyActive
-            )
+        }
+
+        getDefaultUIUtil().onDraw(
+            c,
+            recyclerView,
+            itemView,
+            dX,
+            dY,
+            actionState,
+            isCurrentlyActive
+        )
+    }
+
+    fun onDeleteIcon(e: MotionEvent) {
+        if (e.action == MotionEvent.ACTION_UP) {
+            if (iconDest!!.contains(e.x, e.y)) {
+                curPos?.let { adapter.removeItem(it) }
+            }
+            iconDest = null
         }
     }
 
@@ -123,8 +135,6 @@ class SwipeItemCallback(private val context: Context, private val adapter: MyWis
     fun setClamp(clamp:Float) {this.clamp = clamp}
 
     fun removePreviousClamp(recyclerView: RecyclerView) {
-        if(curPos==prePos) return
-
         prePos?.let {
             val viewHolder = recyclerView.findViewHolderForAdapterPosition(it) ?: return
             viewHolder.itemView.animate().x(0f).setDuration(100L).start()
