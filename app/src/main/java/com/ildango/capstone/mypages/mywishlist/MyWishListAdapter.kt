@@ -1,5 +1,6 @@
 package com.ildango.capstone.mypages.mywishlist
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
@@ -25,7 +26,9 @@ class MyWishListAdapter() : RecyclerView.Adapter<ProductViewHolder>() {
     }
 
     fun removeItem(position: Int) {
-
+        items.removeAt(position)
+        notifyDataSetChanged()
+        notifyItemRangeChanged(0, items.size)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
