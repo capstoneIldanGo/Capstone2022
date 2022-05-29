@@ -26,9 +26,9 @@ class MyWishListAdapter() : RecyclerView.Adapter<ProductViewHolder>() {
     }
 
     fun removeItem(position: Int) {
-        Log.d("Check", "pos:${position}")
         items.removeAt(position)
         notifyDataSetChanged()
+        notifyItemRangeChanged(0, items.size)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {

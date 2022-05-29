@@ -1,5 +1,6 @@
 package com.ildango.capstone.data.repository
 
+import android.util.Log
 import com.ildango.capstone.data.model.MyWishItem
 import com.ildango.capstone.data.service.RetrofitClient
 import com.ildango.capstone.data.model.MyWishPostItem
@@ -7,6 +8,22 @@ import retrofit2.Response
 import java.lang.Exception
 
 class MyWishListRepository {
+
+    suspend fun deleteWishItem(userId:Long, postId:Long): Result<Void> {
+        return try {
+            val data = RetrofitClient.wishApi.deleteMyPostItem(userId, postId)
+            if(data.isSuccessful) {
+                data.body()?.let {
+                    Result.success(it)
+                }?: Result.failure(Throwable(data.message()))
+            } else {
+                Result.failure(Throwable(data.message()))
+            }
+        } catch (e:Exception) {
+            Result.failure(Throwable(e.message))
+        }
+    }
+
     suspend fun getWishItem() : Result<List<MyWishItem>> {
         return try {
             val data = RetrofitClient.wishApi.getAllWishProduct()

@@ -41,7 +41,8 @@ class MyWishListActivity : AppCompatActivity() {
         }
         ItemTouchHelper(swipeItemCallback).attachToRecyclerView(binding.recyclerviewWishList)
         binding.recyclerviewWishList.setOnTouchListener { _, motionEvent ->
-            swipeItemCallback.onDeleteIcon(motionEvent)
+            val removedPos = swipeItemCallback.onDeleteIcon(motionEvent)
+            if(removedPos != -1) viewModel.deleteItem(1, removedPos)
             swipeItemCallback.removePreviousClamp(binding.recyclerviewWishList)
             false
         }

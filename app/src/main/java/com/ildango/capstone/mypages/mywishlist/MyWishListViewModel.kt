@@ -1,11 +1,11 @@
 package com.ildango.capstone.mypages.mywishlist
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.ildango.capstone.data.model.MyWishItem
 import com.ildango.capstone.data.model.MyWishPostItem
 import com.ildango.capstone.data.repository.MyWishListRepository
 import kotlinx.coroutines.*
-import retrofit2.Response
 
 class MyWishListViewModel(private val wishListRepository: MyWishListRepository) : ViewModel() {
     private var itemList = mutableListOf<MyWishItem>()
@@ -17,6 +17,16 @@ class MyWishListViewModel(private val wishListRepository: MyWishListRepository) 
             wishListRepository.getWishItem()
                 .onSuccess {
                     itemList.addAll(it)
+                    _items.value = itemList
+                }
+        }
+    }
+
+    fun deleteItem(userId: Long, pos:Int) {
+        viewModelScope.launch {
+            wishListRepository.deleteWishItem(userId, itemList[pos].post.postId)
+                .onSuccess {
+                    itemList.removeAt(pos)
                     _items.value = itemList
                 }
         }
@@ -47,7 +57,6 @@ class MyWishListViewModel(private val wishListRepository: MyWishListRepository) 
                 .onSuccess {
                 }
                 .onFailure {
-
                 }
         }
     }

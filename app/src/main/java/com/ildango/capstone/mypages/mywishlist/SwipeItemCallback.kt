@@ -100,13 +100,16 @@ class SwipeItemCallback(private val context: Context, private val adapter: MyWis
         )
     }
 
-    fun onDeleteIcon(e: MotionEvent) {
+    fun onDeleteIcon(e: MotionEvent): Int {
         if (e.action == MotionEvent.ACTION_UP) {
             if (iconDest!!.contains(e.x, e.y)) {
-                curPos?.let { adapter.removeItem(it) }
+                curPos!!.let { adapter.removeItem(it) }
+                iconDest = null
+                return curPos!!
             }
             iconDest = null
         }
+        return -1
     }
 
     override fun getSwipeEscapeVelocity(defaultValue: Float): Float = defaultValue*10
