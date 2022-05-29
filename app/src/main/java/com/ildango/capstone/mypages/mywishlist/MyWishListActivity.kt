@@ -2,6 +2,7 @@ package com.ildango.capstone.mypages.mywishlist
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -28,7 +29,14 @@ class MyWishListActivity : AppCompatActivity() {
         _binding = ActivityWishListBinding.inflate(this.layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MyWishListViewModel::class.java)
+    }
 
+    override fun onStart() {
+        super.onStart()
+        initView()
+    }
+
+    private fun initView() {
         setRecyclerview()
         setObserver()
         setItemSwipe()

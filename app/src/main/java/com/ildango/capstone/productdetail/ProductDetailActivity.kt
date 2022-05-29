@@ -57,19 +57,15 @@ class ProductDetailActivity : AppCompatActivity() {
 
     fun onWishBtnClick() {
         if(isExistsInWishList) {
-            // delete from wish lists
-            // isExistsInWishList = false
-            // binding.imgBtnWish.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+            viewModel.deleteItem(1, intent.getLongExtra("postid", 0))
+            isExistsInWishList = false
+            binding.imgBtnWish.setImageResource(R.drawable.ic_baseline_favorite_border_24)
         }
         else {
-            addWishItem()
+            viewModel.addWishItem(MyWishPostItem(1, intent.getLongExtra("postid", 0)))
             isExistsInWishList = true
             binding.imgBtnWish.setImageResource(R.drawable.ic_baseline_favorite_24)
         }
-    }
-
-    private fun addWishItem() {
-        viewModel.addWishItem(MyWishPostItem(1, intent.getLongExtra("postid", 0)))
     }
 
     @SuppressLint("SetJavaScriptEnabled")

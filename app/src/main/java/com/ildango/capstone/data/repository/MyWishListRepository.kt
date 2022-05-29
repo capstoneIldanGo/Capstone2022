@@ -39,7 +39,7 @@ class MyWishListRepository {
         }
     }
 
-    suspend fun addWishItem(item: MyWishPostItem) : Result<Int> {
+    suspend fun addWishItem(item: MyWishPostItem) : Result<Void> {
         return try {
             val data = RetrofitClient.wishApi.setMyPost(item)
             if(data.isSuccessful) {

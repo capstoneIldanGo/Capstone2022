@@ -16,6 +16,7 @@ class MyWishListViewModel(private val wishListRepository: MyWishListRepository) 
         viewModelScope.launch {
             wishListRepository.getWishItem()
                 .onSuccess {
+                    itemList.clear()
                     itemList.addAll(it)
                     _items.value = itemList
                 }
@@ -27,6 +28,21 @@ class MyWishListViewModel(private val wishListRepository: MyWishListRepository) 
             wishListRepository.deleteWishItem(userId, itemList[pos].post.postId)
                 .onSuccess {
                     itemList.removeAt(pos)
+                    _items.value = itemList
+                }
+        }
+    }
+
+    fun deleteItem(userId: Long, postId:Long) {
+        viewModelScope.launch {
+            wishListRepository.deleteWishItem(userId, postId)
+                .onSuccess {
+                    for(i in 0 until itemList.size) {
+                        if(itemList[i].post.postId == postId) {
+                            itemList.removeAt(i)
+                            break
+                        }
+                    }
                     _items.value = itemList
                 }
         }
@@ -54,10 +70,6 @@ class MyWishListViewModel(private val wishListRepository: MyWishListRepository) 
     fun addWishItem(item: MyWishPostItem) {
         viewModelScope.launch {
             wishListRepository.addWishItem(item)
-                .onSuccess {
-                }
-                .onFailure {
-                }
         }
     }
 }

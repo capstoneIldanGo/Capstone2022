@@ -10,7 +10,7 @@ interface MyWishService {
     suspend fun getAllWishProduct() : Response<List<MyWishItem>>
 
     @POST("myposts/add")
-    suspend fun setMyPost(@Body item: MyWishPostItem): Response<Int>
+    suspend fun setMyPost(@Body item: MyWishPostItem): Response<Void>
 
     @GET("myposts/exist")
     suspend fun isItemExistInMyPosts(
