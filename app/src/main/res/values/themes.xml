@@ -66,4 +66,11 @@
         <item name="cornerSize">16dp</item>
     </style>
 
+    <style name="Theme.App.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+        <item name="postSplashScreenTheme">@style/Theme.Capstone</item>
+    </style>
+
+
 </resources>

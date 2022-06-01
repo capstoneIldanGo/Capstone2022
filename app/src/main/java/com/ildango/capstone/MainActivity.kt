@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.SearchView
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.bumptech.glide.Glide
 import com.ildango.capstone.mypages.mywishlist.MyWishListActivity
 import com.ildango.capstone.databinding.ActivityMainBinding
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
     private val bottomSheet = BottomSheetFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
