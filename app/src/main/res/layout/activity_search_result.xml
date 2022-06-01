@@ -70,16 +70,20 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_chart"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="200dp"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout"/>
+        app:layout_constraintTop_toBottomOf="@id/tabLayout"
+        app:layout_constraintLeft_toLeftOf="@id/tv_recentTransaction"
+        app:layout_constraintRight_toRightOf="@id/btnMakeAlarm" />
 
     <TextView
         android:id="@+id/tv_priceInfoTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="@string/price_info_list"
         android:textSize="20sp"
+        android:textColor="@color/logoColor"
         app:layout_constraintLeft_toLeftOf="@id/tv_recentTransaction"
         app:layout_constraintTop_toBottomOf="@id/vp_chart"/>
 
@@ -89,7 +93,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
         tools:listitem="@layout/item_price_list_listview"
         app:layout_constraintTop_toBottomOf="@id/tv_priceInfoTitle" />
 
