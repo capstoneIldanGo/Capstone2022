@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.SearchView
+import com.bumptech.glide.Glide
 import com.ildango.capstone.mypages.mywishlist.MyWishListActivity
 import com.ildango.capstone.databinding.ActivityMainBinding
 import com.ildango.capstone.mypages.myalarmlist.MyAlarmListActivity
@@ -23,8 +24,15 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
 
     override fun onStart() {
         super.onStart()
+        setLogoImage()
         setSearchView()
         setBottomSheet()
+    }
+
+    private fun setLogoImage() {
+        Glide.with(this)
+            .load(R.raw.logo)
+            .into(binding.imgLogo)
     }
 
     private fun setBottomSheet() {
@@ -46,7 +54,6 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
                 startActivity(intent)
                 return true
             }
-
 
             override fun onQueryTextChange(p0: String?): Boolean {
                 // 텍스트 값 바뀔 때

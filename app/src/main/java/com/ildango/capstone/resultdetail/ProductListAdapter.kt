@@ -36,9 +36,9 @@ class ProductListAdapter() : RecyclerView.Adapter<ProductViewHolder>() {
                         .fitCenter()
                         .into(iv_thumbnail)
                 } catch (e:Exception) {
-                    Glide.with(holder.itemView.context)
+                    /*Glide.with(holder.itemView.context)
                         .load(R.drawable.logo)
-                        .into(iv_thumbnail)
+                        .into(iv_thumbnail)*/
                 }
                 tv_title.text = item.get(position).title
                 tv_price.text = "${item.get(position).price}원"
