@@ -8,15 +8,15 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="logoColor">#FF4EADE3</color>
+    <color name="logoColor">#EBA155</color>
     <color name="darkGray">#FF404040</color>
     <color name="gray">#FFC4C4C4</color>
-    <color name="opaqueGray">#4DC4C4C4</color>
+    <color name="opaqueGray">#E8C4C4C4</color>
 
     <color name="selected">#E82C2C2C</color>
     <color name="unselected">#E8E6E6E6</color>
 
-    <color name="selectedTab">#FF4EADE3</color>
+    <color name="selectedTab">#E8EBA155</color>
     <color name="unselectedTab">#E8E6E6E6</color>
 
     <color name="deleteButton">#FFD14B4B</color>
