@@ -1,11 +1,13 @@
 package com.ildango.capstone.result
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.components.MarkerView
 import com.github.mikephil.charting.data.Entry
@@ -51,6 +53,10 @@ class ChartFragment(private val priceList: ArrayList<Int>): Fragment() {
         lineDataSet = LineDataSet(lineList, null)
         lineData = LineData(lineDataSet)
         lineData.setValueTextSize(0f)
+        lineDataSet.color = ContextCompat.getColor(requireContext(), R.color.logoColor)
+        lineDataSet.setDrawCircles(false)
+        lineDataSet.setDrawHighlightIndicators(false)
+        lineDataSet.setLineWidth(2F)
 
         if(lineData.entryCount == 0)
             binding.priceChart.setNoDataText("데이터가 없습니다.")
