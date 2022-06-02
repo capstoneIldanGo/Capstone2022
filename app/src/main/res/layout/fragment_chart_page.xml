@@ -13,18 +13,5 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp">
 
-        <TextView
-            android:id="@+id/tv_chart_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text=""
-            android:textSize="12dp"
-            android:textColor="@color/logoColor"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            tools:ignore="MissingConstraints" />
-
     </com.github.mikephil.charting.charts.LineChart>
 </androidx.constraintlayout.widget.ConstraintLayout>
