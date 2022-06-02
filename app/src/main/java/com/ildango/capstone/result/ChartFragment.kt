@@ -39,8 +39,6 @@ class ChartFragment(private val priceList: ArrayList<Int>): Fragment() {
     }
 
     private fun makeChart() {
-        binding.priceChart.setNoDataText("데이터가 없습니다.")
-
         setChart()
 
         lineList = ArrayList()
@@ -53,7 +51,11 @@ class ChartFragment(private val priceList: ArrayList<Int>): Fragment() {
         lineDataSet = LineDataSet(lineList, null)
         lineData = LineData(lineDataSet)
         lineData.setValueTextSize(0f)
-        binding.priceChart.data = lineData
+
+        if(lineData.entryCount == 0)
+            binding.priceChart.setNoDataText("데이터가 없습니다.")
+        else
+            binding.priceChart.data = lineData
         binding.priceChart.invalidate()
     }
 
