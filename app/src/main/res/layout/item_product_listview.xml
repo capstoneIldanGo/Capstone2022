@@ -35,6 +35,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="3dp"
+                android:maxLines="2"
                 app:layout_constraintLeft_toRightOf="@id/ivProductThumbnail"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -52,7 +53,7 @@
                 app:layout_constraintLeft_toLeftOf="@id/tvProductTitle"
                 app:layout_constraintRight_toRightOf="@id/tvProductTitle"
                 app:layout_constraintTop_toBottomOf="@id/tvProductTitle"
-                app:layout_constraintBottom_toTopOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

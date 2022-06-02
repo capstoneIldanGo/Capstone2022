@@ -7,11 +7,9 @@
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
-        style="@style/SearchbarStyle"
+        app:theme="@style/SearchStyle"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center_vertical"
-        android:includeFontPadding="false"
         app:iconifiedByDefault="false"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">Capstone</string>
+    <string name="app_name">중세시대</string>
+
     <string name="productTextSearch">검색어를 입력해주세요</string>
     <string name="kindOfSort">내 주변 최저가</string>
     <string name="text_of_alarmpage">원하는 가격을 알림으로 받을 수 있습니다</string>
@@ -8,9 +9,11 @@
     <string name="price_info_list">가격정보</string>
     <string name="text_of_wishpage">찜한 상품들을 보여줍니다</string>
     <string name="chart_title">시세확인</string>
+
     <string name="price_button_1">내 주변 최저가는</string>
     <string name="price_button_2">전국 최저가는</string>
     <string name="price_button_3">미개봉/S급 최저가는</string>
+
     <string name="sorting1_title">정렬</string>
     <string name="sorting2_title">플랫폼</string>
     <string name="sorting3_title">태그</string>
