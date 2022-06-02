@@ -13,16 +13,6 @@ class ChartItemViewModel(private val chartRepository: ChartRepository) : ViewMod
     private var _items : MutableLiveData<List<ChartItem>> = MutableLiveData()
     val items: LiveData<List<ChartItem>> = _items
 
-
-    var chartPriceList = MutableLiveData<List<Int>>()
-
-    private val twoWeeksChartData = arrayOf(700,300,200,1200,500,200,500)
-    private val oneWeekChartData = arrayOf(700,300,200,1200,500,200,500)
-
-    // Chart 관련
-    fun getTwoWeeksChartData() : Array<Int> { return twoWeeksChartData }
-    fun getOneWeekChartData() : Array<Int> { return oneWeekChartData }
-
     fun getData(keyword:String) {
         viewModelScope.launch {
             chartRepository.getChartPrice(keyword)

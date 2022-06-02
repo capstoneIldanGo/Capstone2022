@@ -5,10 +5,6 @@ import com.ildango.capstone.result.ChartItem
 import retrofit2.Response
 
 class ChartRepository() {
-    /*suspend fun getChartPrice(keyword:String) : Response<List<ChartItem>>{
-        return RetrofitClient.chartApi.getChartPrice(keyword)
-    }*/
-
     suspend fun getChartPrice(keyword:String) : Result<List<ChartItem>>{
         return try {
             val data = RetrofitClient.chartApi.getChartPrice(keyword)
