@@ -3,12 +3,14 @@ package com.ildango.capstone.result
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import com.ildango.capstone.data.model.MyAlarmPostItem
 import com.ildango.capstone.data.repository.MyAlarmListRepository
 import com.ildango.capstone.databinding.DialogSetAlarmBinding
 import com.ildango.capstone.mypages.myalarmlist.MyAlarmListViewModel
@@ -52,8 +54,11 @@ class AlarmDialog(val keyword:String) : DialogFragment(), View.OnClickListener {
                 dismiss()
             }
             binding.btnSubmitAlarm-> {
-                val price = Integer.parseInt(binding.editTextGetPrice.text.toString())
-                dismiss()
+                val price = binding.editTextGetPrice.text.toString()
+                if(price != "") {
+                    viewModel!!.addAlarmItem(MyAlarmPostItem(keyword, Integer.parseInt(price), 1))
+                    dismiss()
+                }
             }
         }
     }

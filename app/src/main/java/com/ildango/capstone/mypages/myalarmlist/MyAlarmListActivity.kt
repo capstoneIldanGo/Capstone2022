@@ -16,6 +16,7 @@ class MyAlarmListActivity : AppCompatActivity() {
     private lateinit var viewModel: MyAlarmListViewModel
     private val repository = MyAlarmListRepository()
     private val viewModelFactory = MyAlarmListViewModelFactory(repository)
+    private lateinit var adapter: MyAlarmListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,22 +24,20 @@ class MyAlarmListActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MyAlarmListViewModel::class.java)
 
-        // list view
-        binding.recyclerviewAlarmList.layoutManager = LinearLayoutManager(this)
-
-        viewModel.getData()
+        setRecyclerview()
         setObserver()
+    }
+
+    private fun setRecyclerview() {
+        binding.recyclerviewAlarmList.layoutManager = LinearLayoutManager(this)
+        adapter = MyAlarmListAdapter()
+        binding.recyclerviewAlarmList.adapter = adapter
+        viewModel.getData()
     }
 
     private fun setObserver() {
         viewModel.items.observe(this, Observer {
-            if(it.isSuccessful) {
-                val mAdapter = MyAlarmListAdapter(viewModel.items)
-                binding.recyclerviewAlarmList.adapter = mAdapter
-            }
-            else {
-                Log.d("Response", "ERROR:${it.errorBody().toString()}")
-            }
+            adapter.setItems(it)
         })
     }
 

@@ -1,6 +1,5 @@
 package com.ildango.capstone.mypages.mywishlist
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.ildango.capstone.data.model.MyWishItem
 import com.ildango.capstone.data.model.MyWishPostItem
