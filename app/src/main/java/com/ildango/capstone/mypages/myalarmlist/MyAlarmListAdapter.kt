@@ -21,6 +21,12 @@ class MyAlarmListAdapter() : RecyclerView.Adapter<MyAlarmListAdapter.MyAlarmList
         notifyDataSetChanged()
     }
 
+    fun removeItem(position: Int) {
+        items.removeAt(position)
+        notifyDataSetChanged()
+        notifyItemRangeChanged(0, items.size)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyAlarmListViewHolder {
         return MyAlarmListViewHolder(parent)
     }

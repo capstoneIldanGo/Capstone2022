@@ -1,13 +1,14 @@
 package com.ildango.capstone.mypages.myalarmlist
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ildango.capstone.databinding.ActivityPriceAlarmListBinding
 import com.ildango.capstone.data.repository.MyAlarmListRepository
+import com.ildango.capstone.mypages.mywishlist.SwipeItemCallback
 
 class MyAlarmListActivity : AppCompatActivity() {
 
@@ -26,6 +27,7 @@ class MyAlarmListActivity : AppCompatActivity() {
 
         setRecyclerview()
         setObserver()
+        setItemSwipe()
     }
 
     private fun setRecyclerview() {
@@ -33,6 +35,19 @@ class MyAlarmListActivity : AppCompatActivity() {
         adapter = MyAlarmListAdapter()
         binding.recyclerviewAlarmList.adapter = adapter
         viewModel.getData()
+    }
+
+    private fun setItemSwipe() {
+        val swipeItemCallback = SwipeItemCallback(this, adapter).apply {
+            setClamp(resources.displayMetrics.widthPixels.toFloat() / 5)
+        }
+        ItemTouchHelper(swipeItemCallback).attachToRecyclerView(binding.recyclerviewAlarmList)
+        binding.recyclerviewAlarmList.setOnTouchListener { _, motionEvent ->
+            val removedPos = swipeItemCallback.onDeleteIcon(motionEvent)
+            if(removedPos != -1) viewModel.deleteItem(1, removedPos)
+            swipeItemCallback.removePreviousClamp(binding.recyclerviewAlarmList)
+            false
+        }
     }
 
     private fun setObserver() {

@@ -23,6 +23,16 @@ class MyAlarmListViewModel(private val alarmListRepository: MyAlarmListRepositor
         }
     }
 
+    fun deleteItem(userId:Long, pos:Int) {
+        viewModelScope.launch {
+            alarmListRepository.deleteAlarmItem(userId, itemList[pos].itemName)
+                .onSuccess {
+                    itemList.removeAt(pos)
+                    _items.value = itemList
+                }
+        }
+    }
+
     fun addAlarmItem(item: MyAlarmPostItem) {
         viewModelScope.launch {
             alarmListRepository.addAlarmItem(item)

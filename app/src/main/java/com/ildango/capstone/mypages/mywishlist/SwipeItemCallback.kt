@@ -14,8 +14,19 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ItemTouchHelper.*
 import androidx.recyclerview.widget.RecyclerView
 import com.ildango.capstone.R
+import com.ildango.capstone.mypages.myalarmlist.MyAlarmListAdapter
 
-class SwipeItemCallback(private val context: Context, private val adapter: MyWishListAdapter) : ItemTouchHelper.Callback() {
+class SwipeItemCallback constructor(private val context: Context) : ItemTouchHelper.Callback() {
+
+    private var wishAdapter:MyWishListAdapter ?= null
+    private var alarmAdapter:MyAlarmListAdapter ?= null
+
+    constructor(context: Context, adapter: MyWishListAdapter):this(context) {
+        wishAdapter = adapter
+    }
+    constructor(context: Context, adapter: MyAlarmListAdapter):this(context) {
+        alarmAdapter = adapter
+    }
 
     private var curPos:Int ?= null
     private var prePos:Int ?= null
@@ -103,7 +114,9 @@ class SwipeItemCallback(private val context: Context, private val adapter: MyWis
     fun onDeleteIcon(e: MotionEvent): Int {
         if (e.action == MotionEvent.ACTION_UP) {
             if (iconDest!!.contains(e.x, e.y)) {
-                curPos!!.let { adapter.removeItem(it) }
+                curPos!!.let {
+                    wishAdapter?.removeItem(it) ?: alarmAdapter?.removeItem(it)
+                }
                 iconDest = null
                 return curPos!!
             }
