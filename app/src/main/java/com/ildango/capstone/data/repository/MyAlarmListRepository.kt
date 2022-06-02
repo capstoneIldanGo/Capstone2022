@@ -52,4 +52,34 @@ class MyAlarmListRepository {
             Result.failure(Throwable(e.message))
         }
     }
+
+    suspend fun changeAlarmPrice(userId: Long, itemName: String, price: Int): Result<Void> {
+        return try {
+            val result = RetrofitClient.alarmApi.updatePrice(userId, itemName, price)
+            if(result.isSuccessful) {
+                result.body()?.let {
+                    Result.success(it)
+                }?: Result.failure(Throwable(result.message()))
+            } else {
+                Result.failure(Throwable(result.message()))
+            }
+        } catch (e:Exception) {
+            Result.failure(Throwable(e.message))
+        }
+    }
+
+    suspend fun isItemExistInMyAlarms(userId: Long, itemName: String): Result<Boolean> {
+        return try {
+            val result = RetrofitClient.alarmApi.isItemExistInMyAlarms(userId, itemName)
+            if (result.isSuccessful) {
+                result.body()?.let {
+                    Result.success(it)
+                }?: Result.failure(Throwable(result.message()))
+            } else {
+                Result.failure(Throwable(result.message()))
+            }
+        } catch (e:Exception) {
+            Result.failure(Throwable(e.message))
+        }
+    }
 }

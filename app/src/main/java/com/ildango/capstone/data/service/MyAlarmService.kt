@@ -19,4 +19,17 @@ interface MyAlarmService {
         @Path("userId") userId:Long,
         @Path("itemName") itemName:String
     ) : Response<Void>
+
+    @GET("pricealarm/exist")
+    suspend fun isItemExistInMyAlarms(
+        @Query("userId") userId: Long,
+        @Query("itemName") itemName: String
+    ) : Response<Boolean>
+
+    @PUT("pricealarm/update")
+    suspend fun updatePrice(
+        @Query("userId") userId: Long,
+        @Query("itemName") itemName: String,
+        @Query("targetPrice") targetPrice: Int
+    ) : Response<Void>
 }

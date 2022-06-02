@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.ildango.capstone.data.model.MyAlarmPostItem
@@ -56,8 +57,19 @@ class AlarmDialog(val keyword:String) : DialogFragment(), View.OnClickListener {
             binding.btnSubmitAlarm-> {
                 val price = binding.editTextGetPrice.text.toString()
                 if(price != "") {
-                    viewModel!!.addAlarmItem(MyAlarmPostItem(keyword, Integer.parseInt(price), 1))
-                    dismiss()
+                    viewModel!!.isItemExistInMyAlarms(1, keyword).observe(this) {
+                        if(!it) {
+                            viewModel!!.addAlarmItem(MyAlarmPostItem(keyword, Integer.parseInt(price), 1))
+                            Toast.makeText(this.context, "가격 알림이 등록되었어용!", Toast.LENGTH_SHORT).show()
+                            dismiss()
+                        } else {
+                            viewModel!!.updateItem(1, keyword, Integer.parseInt(price))
+                            Toast.makeText(this.context, "알림받을 가격이 변경되었어용!", Toast.LENGTH_SHORT).show()
+                            dismiss()
+                        }
+                    }
+                } else {
+                    Toast.makeText(this.context, "가격을 입력해주세용!", Toast.LENGTH_SHORT).show()
                 }
             }
         }

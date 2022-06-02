@@ -23,6 +23,15 @@ class MyAlarmListViewModel(private val alarmListRepository: MyAlarmListRepositor
         }
     }
 
+    fun updateItem(userId: Long, itemName: String, price:Int) {
+        viewModelScope.launch {
+            alarmListRepository.changeAlarmPrice(userId, itemName, price)
+                .onSuccess {
+                    getData()
+                }
+        }
+    }
+
     fun deleteItem(userId:Long, pos:Int) {
         viewModelScope.launch {
             alarmListRepository.deleteAlarmItem(userId, itemList[pos].itemName)
@@ -37,6 +46,17 @@ class MyAlarmListViewModel(private val alarmListRepository: MyAlarmListRepositor
         viewModelScope.launch {
             alarmListRepository.addAlarmItem(item)
         }
+    }
+
+    fun isItemExistInMyAlarms(userId: Long, itemName:String): LiveData<Boolean> {
+        val isExist = MutableLiveData<Boolean>()
+        viewModelScope.launch {
+            alarmListRepository.isItemExistInMyAlarms(userId, itemName)
+                .onSuccess {
+                    isExist.postValue(it)
+                }
+        }
+        return isExist
     }
 }
 
