@@ -2,7 +2,6 @@ package com.ildango.capstone.result
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -168,10 +167,7 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private inner class ChartPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
-
-
         override fun createFragment(position: Int): Fragment {
-
 
             return when(position) {
                 0-> ChartFragment(chartTwoWeekList)
@@ -188,7 +184,4 @@ class ResultActivity : AppCompatActivity() {
         super.onDestroy()
     }
 
-    companion object {
-        const val TAG = "jotgatne"
-    }
 }
