@@ -6,9 +6,9 @@ import android.os.Bundle
 import androidx.appcompat.widget.SearchView
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.bumptech.glide.Glide
-import com.ildango.capstone.mypages.mywishlist.MyWishListActivity
+import com.ildango.capstone.mywishlist.MyWishListActivity
 import com.ildango.capstone.databinding.ActivityMainBinding
-import com.ildango.capstone.mypages.myalarmlist.MyAlarmListActivity
+import com.ildango.capstone.myalarmlist.MyAlarmListActivity
 import com.ildango.capstone.result.ResultActivity
 
 class MainActivity : AppCompatActivity(), BottomSheetClickListener {

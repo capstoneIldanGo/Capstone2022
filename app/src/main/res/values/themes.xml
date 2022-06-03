@@ -65,7 +65,7 @@
     </style>
 
     <style name="DialogTextStyle">
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
