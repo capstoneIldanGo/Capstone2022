@@ -1,6 +1,7 @@
 package com.ildango.capstone
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.SearchView
@@ -22,6 +23,8 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        checkOnBoarding()
     }
 
     override fun onStart() {
@@ -29,6 +32,20 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
         setLogoImage()
         setSearchView()
         setBottomSheet()
+    }
+
+    private fun checkOnBoarding() {
+        val pref:SharedPreferences = getSharedPreferences("isFirst", MODE_PRIVATE)
+        val isFirst = pref.getBoolean("isFirst", false)
+
+        if(!isFirst) {
+        //    val prefEditor:SharedPreferences.Editor = pref.edit()
+        //    prefEditor.putBoolean("isFirst", true)
+        //    prefEditor.apply()
+
+            val intent = Intent(this@MainActivity, OnBoardingActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setLogoImage() {
