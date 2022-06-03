@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
     }
 
     private fun checkOnBoarding() {
-        val pref:SharedPreferences = getSharedPreferences("isFirst", MODE_PRIVATE)
+        val pref:SharedPreferences = getSharedPreferences("Information", MODE_PRIVATE)
         val isFirst = pref.getBoolean("isFirst", false)
 
         if(!isFirst) {

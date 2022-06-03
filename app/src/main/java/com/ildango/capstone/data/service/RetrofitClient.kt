@@ -44,8 +44,11 @@ object RetrofitClient {
     val wishApi: MyWishService by lazy {
         instance.create(MyWishService::class.java)
     }
-    val chartApi : ChartService by lazy{
+    val chartApi : ChartService by lazy {
         instance.create(ChartService::class.java)
+    }
+    val locationApi : LocationService by lazy {
+        instance.create(LocationService::class.java)
     }
 
 }
