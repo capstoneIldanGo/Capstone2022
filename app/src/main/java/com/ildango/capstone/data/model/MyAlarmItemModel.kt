@@ -12,3 +12,9 @@ data class MyAlarmItem (
     val itemId:Long,
     val itemName:String
 )
+
+data class MyAlarmPostItem (
+    val itemName: String,
+    val targetPrice: Int,
+    val userId: Long
+)

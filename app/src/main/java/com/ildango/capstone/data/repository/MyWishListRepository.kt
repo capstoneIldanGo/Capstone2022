@@ -1,10 +1,8 @@
 package com.ildango.capstone.data.repository
 
-import android.util.Log
 import com.ildango.capstone.data.model.MyWishItem
 import com.ildango.capstone.data.service.RetrofitClient
 import com.ildango.capstone.data.model.MyWishPostItem
-import retrofit2.Response
 import java.lang.Exception
 
 class MyWishListRepository {

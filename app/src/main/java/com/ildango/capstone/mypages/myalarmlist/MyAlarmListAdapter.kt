@@ -9,24 +9,39 @@ import com.ildango.capstone.R
 import com.ildango.capstone.data.model.MyAlarmItem
 import retrofit2.Response
 
-class MyAlarmListAdapter(private var items: MutableLiveData<Response<List<MyAlarmItem>>>)
-    : RecyclerView.Adapter<MyAlarmListAdapter.MyAlarmListViewHolder>() {
+class MyAlarmListAdapter() : RecyclerView.Adapter<MyAlarmListAdapter.MyAlarmListViewHolder>() {
+
+    private val items = mutableListOf<MyAlarmItem>()
+
+    fun setItems(items: List<MyAlarmItem>) {
+        this.items.apply {
+            clear()
+            addAll(items)
+        }
+        notifyDataSetChanged()
+    }
+
+    fun removeItem(position: Int) {
+        items.removeAt(position)
+        notifyDataSetChanged()
+        notifyItemRangeChanged(0, items.size)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyAlarmListViewHolder {
         return MyAlarmListViewHolder(parent)
     }
 
     override fun onBindViewHolder(holder: MyAlarmListViewHolder, position: Int) {
-        items.value!!.body()!!.get(position).let { item ->
+        items.let { item ->
             with(holder) {
-                tv_keyword.text = item.itemName
-                tv_price.text = "${item.targetPrice}원"
+                tv_keyword.text = item.get(position).itemName
+                tv_price.text = "${item.get(position).targetPrice}원"
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return items.value!!.body()!!.size
+        return items.size
     }
 
     inner class MyAlarmListViewHolder constructor(parent: ViewGroup) : RecyclerView.ViewHolder(
