@@ -18,8 +18,13 @@ class OnBoardingActivity : AppCompatActivity() {
 
         binding.btnStartGetInfo.setOnClickListener {
             finish()
-            val intent = Intent(this@OnBoardingActivity, GetInfoActivity::class.java)
-            startActivity(intent)
+            Intent(this@OnBoardingActivity, GetInfoActivity::class.java).apply {
+                putExtra("isFirst", true)
+            }.run { startActivity(this) }
         }
+    }
+
+    override fun onBackPressed() {
+        // super.onBackPressed()
     }
 }
