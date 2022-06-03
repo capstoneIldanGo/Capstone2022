@@ -28,7 +28,6 @@ class GetInfoViewModel(private val locationRepository: LocationRepository): View
                 }
         }
     }
-
 }
 
 class GetInfoViewModelFactory(private val repository: LocationRepository)

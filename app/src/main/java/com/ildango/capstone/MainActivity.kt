@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.ildango.capstone.mywishlist.MyWishListActivity
 import com.ildango.capstone.databinding.ActivityMainBinding
 import com.ildango.capstone.myalarmlist.MyAlarmListActivity
+import com.ildango.capstone.myinfo.GetInfoActivity
 import com.ildango.capstone.result.ResultActivity
 
 class MainActivity : AppCompatActivity(), BottomSheetClickListener {
@@ -39,9 +40,9 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
         val isFirst = pref.getBoolean("isFirst", false)
 
         if(!isFirst) {
-        //    val prefEditor:SharedPreferences.Editor = pref.edit()
-        //    prefEditor.putBoolean("isFirst", true)
-        //    prefEditor.apply()
+            val prefEditor:SharedPreferences.Editor = pref.edit()
+            prefEditor.putBoolean("isFirst", true)
+            prefEditor.apply()
 
             val intent = Intent(this@MainActivity, OnBoardingActivity::class.java)
             startActivity(intent)
@@ -84,15 +85,13 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
     override fun onButtonClicked(id: Int) {
         when(id) {
             R.id.btn_favorite -> {
-                val intent = Intent(this, MyWishListActivity::class.java)
-                startActivity(intent)
+                Intent(this, MyWishListActivity::class.java).run { startActivity(this) }
             }
             R.id.btn_alarm -> {
-                val intent = Intent(this, MyAlarmListActivity::class.java)
-                startActivity(intent)
+                Intent(this, MyAlarmListActivity::class.java).run { startActivity(this) }
             }
-            R.id.btn_logstate -> {
-
+            R.id.btn_setInfo -> {
+                Intent(this, GetInfoActivity::class.java).run { startActivity(this) }
             }
         }
     }

@@ -16,45 +16,58 @@ class GetInfoActivity : AppCompatActivity() {
 
     private var _binding: ActivityGetInfoBinding?= null
     private val binding get() = _binding!!
-    private var isFirstRun = false
     private lateinit var viewModel: GetInfoViewModel
     private val repository = LocationRepository()
     private val viewModelFactory = GetInfoViewModelFactory(repository)
     private lateinit var pref:SharedPreferences
+
+    private lateinit var cityAdapter: ArrayAdapter<String>
+    private lateinit var stateAdapter: ArrayAdapter<String>
+    private var isFirstRun = false
+    private var isCreated = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityGetInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this, viewModelFactory).get(GetInfoViewModel::class.java)
+
+        cityAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item)
+        stateAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item)
         pref = getSharedPreferences("Information", MODE_PRIVATE)
 
         isFirstRun = intent.getBooleanExtra("isFirst", false)
 
-        changeBtnIfItsFirst()
+        changeSettingIfItsFirst()
         setSpinner()
         setOnBtnClick()
     }
 
-    private fun changeBtnIfItsFirst() {
+    private fun changeSettingIfItsFirst() {
         if(isFirstRun) {
             binding.btnCancelInfo.visibility = View.GONE
+        } else {
+            binding.edittextName.setText(pref.getString("name", ""))
         }
     }
 
     private fun setSpinner() {
-        val cityAdapter = ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item)
-        val stateAdapter = ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item)
-
         viewModel.cityList.observe(this) {
             cityAdapter.addAll(it)
             binding.spinnerCity.adapter = cityAdapter
+            if(!isFirstRun) {
+                binding.spinnerCity.setSelection(pref.getInt("city", 0))
+            }
         }
 
         viewModel.stateList.observe(this) {
             stateAdapter.clear()
             stateAdapter.addAll(it)
             binding.spinnerState.adapter = stateAdapter
+            if(!isFirstRun && !isCreated) {
+                binding.spinnerState.setSelection(pref.getInt("state", 0))
+                isCreated = true
+            }
         }
 
         binding.spinnerCity.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
@@ -63,7 +76,6 @@ class GetInfoActivity : AppCompatActivity() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO()
             }
         }
     }
@@ -72,7 +84,7 @@ class GetInfoActivity : AppCompatActivity() {
        binding.btnSubmitInfo.setOnClickListener {
             if(binding.edittextName.text.isNotEmpty()) {
                 saveName(binding.edittextName.text.toString())
-                saveLocation(binding.spinnerCity.selectedItem.toString(), binding.spinnerState.selectedItem.toString())
+                saveLocation(binding.spinnerCity.selectedItemPosition, binding.spinnerState.selectedItemPosition)
                 finish()
             } else {
                 Toast.makeText(this, "모든 정보를 입력해주세용!", Toast.LENGTH_SHORT).show()
@@ -89,10 +101,10 @@ class GetInfoActivity : AppCompatActivity() {
         prefEditor.apply()
     }
 
-    private fun saveLocation(city:String, state:String) {
+    private fun saveLocation(city:Int, state:Int) {
         val prefEditor: SharedPreferences.Editor = pref.edit()
-        prefEditor.putString("city", city)
-        prefEditor.putString("state", state)
+        prefEditor.putInt("city", city)
+        prefEditor.putInt("state", state)
         prefEditor.apply()
     }
 

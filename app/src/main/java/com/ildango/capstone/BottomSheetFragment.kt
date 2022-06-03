@@ -1,10 +1,12 @@
 package com.ildango.capstone
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.ildango.capstone.databinding.FragmentMainBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.lang.Exception
@@ -57,10 +59,13 @@ class BottomSheetFragment() : BottomSheetDialogFragment() {
             bottomSheetClickListener.onButtonClicked(R.id.btn_alarm)
             dismiss()
         }
-        binding.btnLogstate.setOnClickListener {
-            bottomSheetClickListener.onButtonClicked(R.id.btn_logstate)
+        binding.btnSetInfo.setOnClickListener {
+            bottomSheetClickListener.onButtonClicked(R.id.btn_setInfo)
             dismiss()
         }
+
+        val pref: SharedPreferences = requireActivity().getSharedPreferences("Information", AppCompatActivity.MODE_PRIVATE)
+        binding.mainBottomSheetName.text = pref.getString("name", "일단고")
 
     }
 
