@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="bgColor">#F5F4ED</color>
     <color name="logoColor">#EBA155</color>
     <color name="darkGray">#FF404040</color>
     <color name="gray">#FFC4C4C4</color>
@@ -19,5 +20,5 @@
     <color name="selectedTab">#E8EBA155</color>
     <color name="unselectedTab">#E8E6E6E6</color>
 
-    <color name="deleteButton">#FFD14B4B</color>
+    <color name="deleteButton">#D45959</color>
 </resources>
