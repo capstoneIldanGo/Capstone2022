@@ -25,4 +25,5 @@
     <string name="sorting2_tag4">번개장터</string>
     <string name="sorting3_tag1">관심지역</string>
     <string name="sorting3_tag2">미개봉중고</string>
+    <string name="getNameString">닉네임을 입력해주세요</string>
 </resources>
