@@ -86,6 +86,11 @@ class GetInfoActivity : AppCompatActivity() {
                 saveName(binding.edittextName.text.toString())
                 saveLocation(binding.spinnerCity.selectedItemPosition, binding.spinnerState.selectedItemPosition)
                 finish()
+
+                val prefEditor:SharedPreferences.Editor = pref.edit()
+                prefEditor.putBoolean("isFirst", true)
+                prefEditor.apply()
+
             } else {
                 CustomSnackBar.make(binding.root, "모든 정보를 입력해주세용!").show()
             }

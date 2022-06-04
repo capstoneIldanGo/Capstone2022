@@ -40,10 +40,6 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
         val isFirst = pref.getBoolean("isFirst", false)
 
         if(!isFirst) {
-            val prefEditor:SharedPreferences.Editor = pref.edit()
-            prefEditor.putBoolean("isFirst", true)
-            prefEditor.apply()
-
             val intent = Intent(this@MainActivity, OnBoardingActivity::class.java)
             startActivity(intent)
         }
