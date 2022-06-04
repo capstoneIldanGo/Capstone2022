@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
     private val binding get() = _binding!!
     private val bottomSheet = BottomSheetFragment()
 
+    private var waitTime = 0L
+
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
@@ -90,6 +92,14 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
                 Intent(this, GetInfoActivity::class.java).run { startActivity(this) }
             }
         }
+    }
+
+    override fun onBackPressed() {
+        if(System.currentTimeMillis() - waitTime >= 1500) {
+            waitTime = System.currentTimeMillis()
+            CustomSnackBar.make(binding.root, "뒤로가기 버튼을 한 번 더 누르면 종료됩니다!").show()
+        } else
+            finish()
     }
 
     override fun onDestroy() {
