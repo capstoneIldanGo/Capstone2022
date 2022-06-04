@@ -104,7 +104,9 @@ class GetInfoActivity : AppCompatActivity() {
     private fun saveLocation(city:Int, state:Int) {
         val prefEditor: SharedPreferences.Editor = pref.edit()
         prefEditor.putInt("city", city)
+        prefEditor.putString("cityInfo", viewModel.cityList.value!![city])
         prefEditor.putInt("state", state)
+        prefEditor.putString("stateInfo", viewModel.stateList.value!![state])
         prefEditor.apply()
     }
 

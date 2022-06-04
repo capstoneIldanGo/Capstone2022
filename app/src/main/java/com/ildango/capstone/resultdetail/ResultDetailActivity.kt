@@ -1,6 +1,7 @@
 package com.ildango.capstone.resultdetail
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -54,6 +55,7 @@ class ResultDetailActivity : AppCompatActivity(){
 
     private fun initView() {
         setSearchView()
+        getArea()
         setTextByType(intent.getStringExtra("type").toString())
         setRecyclerView()
         setScrollListener()
@@ -145,6 +147,12 @@ class ResultDetailActivity : AppCompatActivity(){
         binding.btnSorting.setOnClickListener{
             sortingSheet.show(supportFragmentManager, SortingSheetFragment.TAG)
         }
+    }
+
+    private fun getArea() {
+        val pref: SharedPreferences = getSharedPreferences("Information", MODE_PRIVATE)
+        viewModel.setCity(pref.getString("cityInfo", "")!!)
+        viewModel.setState(pref.getString("stateInfo", "")!!)
     }
 
     private fun setTextByType(type:String) {

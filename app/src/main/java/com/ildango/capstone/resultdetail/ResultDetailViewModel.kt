@@ -16,6 +16,9 @@ class ResultDetailViewModel(private val productRepository: ProductRepository)
     var productPlatform = MutableLiveData<List<Boolean>>()
     var productTag = MutableLiveData<List<Boolean>>()
 
+    private var infoCity = MutableLiveData<String>()
+    private var infoState = MutableLiveData<String>()
+
     var isDismissed = MutableLiveData<Boolean>()
 
     fun resetData() {
@@ -25,7 +28,8 @@ class ResultDetailViewModel(private val productRepository: ProductRepository)
 
     fun getData(keyword:String, page:Int) {
         viewModelScope.launch {
-            productRepository.getAllProduct(keyword, productOrderType.value!!, page, productTag.value!!, productPlatform.value!!)
+            productRepository.getAllProduct(keyword = keyword, order = productOrderType.value!!, page = page,
+                platform = productPlatform.value!!, tag = productTag.value!!, city = infoCity.value!!, state = infoState.value!!)
                 .onSuccess {
                     productList.addAll(it.productList)
                     _product.value = productList
@@ -54,6 +58,10 @@ class ResultDetailViewModel(private val productRepository: ProductRepository)
     fun setTag(value:List<Boolean>) {
         productTag.value = value
     }
+
+    // location info
+    fun setCity(city:String) {infoCity.value = city}
+    fun setState(state:String) {infoState.value = state}
 }
 
 class ResultDetailViewModelFactory (private val repository: ProductRepository)

@@ -1,10 +1,8 @@
 package com.ildango.capstone.data.repository
 
-import android.util.Log
 import com.ildango.capstone.data.model.ProductItem
 import com.ildango.capstone.data.model.ProductItemList
 import com.ildango.capstone.data.service.RetrofitClient
-import com.ildango.capstone.resultdetail.orderByPrice
 import retrofit2.Response
 import java.lang.Exception
 
@@ -16,19 +14,30 @@ class ProductRepository {
         keyword: String,
         order: String,
         page: Int,
+        platform: List<Boolean>,
         tag: List<Boolean>,
-        platform: List<Boolean>
+        city: String,
+        state: String
     ): Result<ProductItemList> {
 
         val data: Response<ProductItemList>
 
         return try {
+            val areaCity = if(tag[0]) city else null
+            var areaState = if(tag[0]) state else null
+            if(areaCity==areaState) areaState = null
             val mint = if(tag[1]) true else null
-            val area = if(tag[0]) true else null
             val platform = getPlatform(platform)
 
             data = RetrofitClient.productApi.getAllProduct(
-                keyword=keyword, order=order, page=page, mint = mint, platform = platform)
+                keyword=keyword,
+                order=order,
+                page=page,
+                mint = mint,
+                platform = platform,
+                city = areaCity,
+                state = areaState
+            )
 
             if (data.isSuccessful) {
                 data.body()?.let {

@@ -99,10 +99,10 @@ class SortingSheetFragment: BottomSheetDialogFragment() {
 
     private fun onTagButtonClick() {
         binding.btnTagSclass.setOnClickListener {
-            viewModel.setTag(listOf(viewModel.productTag.value!![0], !viewModel.productTag.value!![1]))
+            viewModel.setTag(listOf(binding.btnTagFavoriteArea.isChecked, binding.btnTagSclass.isChecked))
         }
         binding.btnTagFavoriteArea.setOnClickListener {
-            viewModel.setTag(listOf(!viewModel.productTag.value!![0], viewModel.productTag.value!![1]))
+            viewModel.setTag(listOf(binding.btnTagFavoriteArea.isChecked, binding.btnTagSclass.isChecked))
         }
     }
 
