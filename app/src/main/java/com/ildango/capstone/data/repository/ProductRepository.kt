@@ -56,7 +56,8 @@ class ProductRepository {
         order: String,
         sold: Boolean ?= false,
         mint: Boolean ?= null,
-        area: Boolean ?= null
+        city: String ?= null,
+        state: String ?= null
     ): Result<ProductItem> {
         return try {
             val data = RetrofitClient.productApi.getAllProduct(
@@ -64,7 +65,9 @@ class ProductRepository {
                 order = order,
                 sold = sold,
                 page = 0,
-                mint = mint
+                mint = mint,
+                city = city,
+                state = state
             )
 
             if (data.isSuccessful) {
