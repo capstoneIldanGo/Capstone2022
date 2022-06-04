@@ -22,7 +22,7 @@
         style="@style/DialogTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/style_white_radius10"
+        android:background="@drawable/style_white_box"
         android:onClick="@{()->activity.onBtnClick()}"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"

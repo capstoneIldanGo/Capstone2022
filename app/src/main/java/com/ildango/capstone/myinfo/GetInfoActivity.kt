@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.ildango.capstone.CustomSnackBar
 import com.ildango.capstone.R
 import com.ildango.capstone.data.repository.LocationRepository
 import com.ildango.capstone.databinding.ActivityGetInfoBinding
@@ -87,7 +87,7 @@ class GetInfoActivity : AppCompatActivity() {
                 saveLocation(binding.spinnerCity.selectedItemPosition, binding.spinnerState.selectedItemPosition)
                 finish()
             } else {
-                Toast.makeText(this, "모든 정보를 입력해주세용!", Toast.LENGTH_SHORT).show()
+                CustomSnackBar.make(binding.root, "모든 정보를 입력해주세용!").show()
             }
         }
         binding.btnCancelInfo.setOnClickListener {
