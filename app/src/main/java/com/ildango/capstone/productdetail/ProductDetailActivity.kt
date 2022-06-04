@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.ildango.capstone.R
 import com.ildango.capstone.data.repository.MyWishListRepository
 import com.ildango.capstone.databinding.ActivityProductDetailBinding
-import com.ildango.capstone.mypages.mywishlist.MyWishListViewModel
-import com.ildango.capstone.mypages.mywishlist.MyWishListViewModelFactory
+import com.ildango.capstone.mywishlist.MyWishListViewModel
+import com.ildango.capstone.mywishlist.MyWishListViewModelFactory
 import com.ildango.capstone.data.model.MyWishPostItem
 
 class ProductDetailActivity : AppCompatActivity() {

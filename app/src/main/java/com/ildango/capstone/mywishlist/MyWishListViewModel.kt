@@ -1,4 +1,4 @@
-package com.ildango.capstone.mypages.mywishlist
+package com.ildango.capstone.mywishlist
 
 import androidx.lifecycle.*
 import com.ildango.capstone.data.model.MyWishItem

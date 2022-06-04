@@ -1,15 +1,12 @@
-package com.ildango.capstone.mypages.mywishlist
+package com.ildango.capstone.mywishlist
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ildango.capstone.R
 import com.ildango.capstone.data.model.MyWishItem
 import com.ildango.capstone.resultdetail.ProductViewHolder
-import retrofit2.Response
 import java.lang.Exception
 
 class MyWishListAdapter() : RecyclerView.Adapter<ProductViewHolder>() {

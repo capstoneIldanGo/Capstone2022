@@ -23,11 +23,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.ildango.capstone.mypages.mywishlist.MyWishListActivity" />
-        <activity android:name=".mypages.myalarmlist.MyAlarmListActivity"/>
-        <activity android:name="com.ildango.capstone.result.ResultActivity"/>
-        <activity android:name="com.ildango.capstone.resultdetail.ResultDetailActivity" />
+        <activity android:name=".mywishlist.MyWishListActivity" />
+        <activity android:name=".myalarmlist.MyAlarmListActivity"/>
+        <activity android:name=".result.ResultActivity"/>
+        <activity android:name=".resultdetail.ResultDetailActivity" />
         <activity android:name=".productdetail.ProductDetailActivity" />
+        <activity android:name=".OnBoardingActivity" />
+        <activity android:name=".myinfo.GetInfoActivity" />
 
     </application>
 

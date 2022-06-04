@@ -1,4 +1,4 @@
-package com.ildango.capstone.mypages.myalarmlist
+package com.ildango.capstone.myalarmlist
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ildango.capstone.databinding.ActivityPriceAlarmListBinding
 import com.ildango.capstone.data.repository.MyAlarmListRepository
-import com.ildango.capstone.mypages.mywishlist.SwipeItemCallback
+import com.ildango.capstone.SwipeItemCallback
 
 class MyAlarmListActivity : AppCompatActivity() {
 

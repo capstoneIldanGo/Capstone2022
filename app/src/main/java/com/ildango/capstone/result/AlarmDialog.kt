@@ -14,8 +14,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.ildango.capstone.data.model.MyAlarmPostItem
 import com.ildango.capstone.data.repository.MyAlarmListRepository
 import com.ildango.capstone.databinding.DialogSetAlarmBinding
-import com.ildango.capstone.mypages.myalarmlist.MyAlarmListViewModel
-import com.ildango.capstone.mypages.myalarmlist.MyAlarmListViewModelFactory
+import com.ildango.capstone.myalarmlist.MyAlarmListViewModel
+import com.ildango.capstone.myalarmlist.MyAlarmListViewModelFactory
 
 class AlarmDialog(val keyword:String) : DialogFragment(), View.OnClickListener {
 
@@ -23,7 +23,7 @@ class AlarmDialog(val keyword:String) : DialogFragment(), View.OnClickListener {
     private val binding  get() = _binding!!
     private val repository = MyAlarmListRepository()
     private val viewModelFactory = MyAlarmListViewModelFactory(repository)
-    private var viewModel: MyAlarmListViewModel ?= null
+    private var viewModel: MyAlarmListViewModel?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

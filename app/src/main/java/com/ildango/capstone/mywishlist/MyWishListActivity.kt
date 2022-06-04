@@ -1,19 +1,18 @@
-package com.ildango.capstone.mypages.mywishlist
+package com.ildango.capstone.mywishlist
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ildango.capstone.SwipeItemCallback
 import com.ildango.capstone.data.repository.MyWishListRepository
 import com.ildango.capstone.databinding.ActivityWishListBinding
 import com.ildango.capstone.productdetail.ProductDetailActivity
 import com.ildango.capstone.resultdetail.ProductViewHolder
-
 
 class MyWishListActivity : AppCompatActivity() {
 

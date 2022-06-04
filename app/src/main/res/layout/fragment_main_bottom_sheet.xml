@@ -16,7 +16,7 @@
     android:paddingBottom="20dp">
 
     <TextView
-        android:id="@+id/main_bottomsheet_title"
+        android:id="@+id/mainBottomSheetName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="일단고"
@@ -58,16 +58,17 @@
         android:text="알림 설정" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_logstate"
+        android:id="@+id/btn_setInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:drawableLeft="@drawable/ic_logout"
+        android:drawableLeft="@drawable/ic_baseline_settings_24"
+        android:drawableTint="@color/black"
         android:drawablePadding="15dp"
         android:textAlignment="textStart"
         android:layout_marginBottom="10dp"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:text="로그아웃" />
+        android:text="정보 수정" />
 
 </LinearLayout>

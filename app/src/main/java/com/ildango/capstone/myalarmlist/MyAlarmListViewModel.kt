@@ -1,11 +1,10 @@
-package com.ildango.capstone.mypages.myalarmlist
+package com.ildango.capstone.myalarmlist
 
 import androidx.lifecycle.*
 import com.ildango.capstone.data.model.MyAlarmItem
 import com.ildango.capstone.data.model.MyAlarmPostItem
 import com.ildango.capstone.data.repository.MyAlarmListRepository
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
 class MyAlarmListViewModel(private val alarmListRepository: MyAlarmListRepository):ViewModel() {
     private var itemList = mutableListOf<MyAlarmItem>()

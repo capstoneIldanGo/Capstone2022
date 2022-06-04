@@ -1,13 +1,11 @@
-package com.ildango.capstone.mypages.myalarmlist
+package com.ildango.capstone.myalarmlist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.ildango.capstone.R
 import com.ildango.capstone.data.model.MyAlarmItem
-import retrofit2.Response
 
 class MyAlarmListAdapter() : RecyclerView.Adapter<MyAlarmListAdapter.MyAlarmListViewHolder>() {
 

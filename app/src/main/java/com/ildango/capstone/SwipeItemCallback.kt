@@ -1,4 +1,4 @@
-package com.ildango.capstone.mypages.mywishlist
+package com.ildango.capstone
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -7,19 +7,18 @@ import android.graphics.Paint
 import android.graphics.RectF
 import android.graphics.drawable.VectorDrawable
 import android.view.MotionEvent
-import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ItemTouchHelper.*
 import androidx.recyclerview.widget.RecyclerView
-import com.ildango.capstone.R
-import com.ildango.capstone.mypages.myalarmlist.MyAlarmListAdapter
+import com.ildango.capstone.myalarmlist.MyAlarmListAdapter
+import com.ildango.capstone.mywishlist.MyWishListAdapter
 
 class SwipeItemCallback constructor(private val context: Context) : ItemTouchHelper.Callback() {
 
-    private var wishAdapter:MyWishListAdapter ?= null
-    private var alarmAdapter:MyAlarmListAdapter ?= null
+    private var wishAdapter: MyWishListAdapter?= null
+    private var alarmAdapter: MyAlarmListAdapter?= null
 
     constructor(context: Context, adapter: MyWishListAdapter):this(context) {
         wishAdapter = adapter
