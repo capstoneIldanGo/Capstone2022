@@ -1,6 +1,7 @@
 package com.ildango.capstone.result
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
@@ -90,7 +91,12 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private fun getPriceData() {
-        viewModel.getLowestAroundMyArea()
+        val pref: SharedPreferences = getSharedPreferences("Information", MODE_PRIVATE)
+        val city = pref.getString("cityInfo", "")!!
+        var state = pref.getString("stateInfo", "")
+        if(city == state) state = null
+
+        viewModel.getLowestAroundMyArea(keyword, city, state)
         viewModel.getLowestOfAll(keyword)
         viewModel.getLowestOfSClass(keyword)
     }

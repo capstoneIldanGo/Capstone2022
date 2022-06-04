@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -52,7 +51,6 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
     fun onShareBtnClick() {
-        Toast.makeText(applicationContext, "share", Toast.LENGTH_SHORT).show()
     }
 
     fun onWishBtnClick() {

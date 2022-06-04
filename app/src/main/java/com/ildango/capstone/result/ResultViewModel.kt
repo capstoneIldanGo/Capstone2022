@@ -26,9 +26,16 @@ class ResultViewModel(private val productRepository: ProductRepository) : ViewMo
         }
     }
 
-    // 태그별 최저가
-    fun getLowestAroundMyArea() {
-        lowestPriceAroundArea.value = 15000
+    fun getLowestAroundMyArea(keyword:String, city:String, state:String?=null ) {
+        viewModelScope.launch {
+            productRepository.getProductPrice(keyword, orderByPrice, city=city, state=state)
+                .onSuccess {
+                    lowestPriceAroundArea.value = it.price
+                }
+                .onFailure {
+                    lowestPriceAroundArea.value = 0
+                }
+        }
     }
 
     fun getLowestOfAll(keyword:String) {

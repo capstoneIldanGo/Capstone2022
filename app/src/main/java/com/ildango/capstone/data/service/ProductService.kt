@@ -13,6 +13,8 @@ interface ProductService {
         @Query("isSold") sold:Boolean ?= false,
         @Query("page") page:Int,
         @Query("isMint") mint:Boolean ?= null,
-        @Query("platform") platform:String ?= null
+        @Query("platform") platform:String ?= null,
+        @Query("city", encoded = true) city:String ?= null,
+        @Query("state", encoded = true) state:String ?= null
     ) : Response<ProductItemList>
 }

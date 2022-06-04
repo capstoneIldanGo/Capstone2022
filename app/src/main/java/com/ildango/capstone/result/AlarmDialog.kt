@@ -3,14 +3,13 @@ package com.ildango.capstone.result
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import com.ildango.capstone.CustomSnackBar
 import com.ildango.capstone.data.model.MyAlarmPostItem
 import com.ildango.capstone.data.repository.MyAlarmListRepository
 import com.ildango.capstone.databinding.DialogSetAlarmBinding
@@ -60,16 +59,16 @@ class AlarmDialog(val keyword:String) : DialogFragment(), View.OnClickListener {
                     viewModel!!.isItemExistInMyAlarms(1, keyword).observe(this) {
                         if(!it) {
                             viewModel!!.addAlarmItem(MyAlarmPostItem(keyword, Integer.parseInt(price), 1))
-                            Toast.makeText(this.context, "가격 알림이 등록되었어용!", Toast.LENGTH_SHORT).show()
+                            CustomSnackBar.make(binding.root, "가격 알림이 등록되었어용!").show()
                             dismiss()
                         } else {
                             viewModel!!.updateItem(1, keyword, Integer.parseInt(price))
-                            Toast.makeText(this.context, "알림받을 가격이 변경되었어용!", Toast.LENGTH_SHORT).show()
+                            CustomSnackBar.make(binding.root, "알림받을 가격이 변경되었어용!").show()
                             dismiss()
                         }
                     }
                 } else {
-                    Toast.makeText(this.context, "가격을 입력해주세용!", Toast.LENGTH_SHORT).show()
+                    CustomSnackBar.make(binding.root, "가격을 입력해주세용!").show()
                 }
             }
         }
