@@ -10,12 +10,15 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.icu.util.Calendar
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
 import androidx.core.app.NotificationCompat
+import androidx.core.os.HandlerCompat.postDelayed
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.bumptech.glide.Glide
 import com.ildango.capstone.mywishlist.MyWishListActivity
@@ -25,6 +28,8 @@ import com.ildango.capstone.myinfo.GetInfoActivity
 import com.ildango.capstone.productdetail.ProductDetailActivity
 import com.ildango.capstone.result.AlarmDialog
 import com.ildango.capstone.result.ResultActivity
+import okhttp3.internal.http2.Http2Reader
+import java.util.*
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity(), BottomSheetClickListener {
@@ -55,9 +60,12 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
         setNotificationTrigger()
     }
 
+    // 알람
     private fun setNotificationTrigger(){
         binding.btnNotificationTrigger.setOnClickListener {
-            sendNotification()
+            Handler().postDelayed({
+                sendNotification()
+            },10000)
         }
     }
 
@@ -94,8 +102,6 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
         }
         notificationManager.createNotificationChannel(channel)
     }
-
-
 
     private fun checkOnBoarding() {
         val pref:SharedPreferences = getSharedPreferences("Information", MODE_PRIVATE)
