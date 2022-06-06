@@ -1,17 +1,28 @@
 package com.ildango.capstone
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.NotificationManager.IMPORTANCE_HIGH
+import android.app.PendingIntent
+import android.app.PendingIntent.getActivity
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
+import androidx.core.app.NotificationCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.bumptech.glide.Glide
 import com.ildango.capstone.mywishlist.MyWishListActivity
 import com.ildango.capstone.databinding.ActivityMainBinding
 import com.ildango.capstone.myalarmlist.MyAlarmListActivity
 import com.ildango.capstone.myinfo.GetInfoActivity
+import com.ildango.capstone.productdetail.ProductDetailActivity
 import com.ildango.capstone.result.ResultActivity
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity(), BottomSheetClickListener {
 
