@@ -4,12 +4,10 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.NotificationManager.IMPORTANCE_HIGH
 import android.app.PendingIntent
-import android.app.PendingIntent.FLAG_ONE_SHOT
 import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,7 +21,6 @@ import com.ildango.capstone.databinding.ActivityMainBinding
 import com.ildango.capstone.myalarmlist.MyAlarmListActivity
 import com.ildango.capstone.myinfo.GetInfoActivity
 import com.ildango.capstone.productdetail.ProductDetailActivity
-import com.ildango.capstone.result.AlarmDialog
 import com.ildango.capstone.result.ResultActivity
 import kotlin.random.Random
 
@@ -32,6 +29,8 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
     private var _binding: ActivityMainBinding?= null
     private val binding get() = _binding!!
     private val bottomSheet = BottomSheetFragment()
+
+    private var waitTime = 0L
 
     companion object Constants {
         const val CHANNEL_ID = "channel_id"
@@ -102,10 +101,6 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
         val isFirst = pref.getBoolean("isFirst", false)
 
         if(!isFirst) {
-            val prefEditor:SharedPreferences.Editor = pref.edit()
-            prefEditor.putBoolean("isFirst", true)
-            prefEditor.apply()
-
             val intent = Intent(this@MainActivity, OnBoardingActivity::class.java)
             startActivity(intent)
         }
@@ -156,6 +151,14 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
                 Intent(this, GetInfoActivity::class.java).run { startActivity(this) }
             }
         }
+    }
+
+    override fun onBackPressed() {
+        if(System.currentTimeMillis() - waitTime >= 1500) {
+            waitTime = System.currentTimeMillis()
+            CustomSnackBar.make(binding.root, "뒤로가기 버튼을 한 번 더 누르면 종료됩니다!").show()
+        } else
+            finish()
     }
 
     override fun onDestroy() {

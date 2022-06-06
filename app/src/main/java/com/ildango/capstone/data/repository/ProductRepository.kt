@@ -5,10 +5,11 @@ import com.ildango.capstone.data.model.ProductItemList
 import com.ildango.capstone.data.service.RetrofitClient
 import retrofit2.Response
 import java.lang.Exception
+import java.util.stream.Collectors
 
 class ProductRepository {
 
-    private val platforms = listOf("Joongonara", "Bunjang")
+    private val platforms = listOf("Joongonara", "Bunjang", "Carrot Market")
 
     suspend fun getAllProduct(
         keyword: String,
@@ -83,13 +84,22 @@ class ProductRepository {
     }
 
     private fun getPlatform(platform: List<Boolean>): String? {
-        return if(platform[0]&&platform[1])
-            null
-        else if(platform[0])
-            platforms[0]
-        else if(platform[1])
-            platforms[1]
-        else
-            null
+        val platformArr: ArrayList<String> = ArrayList()
+        var platformString: String
+
+        if(platform[0] && platform[1] && platform[2]) {
+            return null
+        } else if (!(platform[0] || platform[1] || platform[2])) {
+            return null
+        } else {
+            for (i in platforms.indices) {
+                if(platform[i]) {
+                    platformArr.add(platforms[i])
+                }
+            }
+            platformString = platformArr.stream().collect(Collectors.joining(","))
+
+            return platformString
+        }
     }
 }

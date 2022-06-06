@@ -123,16 +123,16 @@ class SortingSheetFragment: BottomSheetDialogFragment() {
             }
         }
         binding.btnJunggoMarket.setOnClickListener{
-            viewModel.setPlatform(listOf(binding.btnJunggoMarket.isChecked, viewModel.productPlatform.value!![1], viewModel.productPlatform.value!![2]))
+            viewModel.setPlatform(listOf(binding.btnJunggoMarket.isChecked, binding.btnThunderMarket.isChecked, binding.btnCarrotMarket.isChecked))
             checkAllPlatformButton()
         }
         binding.btnThunderMarket.setOnClickListener{
-            viewModel.setPlatform(listOf(viewModel.productPlatform.value!![0], binding.btnThunderMarket.isChecked, viewModel.productPlatform.value!![2]))
+            viewModel.setPlatform(listOf(binding.btnJunggoMarket.isChecked, binding.btnThunderMarket.isChecked, binding.btnCarrotMarket.isChecked))
             checkAllPlatformButton()
         }
 
         binding.btnCarrotMarket.setOnClickListener{
-            viewModel.setPlatform(listOf(!viewModel.productPlatform.value!![0], viewModel.productPlatform.value!![1], binding.btnCarrotMarket.isChecked))
+            viewModel.setPlatform(listOf(binding.btnJunggoMarket.isChecked, binding.btnThunderMarket.isChecked, binding.btnCarrotMarket.isChecked))
             checkAllPlatformButton()
         }
     }

@@ -5,12 +5,16 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.marginStart
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ildango.capstone.R
 import com.ildango.capstone.databinding.ActivitySearchDetailBinding
 import com.ildango.capstone.productdetail.ProductDetailActivity
 import com.ildango.capstone.data.repository.ProductRepository
@@ -32,6 +36,7 @@ class ResultDetailActivity : AppCompatActivity(){
     private lateinit var adapter: ProductListAdapter
     private lateinit var sortingSheet : SortingSheetFragment
 
+    private lateinit var nullImageView: ImageView
     private var searchKeyword = ""
     private var type = ""
 
@@ -57,6 +62,7 @@ class ResultDetailActivity : AppCompatActivity(){
         setSearchView()
         getArea()
         setTextByType(intent.getStringExtra("type").toString())
+        setNullImage()
         setRecyclerView()
         setScrollListener()
         setObserver()
@@ -93,8 +99,24 @@ class ResultDetailActivity : AppCompatActivity(){
 
     private fun setObserver() {
         viewModel.product.observe(this, Observer {
-            adapter.setItems(it)
+            if(it.isEmpty()) {
+                nullImageView.visibility = View.VISIBLE
+            }
+            else {
+                nullImageView.visibility = View.INVISIBLE
+                adapter.setItems(it)
+            }
         })
+    }
+
+    private fun setNullImage() {
+        nullImageView = ImageView(this)
+        nullImageView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        val density = resources.displayMetrics.density
+        nullImageView.setPadding((density*40).toInt(),0,(density*40).toInt(),0)
+        nullImageView.setImageResource(R.drawable.logo_crying)
+
+        binding.root.addView(nullImageView)
     }
 
     private fun setScrollListener() {
