@@ -1,12 +1,15 @@
 package com.ildango.capstone.productdetail
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.ildango.capstone.BottomSheetFragment.Companion.TAG
 import com.ildango.capstone.R
 import com.ildango.capstone.data.repository.MyWishListRepository
 import com.ildango.capstone.databinding.ActivityProductDetailBinding
@@ -33,6 +36,10 @@ class ProductDetailActivity : AppCompatActivity() {
         setSupportActionBar(binding.bottomAppBar)
 
         binding.tvKeyword.text = getStringFromIntent("keyword")
+        // 알람용
+        if(getStringFromIntent("keyword") == "null")
+            binding.tvKeyword.text = "아이폰 13"
+
         setWishBtnImage()
         setWebView()
     }
@@ -69,6 +76,9 @@ class ProductDetailActivity : AppCompatActivity() {
     @SuppressLint("SetJavaScriptEnabled")
     private fun setWebView() {
         var url = getStringFromIntent("url")
+        // 알람용
+        if(url == "null")
+            url = "https://www.naver.com/"
 
         binding.webView.apply {
             webViewClient = WebViewClient()
@@ -77,6 +87,7 @@ class ProductDetailActivity : AppCompatActivity() {
             settings.javaScriptEnabled = true
             settings.domStorageEnabled = true
             loadUrl(url)
+
         }
     }
 

@@ -21,6 +21,11 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
 
     private var waitTime = 0L
 
+    companion object Constants {
+        const val CHANNEL_ID = "channel_id"
+        const val CHANNEL_NAME = "channel_name"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
@@ -35,7 +40,50 @@ class MainActivity : AppCompatActivity(), BottomSheetClickListener {
         setLogoImage()
         setSearchView()
         setBottomSheet()
+        setNotificationTrigger()
     }
+
+    private fun setNotificationTrigger(){
+        binding.btnNotificationTrigger.setOnClickListener {
+            sendNotification()
+        }
+    }
+
+    private fun sendNotification(){
+        val title = "중세시대"
+        val message = "아이폰 13의 새로운 가격을 확인하세요!"
+
+        val intent = Intent(this, ProductDetailActivity::class.java)
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE)
+                as NotificationManager
+        val notificationID = Random.nextInt()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createNotificationChannel(notificationManager)
+        }
+
+        val pendingIntent = getActivity(this,0, intent, PendingIntent.FLAG_IMMUTABLE)
+        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setContentTitle(title)
+            .setContentText(message)
+            .setAutoCancel(true)
+            .setContentIntent(pendingIntent)
+            .build()
+
+        notificationManager.notify(notificationID, notification)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createNotificationChannel(notificationManager: NotificationManager) {
+        val channel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, IMPORTANCE_HIGH).apply {
+            description = "Channel Description"
+            enableLights(true)
+        }
+        notificationManager.createNotificationChannel(channel)
+    }
+
+
 
     private fun checkOnBoarding() {
         val pref:SharedPreferences = getSharedPreferences("Information", MODE_PRIVATE)
