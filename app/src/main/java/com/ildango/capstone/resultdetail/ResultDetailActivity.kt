@@ -36,6 +36,7 @@ class ResultDetailActivity : AppCompatActivity(){
     private lateinit var adapter: ProductListAdapter
     private lateinit var sortingSheet : SortingSheetFragment
 
+    private lateinit var nullImageView: ImageView
     private var searchKeyword = ""
     private var type = ""
 
@@ -61,6 +62,7 @@ class ResultDetailActivity : AppCompatActivity(){
         setSearchView()
         getArea()
         setTextByType(intent.getStringExtra("type").toString())
+        setNullImage()
         setRecyclerView()
         setScrollListener()
         setObserver()
@@ -97,16 +99,18 @@ class ResultDetailActivity : AppCompatActivity(){
 
     private fun setObserver() {
         viewModel.product.observe(this, Observer {
-            adapter.setItems(it)
-
             if(it.isEmpty()) {
-                setNullImage()
+                nullImageView.visibility = View.VISIBLE
+            }
+            else {
+                nullImageView.visibility = View.INVISIBLE
+                adapter.setItems(it)
             }
         })
     }
 
     private fun setNullImage() {
-        val nullImageView = ImageView(this)
+        nullImageView = ImageView(this)
         nullImageView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         val density = resources.displayMetrics.density
         nullImageView.setPadding((density*40).toInt(),0,(density*40).toInt(),0)
